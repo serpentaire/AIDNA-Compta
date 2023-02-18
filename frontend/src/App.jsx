@@ -1,5 +1,5 @@
 import Home from "@pages/Home";
-import Footer from "@components/Footer"
+import Footer from "@components/Footer";
 
 import "./App.css";
 
