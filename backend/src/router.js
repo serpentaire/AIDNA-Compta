@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const N_comptesControllers = require("./controllers/N_comptesControllers");
+const nComptesControllers = require("./controllers/nComptesControllers");
 // const itemControllers = require("./controllers/itemControllers");
 
 // router.get("/items", itemControllers.browse);
@@ -10,9 +10,9 @@ const N_comptesControllers = require("./controllers/N_comptesControllers");
 // router.post("/items", itemControllers.add);
 // router.delete("/items/:id", itemControllers.destroy);
 
-router.get("/N_comptes", N_comptesControllers.browse);
-router.get("/N_comptes/:id", N_comptesControllers.read);
-router.put("/N_comptes/:id", N_comptesControllers.edit);
-router.post("/N_comptes", N_comptesControllers.add);
-router.delete("/N_comptes/:id", N_comptesControllers.destroy);
+router.get("/nComptes", nComptesControllers.browse);
+router.get("/nComptes/:id", nComptesControllers.read);
+router.put("/nComptes/:id", nComptesControllers.edit);
+router.post("/nComptes", nComptesControllers.add);
+router.delete("/nComptes/:id", nComptesControllers.destroy);
 module.exports = router;
