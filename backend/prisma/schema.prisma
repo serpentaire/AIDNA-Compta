@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model N_comptes {
+  id          Int      @id @default(autoincrement())
+  numero      Int
+  designation String   @db.VarChar(45)
+  actif       String   @db.VarChar(3)
+  compte      compte[]
+}
+
+model Role {
+  id    Int     @id @default(autoincrement())
+  nom   String  @db.VarChar(45)
+  Users Users[]
+}
+
+model Users {
+  id           Int       @id @default(autoincrement())
+  nom          String    @db.VarChar(255)
+  prenom       String    @db.VarChar(255)
+  adresse      String    @db.VarChar(255)
+  code_postal  Int
+  ville        String    @db.VarChar(255)
+  telephone    Int
+  email        String    @db.VarChar(45)
+  role_id      Int
+  users_log_id Int
+  Role         Role      @relation(fields: [role_id], references: [id])
+  Users_log    Users_log @relation(fields: [users_log_id], references: [id])
+}
+
+model Users_log {
+  id             Int     @id @default(autoincrement())
+  login          String  @db.VarChar(45)
+  hashedpassword String  @db.VarChar(255)
+  Users          Users[]
+}
+
+model banque {
+  id     Int      @id @default(autoincrement())
+  nom    String   @db.VarChar(45)
+  compte compte[]
+}
+
+model compte {
+  id           Int        @id @default(autoincrement())
+  date         DateTime   @db.Date
+  description  String     @db.VarChar(255)
+  nom          String     @db.VarChar(255)
+  prenom       Int
+  validation   String     @db.VarChar(15)
+  N_cheque     Int?
+  N_comptes_id Int
+  banque_id    Int?
+  mode_pay_id  Int
+  N_comptes    N_comptes  @relation(fields: [N_comptes_id], references: [id])
+  banque       banque?    @relation(fields: [banque_id], references: [id])
+  mode_pay     mode_pay   @relation(fields: [mode_pay_id], references: [id])
+  recu_don     recu_don[]
+}
+
+model mode_pay {
+  id     Int      @id @default(autoincrement())
+  nom    String   @db.VarChar(45)
+  compte compte[]
+}
+
+model recu_don {
+  id        Int    @id
+  compte_id Int
+  compte    compte @relation(fields: [compte_id], references: [id])
+}
