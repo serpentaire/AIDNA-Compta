@@ -2,7 +2,7 @@
 // import SideBarMembreEquipe from "@components/sidebar/SideBarMembreEquipe";
 // import SideBarMembreBureau from "@components/sidebar/SideBarMembreBureau";
 // import SideBarTresorier from "../components/sidebar/SideBarTresorier";
-import SideBarAdmin from "../components/sidebar/SideBarAdmin";
+import SideBarAdmin from "../../components/sidebar/SideBarAdmin";
 
 export default function Home() {
   return (
