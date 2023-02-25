@@ -1,7 +1,8 @@
 // import Home from "./pages/Homes/Home";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import HomeAdherent from "./pages/homes/HomeAdherent";
+// import HomeAdherent from "./pages/homes/HomeAdherent";
+import Login from "./pages/homes/login/login";
 
 import "./App.css";
 
@@ -10,7 +11,8 @@ function App() {
     <div className="App">
       <Header />
       {/* <Home /> */}
-      <HomeAdherent />
+      {/* <HomeAdherent /> */}
+      <Login />
       <Footer />
     </div>
   );
