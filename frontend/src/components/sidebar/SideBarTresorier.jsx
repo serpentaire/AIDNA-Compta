@@ -2,11 +2,11 @@ import React from "react";
 
 function SideBarTresorier() {
   return (
-    <div className="sideBarTresorier">
-      <h1 className="rounded-3xl text-1xl text-center text-green font-semibold p-3 md:text-start md:pl-2">
-        Espace Présidente, secrétaire et trésorier
+    <div className="sideBarTresorier overflow-y-scroll md:h-screen">
+      <h1 className="rounded-3xl text-1xl text-center text-green font-semibold p-3 md:pl-2">
+        Espace Présidente, Secrétaire et Trésorier
       </h1>
-      <div className="md:w-60 md:w-56 border pt-2 pb-2 border-black hover:scale-105 duration-300 rounded-3xl shadow-lg lg:max-w-lg mt-3 mx-8">
+      <div className=" md:w-60 md:w-56 border pt-2 pb-2 border-black hover:scale-105 duration-300 rounded-3xl shadow-lg lg:max-w-lg mt-3 mx-8">
         <h2 className="rounded-3xl text-1xl text-center text-green font-semibold p-3">
           Saisies
         </h2>
