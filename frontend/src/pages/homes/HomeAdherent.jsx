@@ -2,7 +2,7 @@ import SideBarAdherent from "../../components/sidebar/SideBarAdherent";
 
 export default function HomeAdherent() {
   return (
-    <div className="homeAdherent md:flex  ">
+    <div className="homeAdherent md:flex ">
       <div>
         <SideBarAdherent />
       </div>
