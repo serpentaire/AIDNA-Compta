@@ -29,7 +29,6 @@ model Users {
   code_postal  Int
   ville        String    @db.VarChar(255)
   telephone    Int
-  email        String    @db.VarChar(45)
   role_id      Int
   users_log_id Int
   Role         Role      @relation(fields: [role_id], references: [id])
@@ -38,7 +37,7 @@ model Users {
 
 model Users_log {
   id             Int     @id @default(autoincrement())
-  login          String  @db.VarChar(45)
+  login          String  @unique @db.VarChar(45)
   hashedpassword String  @db.VarChar(255)
   Users          Users[]
 }

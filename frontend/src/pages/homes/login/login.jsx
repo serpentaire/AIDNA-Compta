@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiConnexion from "../../../services/apiConnexion";
 import logo from "../../../assets/logo.png";
 
 function Login() {
@@ -7,9 +8,33 @@ function Login() {
     setHidePassword(!hidePassword);
   }
 
+  const [connexion, setConnexion] = useState({
+    utilisateur: "",
+    password: "",
+  });
+
+  const sendForm = (e) => {
+    e.preventDefault();
+    apiConnexion
+      .post("/login", connexion)
+      .then(() => {
+        // console.log(data);
+        // console.log(`Votre email et votre mot de passe sont valides`);
+      })
+      .catch(() => {
+        // console.log(`Votre email ou votre mot de passe n'est pas valide`);
+      });
+  };
+
+  const handleConnexion = (place, value) => {
+    const newConnexion = { ...connexion };
+    newConnexion[place] = value;
+    setConnexion(newConnexion);
+  };
+
   return (
     <div className="login flex justify-center pt-5">
-      <form>
+      <form onSubmit={(e) => sendForm(e)}>
         <div className=" w-80 md:w-96 border pt-2 pb-2 border-black rounded-3xl shadow-lg lg:max-w-lg mt-3">
           <div className="flex flex-col mx-3">
             <img src={logo} alt="logo" className="justify-center h-30" />
@@ -21,8 +46,11 @@ function Login() {
                 required
                 className="focus:bg-orange placeholder:italic placeholder:text-white rounded-full p-2 pl-5 bg-orange text-white w-3/4 md:w-3/4"
                 type="text"
-                id="Email"
+                id="utilisateur"
+                name="utilisateur"
                 placeholder="Email..."
+                value={connexion.utilisateur}
+                onChange={(e) => handleConnexion(e.target.name, e.target.value)}
               />
             </div>
             <div className="relative w-full px-9 md:px-11">
@@ -33,6 +61,8 @@ function Login() {
                 name="password"
                 id="password"
                 placeholder="Mot de passe..."
+                value={connexion.password}
+                onChange={(e) => handleConnexion(e.target.name, e.target.value)}
               />
               <div>
                 <button
