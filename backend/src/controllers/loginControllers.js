@@ -36,8 +36,6 @@ const validateLogin = async (req, res) => {
       },
     });
     if (user) {
-      console.log(user[0].Users_log);
-      console.log(req.body.password);
       if (
         await verifyHash(user[0].Users_log.hashedpassword, req.body.password)
       ) {
