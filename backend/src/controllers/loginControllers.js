@@ -4,8 +4,8 @@ const { verifyHash } = require("../service/auth");
 
 const browse = async (req, res) => {
   try {
-    const nComptes = await prisma.Users_log.findMany();
-    res.status(200).json(nComptes);
+    const users = await prisma.Users.findMany();
+    res.status(200).json(users);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -14,19 +14,38 @@ const browse = async (req, res) => {
 
 const validateLogin = async (req, res) => {
   const { utilisateur } = req.body.utilisateur;
-
   try {
-    const user = await prisma.Users_log.findFirst({
-      where: { login: utilisateur },
+    const user = await prisma.Users.findMany({
+      include: {
+        Users_log: {
+          select: {
+            login: true,
+            hashedpassword: true,
+          },
+        },
+        Role: {
+          select: {
+            nom: true,
+          },
+        },
+      },
+      where: {
+        Users_log: {
+          login: utilisateur,
+        },
+      },
     });
     if (user) {
-      if (await verifyHash(user.hashedpassword, req.body.password)) {
+      console.log(user[0].Users_log);
+      console.log(req.body.password);
+      if (
+        await verifyHash(user[0].Users_log.hashedpassword, req.body.password)
+      ) {
         const myUser = { ...user };
         delete myUser.hashedpassword;
         const token = jwt.sign(myUser, process.env.JWT_SECRET, {
           expiresIn: "24h",
         });
-
         res
           .status(201)
           .cookie("access_token", token, {

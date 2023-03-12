@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import apiConnexion from "../../../services/apiConnexion";
 import logo from "../../../assets/logo.png";
 
 function Login() {
+  const navigate = useNavigate("");
   const [hidePassword, setHidePassword] = useState(true);
   function showPassword() {
     setHidePassword(!hidePassword);
@@ -17,8 +19,10 @@ function Login() {
     e.preventDefault();
     apiConnexion
       .post("/login", connexion)
-      .then(() => {
-        // console.log(data);
+      .then((data) => {
+        if (data.data[0].Role.nom === "Trésorier") {
+          setTimeout(() => navigate(`/homeTresorier`), 2000);
+        }
         // console.log(`Votre email et votre mot de passe sont valides`);
       })
       .catch(() => {
