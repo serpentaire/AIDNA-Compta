@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import apiConnexion from "../services/apiConnexion";
 
 function Enregistrement() {
   const location = useLocation();
   const enregistrementType = location.state?.parametre;
+  const [Ncompte, setNcompte] = useState([]);
+  const [banques, setBanques] = useState([]);
+  const [modePays, setModePays] = useState([]);
+  const getNcompte = () => {
+    apiConnexion
+      .get(`/nComptes`)
+      .then((allCompte) => {
+        setNcompte(allCompte.data);
+      })
+      .catch((error) => console.error(error));
+  };
+  const getBanque = () => {
+    apiConnexion
+      .get(`/banque`)
+      .then((allBanque) => {
+        setBanques(allBanque.data);
+      })
+      .catch((error) => console.error(error));
+  };
+  const getModePay = () => {
+    apiConnexion
+      .get(`/modePaiement`)
+      .then((allmodePay) => {
+        setModePays(allmodePay.data);
+      })
+      .catch((error) => console.error(error));
+  };
+  useEffect(() => {
+    getNcompte();
+    getBanque();
+    getModePay();
+  }, []);
+
   return (
     <div className="enregistrement">
       <h1 className="grow text-center font-semibold text-green md:text-2xl">
@@ -35,11 +69,12 @@ function Enregistrement() {
             Mode de paiement*
           </h2>
           <select className="border border-orange rounded-full p-2 pl-5 text-orange w-3/4 md:w-40">
-            <option>---</option>
-            <option>Espèce</option>
-            <option>Chèque</option>
-            <option>Virement</option>
-            <option>TIP</option>
+            <option value="">Sélectionnez</option>
+            {modePays.map((modePay) => (
+              <option key={modePay.id} value={modePay.id}>
+                {modePay.nom}
+              </option>
+            ))}
           </select>
         </div>
         <div className=" pt-4 text-center md:text-start md:pl-20">
@@ -56,11 +91,12 @@ function Enregistrement() {
             Banque
           </h2>
           <select className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-full">
-            <option>---</option>
-            <option>Crédit Agricole</option>
-            <option>Crédit Mutuelle</option>
-            <option>Caisse d'épargne</option>
-            <option>La Poste</option>
+            <option value="">Sélectionnez</option>
+            {banques.map((banque) => (
+              <option key={banque.id} value={banque.id}>
+                {banque.nom}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -69,11 +105,22 @@ function Enregistrement() {
           Numéro de compte
         </h2>
         <select className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-1/2">
-          <option>---</option>
-          <option>746</option>
-          <option>732</option>
-          <option>789</option>
-          <option>756</option>
+          <option value="">Sélectionnez</option>
+          {enregistrementType === "recette"
+            ? Ncompte.filter((compte) =>
+                compte.numero.toString().startsWith("7")
+              ).map((compte) => (
+                <option key={compte.id} value={compte.id}>
+                  {compte.numero} - {compte.designation}
+                </option>
+              ))
+            : Ncompte.filter((compte) =>
+                compte.numero.toString().startsWith("6")
+              ).map((compte) => (
+                <option key={compte.id} value={compte.id}>
+                  {compte.numero} - {compte.designation}
+                </option>
+              ))}
         </select>
       </div>
       <div className=" pt-4 text-center md:text-start md:pl-20">
