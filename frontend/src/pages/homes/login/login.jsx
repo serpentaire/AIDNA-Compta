@@ -21,7 +21,13 @@ function Login() {
       .post("/login", connexion)
       .then((data) => {
         if (data.data[0].Role.nom === "Trésorier") {
-          setTimeout(() => navigate(`/homeTresorier`), 2000);
+          setTimeout(
+            () =>
+              navigate(`/homeTresorier`, {
+                state: { parametre: "recette" },
+              }),
+            2000
+          );
         }
         // console.log(`Votre email et votre mot de passe sont valides`);
       })

@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function SideBarTresorier() {
+  const navigate = useNavigate();
+  const setManageRedirect = (url, enregistrementType) => {
+    navigate(url, { state: { parametre: enregistrementType } });
+  };
+
   return (
     <div className="sideBarTresorier overflow-y-scroll md:h-screen">
       <h1 className="rounded-3xl text-1xl text-center text-green font-semibold p-3 md:pl-2">
@@ -15,6 +21,7 @@ function SideBarTresorier() {
             <button
               className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
               type="button"
+              onClick={() => setManageRedirect("/homeTresorier", "recette")}
             >
               Enregistrer une recette
             </button>
@@ -23,6 +30,7 @@ function SideBarTresorier() {
             <button
               className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
               type="button"
+              onClick={() => setManageRedirect("/homeTresorier", "dépense")}
             >
               Enregistrer une dépense
             </button>
