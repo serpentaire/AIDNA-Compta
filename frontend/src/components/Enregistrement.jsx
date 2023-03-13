@@ -1,10 +1,13 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 function Enregistrement() {
+  const location = useLocation();
+  const enregistrementType = location.state?.parametre;
   return (
     <div className="enregistrement">
       <h1 className="grow text-center font-semibold text-green md:text-2xl">
-        Enregistrer une recette
+        Enregistrer une {enregistrementType}
       </h1>
       <div className=" pt-4 text-center md:text-start md:pl-20">
         <h2 className="grow text-center md:text-start font-semibold text-green">
@@ -93,27 +96,29 @@ function Enregistrement() {
           type="text"
         />
       </div>
-      <form
-        encType="multipart/form-data"
-        className=" pt-4 text-center md:text-start md:pl-20"
-      >
-        <button
-          className="focus:bg-white focus:text-orange border border-orange rounded-full p-2 pl-5 bg-orange text-white w-1/2 md:w-52"
-          type="button"
-          // onClick={handleClick1}
+      {enregistrementType === "dépense" && (
+        <form
+          encType="multipart/form-data"
+          className=" pt-4 text-center md:text-start md:pl-20"
         >
-          Télécharger la facture
-        </button>
-        <input
-          className="hidden"
-          type="file"
-          // ref={inputRef1}
-          name="facture"
-          style={{ display: "none" }}
-          accept=".pdf"
-          // value={depense.facture}
-        />
-      </form>
+          <button
+            className="focus:bg-white focus:text-orange border border-orange rounded-full p-2 pl-5 bg-orange text-white w-1/2 md:w-52"
+            type="button"
+            // onClick={handleClick1}
+          >
+            Télécharger la facture
+          </button>
+          <input
+            className="hidden"
+            type="file"
+            // ref={inputRef1}
+            name="facture"
+            style={{ display: "none" }}
+            accept=".pdf"
+            // value={depense.facture}
+          />
+        </form>
+      )}
       <div className="flex flex-row justify-around items-center my-3 md:justify-end md:pr-20">
         <button
           className="focus:bg-white focus:text-orange border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
