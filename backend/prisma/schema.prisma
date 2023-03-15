@@ -53,12 +53,14 @@ model compte {
   date         DateTime   @db.Date
   description  String     @db.VarChar(255)
   nom          String     @db.VarChar(255)
-  prenom       Int
+  somme        Decimal    @db.Decimal
   validation   String     @db.VarChar(15)
   N_cheque     Int?
   N_comptes_id Int
   banque_id    Int?
   mode_pay_id  Int
+  enregmt      String     @db.VarChar(20)
+  facture      String?    @db.VarChar(255)
   N_comptes    N_comptes  @relation(fields: [N_comptes_id], references: [id])
   banque       banque?    @relation(fields: [banque_id], references: [id])
   mode_pay     mode_pay   @relation(fields: [mode_pay_id], references: [id])
