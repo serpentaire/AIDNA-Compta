@@ -35,6 +35,8 @@ router.post(
   upload.fields([{ name: "facture", maxCount: 1 }]),
   compteControllers.add
 );
+router.get("/enregistrement", compteControllers.browse);
+router.get("/compteJournalier", compteControllers.cJournalier);
 router.get("/modePaiement", modePayControllers.browse);
 router.get("/banque", banqueControllers.browse);
 router.get("/nComptes", nComptesControllers.browse);

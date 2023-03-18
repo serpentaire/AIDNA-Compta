@@ -26,6 +26,48 @@ const read = async (req, res) => {
   }
 };
 
+const cJournalier = async (req, res) => {
+  const date3 = (parseInt(req.query.date2, 10) + 1).toString();
+  const date1 = `${req.query.date1}-0${date3}`;
+  const date2 = `${req.query.date1}-${req.query.date2}`;
+
+  try {
+    const compte = await prisma.compte.findMany({
+      where: {
+        date: {
+          lt: new Date(date1).toISOString(),
+          gte: new Date(date2).toISOString(),
+        },
+      },
+      include: {
+        N_comptes: {
+          select: {
+            designation: true,
+          },
+        },
+        banque: {
+          select: {
+            nom: true,
+          },
+        },
+        mode_pay: {
+          select: {
+            nom: true,
+          },
+        },
+      },
+    });
+    if (compte) {
+      res.status(200).json(compte);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
+
 const edit = async (req, res) => {
   try {
     await prisma.compte.update({
@@ -87,4 +129,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  cJournalier,
 };
