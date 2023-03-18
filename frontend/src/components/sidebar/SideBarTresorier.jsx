@@ -46,6 +46,7 @@ function SideBarTresorier() {
             <button
               className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
               type="button"
+              onClick={() => setManageRedirect("/compteJournalier")}
             >
               Compte journalier
             </button>
