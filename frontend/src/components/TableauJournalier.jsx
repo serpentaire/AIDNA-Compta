@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiConnexion from "../services/apiConnexion";
+import Enregistrement from "./Enregistrement";
 
 function TableauJournalier() {
   const mois = [
@@ -19,6 +20,8 @@ function TableauJournalier() {
   const [enregistrementMois, setEnregistrementMois] = useState([]);
   const date1 = "2023";
   const [date2, setDate2] = useState("01");
+  const [idUpdate, setIdUpdate] = useState();
+  const [validat, setValidat] = useState("oui");
   const getenregistrement = () => {
     apiConnexion
       .get(`/compteJournalier?date1=${date1}&date2=${date2}`)
@@ -27,9 +30,7 @@ function TableauJournalier() {
       })
       .catch((error) => console.error(error));
   };
-  useEffect(() => {
-    getenregistrement();
-  }, [date2]);
+
   const sousTotal = (enr) => {
     const ssTotalRecette = enregistrementMois
       .filter((rec) => rec.enregmt === enr)
@@ -44,6 +45,26 @@ function TableauJournalier() {
   const selectMois = (moiId) => {
     setDate2(moiId);
   };
+
+  const updateEnrgmt = (id) => {
+    setIdUpdate(id);
+  };
+
+  const updateValidation = (id, validation) => {
+    let val = "";
+    // eslint-disable-next-line no-unused-expressions
+    validation === "non" ? (val = "oui") : (val = "non");
+    apiConnexion
+      .put(`/enregistrementValidation/${id}`, { validation: val })
+      .then((data) => {
+        setValidat(data);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  useEffect(() => {
+    getenregistrement();
+  }, [date2, idUpdate, validat]);
 
   return (
     <div className="tableauJournalier">
@@ -77,7 +98,13 @@ function TableauJournalier() {
           {enregistrementMois.map((enregistrementJour) => (
             <tr key={enregistrementJour.id}>
               <td className="border px-4 py-2">
-                {enregistrementJour.date.split("T").shift().substr(-2)}
+                <button
+                  className="underline"
+                  type="button"
+                  onClick={() => updateEnrgmt(enregistrementJour.id)}
+                >
+                  {enregistrementJour.date.split("T").shift().substr(-2)}
+                </button>
               </td>
               <td className="border px-4 py-2">
                 {enregistrementJour.description}
@@ -110,7 +137,18 @@ function TableauJournalier() {
                 <td className="border px-4 py-2" />
               )}
               <td className="border px-4 py-2">
-                {enregistrementJour.validation}
+                <button
+                  className="underline"
+                  type="button"
+                  onClick={() =>
+                    updateValidation(
+                      enregistrementJour.id,
+                      enregistrementJour.validation
+                    )
+                  }
+                >
+                  {enregistrementJour.validation}
+                </button>
               </td>
             </tr>
           ))}
@@ -121,10 +159,10 @@ function TableauJournalier() {
               Total
             </td>
             <td className="border text-right border-t-2 px-4 py-2">
-              {sousTotal("recette")}€
+              {sousTotal("recette").toFixed(2)}€
             </td>
             <td className="border border-t-2 px-4 py-2">
-              {sousTotal("dépense")}€
+              {sousTotal("dépense").toFixed(2)}€
             </td>
           </tr>
           <tr>
@@ -132,11 +170,16 @@ function TableauJournalier() {
               Solde
             </td>
             <td className="border text-center border-4 px-4 py-2" colSpan="2">
-              {total()}€
+              {total().toFixed(2)}€
             </td>
           </tr>
         </tfoot>
       </table>
+      {idUpdate && (
+        <div>
+          <Enregistrement idUpdate={idUpdate} setIdUpdate={setIdUpdate} />
+        </div>
+      )}
     </div>
   );
 }
