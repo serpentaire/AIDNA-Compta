@@ -1,4 +1,5 @@
 const prisma = require("../models/prisma");
+const validate = require("../service/validateEnregistrement");
 
 const browse = async (req, res) => {
   try {
@@ -84,15 +85,22 @@ const edit = async (req, res) => {
     : null;
   enregistrement.mode_pay_id = parseInt(enregistrement.mode_pay_id, 10);
   enregistrement.date += "T00:00:00Z";
-  try {
-    await prisma.compte.update({
-      where: { id: +req.params.id },
-      data: { ...enregistrement, facture: facturejpg },
-    });
-    res.status(204).json({ message: "Enregistrement a bien été modifié" });
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+
+  const error = validate(enregistrement);
+
+  if (error) {
+    res.status(422).send(error);
+  } else {
+    try {
+      await prisma.compte.update({
+        where: { id: +req.params.id },
+        data: { ...enregistrement, facture: facturejpg },
+      });
+      res.status(204).json({ message: "Enregistrement a bien été modifié" });
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   }
 };
 
@@ -112,17 +120,22 @@ const add = async (req, res) => {
     : null;
   enregistrement.mode_pay_id = parseInt(enregistrement.mode_pay_id, 10);
   enregistrement.date += "T00:00:00Z";
+  const error = validate(enregistrement);
 
-  try {
-    await prisma.compte.create({
-      data: { ...enregistrement, facture: facturejpg },
-    });
-    res
-      .status(201)
-      .json({ message: "Nouvelle recette ou depense enregistrée" });
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+  if (error) {
+    res.status(422).send(error);
+  } else {
+    try {
+      await prisma.compte.create({
+        data: { ...enregistrement, facture: facturejpg },
+      });
+      res
+        .status(201)
+        .json({ message: "Nouvelle recette ou depense enregistrée" });
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   }
 };
 
