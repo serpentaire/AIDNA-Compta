@@ -36,6 +36,14 @@ router.post(
   compteControllers.add
 );
 router.get("/enregistrement", compteControllers.browse);
+router.put(
+  "/enregistrement/:id",
+  upload.fields([{ name: "facture", maxCount: 1 }]),
+  compteControllers.edit
+);
+router.put("/enregistrementValidation/:id", compteControllers.editValidation);
+router.delete("/enregistrement/:id", compteControllers.destroy);
+router.get("/enregistrement/:id", compteControllers.read);
 router.get("/compteJournalier", compteControllers.cJournalier);
 router.get("/modePaiement", modePayControllers.browse);
 router.get("/banque", banqueControllers.browse);

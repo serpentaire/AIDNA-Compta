@@ -69,12 +69,27 @@ const cJournalier = async (req, res) => {
 };
 
 const edit = async (req, res) => {
+  let enregistrement = req.body;
+  const facturejpg = `assets/${
+    req.files.facture ? req.files.facture[0].filename : null
+  }`;
+  enregistrement = JSON.parse(enregistrement.data);
+  enregistrement.somme = parseFloat(enregistrement.somme, 10).toFixed(2);
+  enregistrement.N_cheque = enregistrement.N_cheque
+    ? parseInt(enregistrement.N_cheque, 10)
+    : null;
+  enregistrement.N_comptes_id = parseInt(enregistrement.N_comptes_id, 10);
+  enregistrement.banque_id = enregistrement.banque_id
+    ? parseInt(enregistrement.banque_id, 10)
+    : null;
+  enregistrement.mode_pay_id = parseInt(enregistrement.mode_pay_id, 10);
+  enregistrement.date += "T00:00:00Z";
   try {
     await prisma.compte.update({
       where: { id: +req.params.id },
-      data: req.body,
+      data: { ...enregistrement, facture: facturejpg },
     });
-    res.status(204).json({ message: "Le compte a bien été modifié" });
+    res.status(204).json({ message: "Enregistrement a bien été modifié" });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -123,6 +138,19 @@ const destroy = async (req, res) => {
   }
 };
 
+const editValidation = async (req, res) => {
+  try {
+    await prisma.compte.update({
+      where: { id: +req.params.id },
+      data: req.body,
+    });
+    res.status(204).json({ message: "La validation a bien été modifié" });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
+
 module.exports = {
   browse,
   read,
@@ -130,4 +158,5 @@ module.exports = {
   add,
   destroy,
   cJournalier,
+  editValidation,
 };

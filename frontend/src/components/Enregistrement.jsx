@@ -2,15 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import apiConnexion from "../services/apiConnexion";
 
-function Enregistrement() {
+// eslint-disable-next-line react/prop-types
+function Enregistrement({ idUpdate, setIdUpdate }) {
   const formulaire = document.getElementById("formulaire");
   const inputRef1 = useRef(null);
   const location = useLocation();
-  const enregistrementType = location.state?.parametre;
+  let enregistrementType = location.state?.parametre;
   const [Ncompte, setNcompte] = useState([]);
   const [banques, setBanques] = useState([]);
   const [modePays, setModePays] = useState([]);
-  const enregistrementInitial = {
+  let enregistrementInitial = {
     date: "",
     description: "",
     nom: "",
@@ -24,6 +25,26 @@ function Enregistrement() {
     facture: "",
   };
   const [enregistrement, setEnregistrement] = useState(enregistrementInitial);
+  const getOneEnrgmt = () => {
+    if (idUpdate) {
+      apiConnexion
+        .get(`/enregistrement/${idUpdate}`)
+        .then((oneEnregistrement) => {
+          enregistrementInitial = {
+            ...oneEnregistrement.data,
+            date: oneEnregistrement.data.date.split("T").shift(),
+            somme: parseFloat(oneEnregistrement.data.somme, 10).toFixed(2),
+            mode_pay_id: oneEnregistrement.data.mode_pay_id.toString(),
+          };
+          setEnregistrement(enregistrementInitial);
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+
+  // eslint-disable-next-line no-unused-expressions
+  !enregistrementType ? (enregistrementType = enregistrement.enregmt) : "";
+
   const handleEnregistrement = (place, value) => {
     const newEnregistrement = { ...enregistrement };
     newEnregistrement[place] = value;
@@ -54,16 +75,22 @@ function Enregistrement() {
       })
       .catch((error) => console.error(error));
   };
-  useEffect(() => {
-    getNcompte();
-    getBanque();
-    getModePay();
-  }, []);
 
   const handleClick1 = () => {
     inputRef1.current.click();
   };
-
+  const deleteEnregistrement = (id) => {
+    apiConnexion
+      .delete(`/enregistrement/${id}`)
+      .then(() => {
+        setEnregistrement(enregistrementInitial);
+        // eslint-disable-next-line no-param-reassign
+        setIdUpdate();
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
   const sendForm = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -73,15 +100,31 @@ function Enregistrement() {
       inputRef1.current ? inputRef1.current.files[0] : ""
     );
     formData.append("data", JSON.stringify(enregistrement));
-
-    apiConnexion
-      .post("/enregistrement", formData)
-      .then(() => {
-        setEnregistrement(enregistrementInitial);
-        formulaire.reset();
-      })
-      .catch((error) => console.error(error));
+    if (idUpdate) {
+      apiConnexion
+        .put(`/enregistrement/${idUpdate}`, formData)
+        .then(() => {
+          setEnregistrement(enregistrementInitial);
+          // eslint-disable-next-line no-param-reassign
+          setIdUpdate();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      apiConnexion
+        .post("/enregistrement", formData)
+        .then(() => {
+          setEnregistrement(enregistrementInitial);
+          formulaire.reset();
+        })
+        .catch((error) => console.error(error));
+    }
   };
+  useEffect(() => {
+    getNcompte();
+    getBanque();
+    getModePay();
+    getOneEnrgmt();
+  }, [idUpdate]);
 
   useEffect(() => {
     setEnregistrement({
@@ -97,9 +140,15 @@ function Enregistrement() {
         onSubmit={(e) => sendForm(e)}
         id="formulaire"
       >
-        <h1 className="grow text-center font-semibold text-green md:text-2xl">
-          Enregistrer une {enregistrementType}
-        </h1>
+        {idUpdate ? (
+          <h1 className="grow text-center font-semibold text-green md:text-2xl">
+            Modifier une {enregistrementType}
+          </h1>
+        ) : (
+          <h1 className="grow text-center font-semibold text-green md:text-2xl">
+            Enregistrer une {enregistrementType}
+          </h1>
+        )}
         <div className=" pt-4 text-center md:text-start md:pl-20">
           <h2 className="grow text-center md:text-start font-semibold text-green">
             Date de l'opération*
@@ -139,6 +188,7 @@ function Enregistrement() {
               className="border border-orange rounded-full p-2 pl-5 text-orange w-3/4 md:w-40"
               name="mode_pay_id"
               type="text"
+              value={enregistrement.mode_pay_id}
               onChange={(e) =>
                 handleEnregistrement(e.target.name, e.target.value)
               }
@@ -164,6 +214,7 @@ function Enregistrement() {
                 className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-full"
                 type="text"
                 name="N_cheque"
+                value={enregistrement.N_cheque}
                 onChange={(e) =>
                   handleEnregistrement(e.target.name, e.target.value)
                 }
@@ -260,6 +311,7 @@ function Enregistrement() {
             className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-40"
             type="text"
             name="somme"
+            value={enregistrement.somme}
             onChange={(e) =>
               handleEnregistrement(e.target.name, e.target.value)
             }
@@ -285,12 +337,30 @@ function Enregistrement() {
           </div>
         )}
         <div className="flex flex-row justify-around items-center my-3 md:justify-end md:pr-20">
-          <button
-            className="focus:bg-white focus:text-orange border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
-            type="submit"
-          >
-            Enregistrer
-          </button>
+          {!idUpdate ? (
+            <button
+              className="focus:bg-white focus:text-orange m-2 border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
+              type="submit"
+            >
+              Enregistrer
+            </button>
+          ) : (
+            <div>
+              <button
+                className="focus:bg-white focus:text-orange m-2 border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
+                type="button"
+                onClick={() => deleteEnregistrement(idUpdate)}
+              >
+                Supprimer
+              </button>
+              <button
+                className="focus:bg-white focus:text-orange border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
+                type="submit"
+              >
+                Modifier
+              </button>
+            </div>
+          )}
         </div>
       </form>
     </div>
