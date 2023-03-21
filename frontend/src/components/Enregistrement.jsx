@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import toastiConfig from "../services/toastiConfig";
 import apiConnexion from "../services/apiConnexion";
 
 // eslint-disable-next-line react/prop-types
@@ -83,11 +85,13 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
     apiConnexion
       .delete(`/enregistrement/${id}`)
       .then(() => {
+        toast.success(`Votre écriture a bien été supprimée.`, toastiConfig);
         setEnregistrement(enregistrementInitial);
         // eslint-disable-next-line no-param-reassign
         setIdUpdate();
       })
       .catch((err) => {
+        toast.error(`Votre écriture n'a pas été supprimée.`, toastiConfig);
         console.warn(err);
       });
   };
@@ -104,19 +108,27 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
       apiConnexion
         .put(`/enregistrement/${idUpdate}`, formData)
         .then(() => {
+          toast.success(`Votre écriture a bien été modifié.`, toastiConfig);
           setEnregistrement(enregistrementInitial);
           // eslint-disable-next-line no-param-reassign
           setIdUpdate();
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          toast.error(`Votre écriture n'a pas été ajouté.`, toastiConfig);
+          console.error(error);
+        });
     } else {
       apiConnexion
         .post("/enregistrement", formData)
         .then(() => {
+          toast.success(`Votre écriture a bien été ajouté.`, toastiConfig);
           setEnregistrement(enregistrementInitial);
           formulaire.reset();
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          toast.error(`Votre écriture n'a pas été ajouté.`, toastiConfig);
+          console.error(error);
+        });
     }
   };
   useEffect(() => {
@@ -363,6 +375,18 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           )}
         </div>
       </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
