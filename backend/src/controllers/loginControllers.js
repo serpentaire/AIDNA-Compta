@@ -40,7 +40,7 @@ const validateLogin = async (req, res) => {
         await verifyHash(user[0].Users_log.hashedpassword, req.body.password)
       ) {
         const myUser = { ...user };
-        delete myUser.hashedpassword;
+        delete myUser[0].Users_log.hashedpassword;
         const token = jwt.sign(myUser, process.env.JWT_SECRET, {
           expiresIn: "24h",
         });

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
+import User from "../../../Context/user";
 import logo from "../../../assets/logo.png";
 
 function Login() {
   const navigate = useNavigate("");
   const [hidePassword, setHidePassword] = useState(true);
+  const userContext = useContext(User.UserContext);
   function showPassword() {
     setHidePassword(!hidePassword);
   }
@@ -23,6 +25,7 @@ function Login() {
     apiConnexion
       .post("/login", connexion)
       .then((data) => {
+        userContext.handleUser(data.data);
         if (data.data[0].Role.nom === "Trésorier") {
           setTimeout(
             () =>
@@ -32,7 +35,7 @@ function Login() {
             2000
           );
         }
-        toast.success(`Bonjour à vous.`, toastiConfig);
+        toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
       })
       .catch(() => {
         toast.error(

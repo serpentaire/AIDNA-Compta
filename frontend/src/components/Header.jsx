@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import User from "../Context/user";
 import logo from "../assets/logo.png";
 
 function Header() {
   const navigate = useNavigate();
+  const { logout } = useContext(User.UserContext);
   const getLogout = () => {
-    // logout();
+    logout();
     navigate("/");
   };
   return (

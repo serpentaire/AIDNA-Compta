@@ -54,6 +54,6 @@ router.post("/nComptes", nComptesControllers.add);
 router.delete("/nComptes/:id", nComptesControllers.destroy);
 
 router.post("/login", loginControllers.validateLogin);
-router.get("/login", loginControllers.browse);
+// router.get("/login", loginControllers.browse);
 
 module.exports = router;

@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../services/toastiConfig";
 import apiConnexion from "../services/apiConnexion";
 
-// eslint-disable-next-line react/prop-types
 function Enregistrement({ idUpdate, setIdUpdate }) {
   const formulaire = document.getElementById("formulaire");
   const inputRef1 = useRef(null);
@@ -88,7 +87,6 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
       .then(() => {
         toast.success(`Votre écriture a bien été supprimée.`, toastiConfig);
         setTimeout(() => setEnregistrement(enregistrementInitial), 1000);
-        // eslint-disable-next-line no-param-reassign
         setTimeout(() => setIdUpdate(), 5000);
       })
       .catch((err) => {
@@ -111,7 +109,6 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         .then(() => {
           toast.success(`Votre écriture a bien été modifiée.`, toastiConfig);
           setTimeout(() => setEnregistrement(enregistrementInitial), 1000);
-          // eslint-disable-next-line no-param-reassign
           setTimeout(() => setIdUpdate(), 5000);
         })
         .catch((error) => {
