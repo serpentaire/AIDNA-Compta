@@ -14,7 +14,7 @@ function SideBarAdmin() {
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-full p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
+              className="rounded-3xl p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
               type="button"
             >
               Archiver un compte
@@ -38,7 +38,7 @@ function SideBarAdmin() {
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-full p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
+              className="rounded-3xl p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
               type="button"
             >
               Ajouter un utilisateur
@@ -46,7 +46,7 @@ function SideBarAdmin() {
           </div>
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-full p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
+              className="rounded-3xl p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
               type="button"
             >
               Supprimer un utilisateur
@@ -54,7 +54,7 @@ function SideBarAdmin() {
           </div>
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-full p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
+              className="rounded-3xl p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
               type="button"
             >
               Modifier un utilisateur

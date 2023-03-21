@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import User from "../Context/user";
+import User from "../context/user";
 import logo from "../assets/logo.png";
 
 function Header() {

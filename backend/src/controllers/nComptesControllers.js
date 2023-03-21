@@ -63,10 +63,24 @@ const destroy = async (req, res) => {
   }
 };
 
+const editActive = async (req, res) => {
+  try {
+    await prisma.N_comptes.update({
+      where: { id: +req.params.id },
+      data: req.body,
+    });
+    res.status(204).json({ message: "L'activation a bien été modifié" });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  editActive,
 };

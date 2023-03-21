@@ -41,6 +41,7 @@ router.put(
   upload.fields([{ name: "facture", maxCount: 1 }]),
   compteControllers.edit
 );
+router.put("/compteActive/:id", nComptesControllers.editActive);
 router.put("/enregistrementValidation/:id", compteControllers.editValidation);
 router.delete("/enregistrement/:id", compteControllers.destroy);
 router.get("/enregistrement/:id", compteControllers.read);

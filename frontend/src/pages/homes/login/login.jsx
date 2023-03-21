@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
-import User from "../../../Context/user";
+import User from "../../../context/user";
 import logo from "../../../assets/logo.png";
 
 function Login() {
@@ -34,6 +34,8 @@ function Login() {
               }),
             2000
           );
+        } else {
+          setTimeout(() => navigate(`/homeAdmin`), 2000);
         }
         toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
       })
