@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../services/toastiConfig";
 import apiConnexion from "../services/apiConnexion";
 
@@ -86,9 +87,9 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
       .delete(`/enregistrement/${id}`)
       .then(() => {
         toast.success(`Votre écriture a bien été supprimée.`, toastiConfig);
-        setEnregistrement(enregistrementInitial);
+        setTimeout(() => setEnregistrement(enregistrementInitial), 1000);
         // eslint-disable-next-line no-param-reassign
-        setIdUpdate();
+        setTimeout(() => setIdUpdate(), 5000);
       })
       .catch((err) => {
         toast.error(`Votre écriture n'a pas été supprimée.`, toastiConfig);
@@ -108,25 +109,25 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
       apiConnexion
         .put(`/enregistrement/${idUpdate}`, formData)
         .then(() => {
-          toast.success(`Votre écriture a bien été modifié.`, toastiConfig);
-          setEnregistrement(enregistrementInitial);
+          toast.success(`Votre écriture a bien été modifiée.`, toastiConfig);
+          setTimeout(() => setEnregistrement(enregistrementInitial), 1000);
           // eslint-disable-next-line no-param-reassign
-          setIdUpdate();
+          setTimeout(() => setIdUpdate(), 5000);
         })
         .catch((error) => {
-          toast.error(`Votre écriture n'a pas été ajouté.`, toastiConfig);
+          toast.error(`Votre écriture n'a pas été modifiée.`, toastiConfig);
           console.error(error);
         });
     } else {
       apiConnexion
         .post("/enregistrement", formData)
         .then(() => {
-          toast.success(`Votre écriture a bien été ajouté.`, toastiConfig);
+          toast.success(`Votre écriture a bien été ajoutée.`, toastiConfig);
           setEnregistrement(enregistrementInitial);
           formulaire.reset();
         })
         .catch((error) => {
-          toast.error(`Votre écriture n'a pas été ajouté.`, toastiConfig);
+          toast.error(`Votre écriture n'a pas été ajoutée.`, toastiConfig);
           console.error(error);
         });
     }

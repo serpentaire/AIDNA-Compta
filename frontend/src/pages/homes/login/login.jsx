@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
 import logo from "../../../assets/logo.png";
 
@@ -29,10 +32,13 @@ function Login() {
             2000
           );
         }
-        // console.log(`Votre email et votre mot de passe sont valides`);
+        toast.success(`Bonjour à vous.`, toastiConfig);
       })
       .catch(() => {
-        // console.log(`Votre email ou votre mot de passe n'est pas valide`);
+        toast.error(
+          `Votre email ou votre mot de passe n'est pas valide.`,
+          toastiConfig
+        );
       });
   };
 
@@ -105,6 +111,18 @@ function Login() {
           </div>
         </div>
       </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
