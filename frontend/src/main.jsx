@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import User from "./Context/user";
+import User from "./context/user";
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

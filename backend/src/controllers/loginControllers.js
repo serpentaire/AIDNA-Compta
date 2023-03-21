@@ -13,7 +13,6 @@ const browse = async (req, res) => {
 };
 
 const validateLogin = async (req, res) => {
-  const { utilisateur } = req.body.utilisateur;
   try {
     const user = await prisma.Users.findMany({
       include: {
@@ -31,7 +30,7 @@ const validateLogin = async (req, res) => {
       },
       where: {
         Users_log: {
-          login: utilisateur,
+          login: req.body.utilisateur,
         },
       },
     });

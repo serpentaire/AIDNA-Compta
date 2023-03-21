@@ -7,6 +7,7 @@ import HomeAdherent from "./pages/homes/HomeAdherent";
 import Login from "./pages/homes/login/login";
 import HomeTresorier from "./pages/homes/HomeTresorier";
 import CompteJournalier from "./pages/homes/CompteJournalier";
+import HomeAdmin from "./pages/homes/HomeAdmin";
 import "./App.css";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <Route path="/homeAdherent" element={<HomeAdherent />} />
             <Route path="/homeTresorier" element={<HomeTresorier />} />
             <Route path="/compteJournalier" element={<CompteJournalier />} />
-            {/* <Home /> */}
+            <Route path="/homeAdmin" element={<HomeAdmin />} />
           </Routes>
           <Footer />
         </div>
