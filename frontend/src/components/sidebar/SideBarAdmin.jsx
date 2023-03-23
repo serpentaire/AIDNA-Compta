@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function SideBarAdmin() {
+  const navigate = useNavigate();
+  const setManageRedirect = (url, enregistrementType) => {
+    navigate(url, { state: { parametre: enregistrementType } });
+  };
+
   return (
     <div className="sideBarAdmin">
       <h1 className="rounded-3xl text-1xl text-center text-green font-semibold p-3 md:text-start md:pl-16">
@@ -16,6 +22,7 @@ function SideBarAdmin() {
             <button
               className="rounded-3xl p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
               type="button"
+              onClick={() => setManageRedirect("/homeAdmin")}
             >
               Archiver un compte
             </button>
@@ -40,6 +47,7 @@ function SideBarAdmin() {
             <button
               className="rounded-3xl p-2 bg-orange text-white font-bold w-3/4 md:w-3/4"
               type="button"
+              onClick={() => setManageRedirect("/adminUtilisateur", "Ajouter")}
             >
               Ajouter un utilisateur
             </button>
