@@ -8,6 +8,7 @@ import Login from "./pages/homes/login/login";
 import HomeTresorier from "./pages/homes/HomeTresorier";
 import CompteJournalier from "./pages/homes/CompteJournalier";
 import HomeAdmin from "./pages/homes/HomeAdmin";
+import AdminUser from "./pages/homes/AdminUtilisateur";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/homeTresorier" element={<HomeTresorier />} />
             <Route path="/compteJournalier" element={<CompteJournalier />} />
             <Route path="/homeAdmin" element={<HomeAdmin />} />
+            <Route path="/adminUtilisateur" element={<AdminUser />} />
           </Routes>
           <Footer />
         </div>

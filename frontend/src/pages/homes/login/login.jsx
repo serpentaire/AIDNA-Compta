@@ -34,8 +34,10 @@ function Login() {
               }),
             2000
           );
-        } else {
+        } else if (data.data[0].Role.nom === "Administrateur") {
           setTimeout(() => navigate(`/homeAdmin`), 2000);
+        } else if (data.data[0].Role.nom === "Adhèrent") {
+          setTimeout(() => navigate(`/homeAdherent`), 2000);
         }
         toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
       })

@@ -7,6 +7,8 @@ const loginControllers = require("./controllers/loginControllers");
 const banqueControllers = require("./controllers/banqueControllers");
 const modePayControllers = require("./controllers/modePayControllers");
 const compteControllers = require("./controllers/compteControllers");
+const roleControllers = require("./controllers/roleControllers");
+const usersControllers = require("./controllers/usersControllers");
 // const itemControllers = require("./controllers/itemControllers");
 
 const storage = multer.diskStorage({
@@ -53,8 +55,9 @@ router.get("/nComptes/:id", nComptesControllers.read);
 router.put("/nComptes/:id", nComptesControllers.edit);
 router.post("/nComptes", nComptesControllers.add);
 router.delete("/nComptes/:id", nComptesControllers.destroy);
-
+router.get("/roles", roleControllers.browse);
 router.post("/login", loginControllers.validateLogin);
+router.post("/users", usersControllers.add);
 // router.get("/login", loginControllers.browse);
 
 module.exports = router;
