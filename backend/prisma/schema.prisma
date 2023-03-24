@@ -39,6 +39,7 @@ model Users_log {
   id             Int     @id @default(autoincrement())
   login          String  @unique @db.VarChar(45)
   hashedpassword String  @db.VarChar(255)
+  nb_connexion   Int     @default(1)
   Users          Users[]
 }
 

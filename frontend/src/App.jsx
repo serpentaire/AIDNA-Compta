@@ -9,6 +9,7 @@ import HomeTresorier from "./pages/homes/HomeTresorier";
 import CompteJournalier from "./pages/homes/CompteJournalier";
 import HomeAdmin from "./pages/homes/HomeAdmin";
 import AdminUser from "./pages/homes/AdminUtilisateur";
+import UpdatePassword from "./pages/homes/login/UpdatePassword";
 import "./App.css";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/compteJournalier" element={<CompteJournalier />} />
             <Route path="/homeAdmin" element={<HomeAdmin />} />
             <Route path="/adminUtilisateur" element={<AdminUser />} />
+            <Route path="/updatePassword" element={<UpdatePassword />} />
           </Routes>
           <Footer />
         </div>

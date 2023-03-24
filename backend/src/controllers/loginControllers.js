@@ -1,11 +1,32 @@
 const jwt = require("jsonwebtoken");
 const prisma = require("../models/prisma");
 const { verifyHash } = require("../service/auth");
+const { hashNewPassword } = require("../service/auth");
 
-const browse = async (req, res) => {
+const firstconnexion = async (req, res) => {
+  const motPass = req.body.password;
+  const motPasshashed = await hashNewPassword(motPass);
   try {
-    const users = await prisma.Users.findMany();
-    res.status(200).json(users);
+    const user = await prisma.Users_log.findMany({
+      where: { id: req.body.id },
+    });
+    if (user) {
+      if (await verifyHash(user[0].hashedpassword, req.body.oldpassword)) {
+        const compte = await prisma.Users_log.update({
+          where: { id: +req.body.id },
+          data: { hashedpassword: motPasshashed, nb_connexion: 2 },
+        });
+        if (compte) {
+          res.status(200).json(compte);
+        } else {
+          res.sendStatus(404);
+        }
+      } else {
+        res.sendStatus(401);
+      }
+    } else {
+      res.sendStatus(404);
+    }
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -20,6 +41,7 @@ const validateLogin = async (req, res) => {
           select: {
             login: true,
             hashedpassword: true,
+            nb_connexion: true,
           },
         },
         Role: {
@@ -63,5 +85,5 @@ const validateLogin = async (req, res) => {
 
 module.exports = {
   validateLogin,
-  browse,
+  firstconnexion,
 };
