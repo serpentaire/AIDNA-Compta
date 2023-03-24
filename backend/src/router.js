@@ -58,6 +58,6 @@ router.delete("/nComptes/:id", nComptesControllers.destroy);
 router.get("/roles", roleControllers.browse);
 router.post("/login", loginControllers.validateLogin);
 router.post("/users", usersControllers.add);
-// router.get("/login", loginControllers.browse);
+router.put("/firstconnexion", loginControllers.firstconnexion);
 
 module.exports = router;

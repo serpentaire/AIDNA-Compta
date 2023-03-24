@@ -26,20 +26,28 @@ function Login() {
       .post("/login", connexion)
       .then((data) => {
         userContext.handleUser(data.data);
-        if (data.data[0].Role.nom === "Trésorier") {
-          setTimeout(
-            () =>
-              navigate(`/homeTresorier`, {
-                state: { parametre: "recette" },
-              }),
-            2000
+        if (data.data[0].Users_log.nb_connexion === 1) {
+          setTimeout(() => navigate(`/updatePassword`), 3000);
+          toast.success(
+            `Bonjour ${data.data[0].prenom}, veuillez changer votre mot de passe.`,
+            toastiConfig
           );
-        } else if (data.data[0].Role.nom === "Administrateur") {
-          setTimeout(() => navigate(`/homeAdmin`), 2000);
-        } else if (data.data[0].Role.nom === "Adhèrent") {
-          setTimeout(() => navigate(`/homeAdherent`), 2000);
+        } else {
+          if (data.data[0].Role.nom === "Trésorier") {
+            setTimeout(
+              () =>
+                navigate(`/homeTresorier`, {
+                  state: { parametre: "recette" },
+                }),
+              2000
+            );
+          } else if (data.data[0].Role.nom === "Administrateur") {
+            setTimeout(() => navigate(`/homeAdmin`), 2000);
+          } else if (data.data[0].Role.nom === "Adhèrent") {
+            setTimeout(() => navigate(`/homeAdherent`), 2000);
+          }
+          toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
         }
-        toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
       })
       .catch(() => {
         toast.error(
