@@ -10,6 +10,9 @@ import CompteJournalier from "./pages/homes/CompteJournalier";
 import HomeAdmin from "./pages/homes/HomeAdmin";
 import AdminUser from "./pages/homes/AdminUtilisateur";
 import UpdatePassword from "./pages/homes/login/UpdatePassword";
+import PrivateAdmin from "./pages/Layout/PrivateAdmin";
+import PrivateTresorier from "./pages/Layout/PrivateTresorier";
+import PrivateAdherent from "./pages/Layout/PrivateAdherent";
 import "./App.css";
 
 function App() {
@@ -20,12 +23,21 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/homeAdherent" element={<HomeAdherent />} />
-            <Route path="/homeTresorier" element={<HomeTresorier />} />
-            <Route path="/compteJournalier" element={<CompteJournalier />} />
-            <Route path="/homeAdmin" element={<HomeAdmin />} />
-            <Route path="/adminUtilisateur" element={<AdminUser />} />
             <Route path="/updatePassword" element={<UpdatePassword />} />
+            {/* route adhérent */}
+            <Route path="/" element={<PrivateAdherent />}>
+              <Route path="/homeAdherent" element={<HomeAdherent />} />
+            </Route>
+            {/* route trésorier */}
+            <Route path="/" element={<PrivateTresorier />}>
+              <Route path="/homeTresorier" element={<HomeTresorier />} />
+              <Route path="/compteJournalier" element={<CompteJournalier />} />
+            </Route>
+            {/* route admin */}
+            <Route path="/" element={<PrivateAdmin />}>
+              <Route path="homeAdmin" element={<HomeAdmin />} />
+              <Route path="adminUtilisateur" element={<AdminUser />} />
+            </Route>
           </Routes>
           <Footer />
         </div>
