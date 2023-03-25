@@ -2,7 +2,26 @@ const prisma = require("../models/prisma");
 
 const browse = async (req, res) => {
   try {
-    const nComptes = await prisma.N_comptes.findMany();
+    const nComptes = await prisma.N_comptes.findMany({
+      orderBy: {
+        numero: "asc",
+      },
+    });
+    res.status(200).json(nComptes);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
+
+const comptesActif = async (req, res) => {
+  try {
+    const nComptes = await prisma.N_comptes.findMany({
+      where: { actif: "oui" },
+      orderBy: {
+        numero: "asc",
+      },
+    });
     res.status(200).json(nComptes);
   } catch (error) {
     console.error(error);
@@ -83,4 +102,5 @@ module.exports = {
   add,
   destroy,
   editActive,
+  comptesActif,
 };

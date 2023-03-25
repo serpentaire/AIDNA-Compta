@@ -55,7 +55,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
 
   const getNcompte = () => {
     apiConnexion
-      .get(`/nComptes`)
+      .get(`/allCompteActif`)
       .then((allCompte) => {
         setNcompte(allCompte.data);
       })

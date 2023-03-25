@@ -24,13 +24,13 @@ function NumCompte() {
           Liste des comptes
         </h1>
         <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="1" />
-        <TableauCompte nCompte={nCompte} nb="2" />
-        <TableauCompte nCompte={nCompte} nb="3" />
-        <TableauCompte nCompte={nCompte} nb="4" />
-        <TableauCompte nCompte={nCompte} nb="5" />
-        <TableauCompte nCompte={nCompte} nb="6" />
-        <TableauCompte nCompte={nCompte} nb="7" />
-        <TableauCompte nCompte={nCompte} nb="8" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="2" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="3" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="4" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="5" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="6" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="7" />
+        <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="8" />
       </div>
     </div>
   );
