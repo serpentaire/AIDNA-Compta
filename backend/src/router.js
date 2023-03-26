@@ -9,7 +9,7 @@ const modePayControllers = require("./controllers/modePayControllers");
 const compteControllers = require("./controllers/compteControllers");
 const roleControllers = require("./controllers/roleControllers");
 const usersControllers = require("./controllers/usersControllers");
-// const itemControllers = require("./controllers/itemControllers");
+const checkAuth = require("./middleware/authentification");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -32,21 +32,9 @@ const upload = multer({ storage });
 // router.put("/items/:id", itemControllers.edit);
 // router.post("/items", itemControllers.add);
 // router.delete("/items/:id", itemControllers.destroy);
-router.post(
-  "/enregistrement",
-  upload.fields([{ name: "facture", maxCount: 1 }]),
-  compteControllers.add
-);
+
 router.get("/enregistrement", compteControllers.browse);
-router.put(
-  "/enregistrement/:id",
-  upload.fields([{ name: "facture", maxCount: 1 }]),
-  compteControllers.edit
-);
 router.get("/allCompteActif", nComptesControllers.comptesActif);
-router.put("/compteActive/:id", nComptesControllers.editActive);
-router.put("/enregistrementValidation/:id", compteControllers.editValidation);
-router.delete("/enregistrement/:id", compteControllers.destroy);
 router.get("/enregistrement/:id", compteControllers.read);
 router.get("/compteJournalier", compteControllers.cJournalier);
 router.get("/modePaiement", modePayControllers.browse);
@@ -54,11 +42,35 @@ router.get("/banque", banqueControllers.browse);
 router.get("/nComptes", nComptesControllers.browse);
 router.get("/nComptes/:id", nComptesControllers.read);
 router.put("/nComptes/:id", nComptesControllers.edit);
-router.post("/nComptes", nComptesControllers.add);
-router.delete("/nComptes/:id", nComptesControllers.destroy);
 router.get("/roles", roleControllers.browse);
 router.post("/login", loginControllers.validateLogin);
 router.post("/users", usersControllers.add);
 router.put("/firstconnexion", loginControllers.firstconnexion);
+
+// mur d'authenfication
+router.post(
+  "/enregistrement",
+  checkAuth,
+  upload.fields([{ name: "facture", maxCount: 1 }]),
+  compteControllers.add
+);
+router.put(
+  "/enregistrement/:id",
+  checkAuth,
+  upload.fields([{ name: "facture", maxCount: 1 }]),
+  compteControllers.edit
+);
+router.put("/compteActive/:id", checkAuth, nComptesControllers.editActive);
+router.put(
+  "/enregistrementValidation/:id",
+  checkAuth,
+  compteControllers.editValidation
+);
+router.delete("/enregistrement/:id", checkAuth, compteControllers.destroy);
+router.post("/nComptes", checkAuth, nComptesControllers.add);
+router.delete("/nComptes/:id", checkAuth, nComptesControllers.destroy);
+router.post("/login", checkAuth, loginControllers.validateLogin);
+router.post("/users", checkAuth, usersControllers.add);
+router.put("/firstconnexion", checkAuth, loginControllers.firstconnexion);
 
 module.exports = router;
