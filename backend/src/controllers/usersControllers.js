@@ -1,5 +1,6 @@
 const prisma = require("../models/prisma");
 const { hashNewPassword } = require("../service/auth");
+const sendMail = require("./emailControllers");
 
 const browse = async (req, res) => {
   try {
@@ -50,7 +51,27 @@ const add = async (req, res) => {
   users.code_postal = parseInt(users.code_postal, 10);
   users.telephone = parseInt(users.telephone, 10);
   users.role_id = parseInt(users.role_id, 10);
+  const email = {
+    name: users.prenom,
+    email: newLogin,
+    mp: motPass,
+    message: "Votre inscription a bien été prise en compte.",
+  };
 
+  const mailOptions = {
+    from: "association.aidna@wanadoo.fr",
+    to: "glemoine@hotmail.fr", // this is the address to which the email will be sent
+    subject: "Nouveau message de l'AIDNA",
+    attachments: [
+      {
+        filename: "Logo.png",
+        path: "public/assets/images/Logo.png",
+        cid: "logo",
+      },
+    ],
+    text: `${email.message} \n\n Name: ${email.name} \n\n Email: ${email.email} \n\n mp: ${email.mp}`,
+    html: `<p>Bonjour ${email.name},</p> <p>${email.message}</p> <p>L'association AIDNA est heureuse de vous compter parmi nous.</p><p>Pour vous connecter à AIDNA_COMPTA</p><p>Login : ${email.email}</p><p>Mot de passe : ${email.mp}</p><p>Vous serez inviter à changer votre mot de passe lors de votre première connexion.</p><p>Cordialement</p> <img src="cid:logo" height="100" />`,
+  };
   try {
     const usersLog = await prisma.Users_log.create({
       data: { login: newLogin, hashedpassword: motPasshashed },
@@ -59,7 +80,7 @@ const add = async (req, res) => {
     await prisma.Users.create({
       data: { ...users, users_log_id: usersLog.id },
     });
-
+    sendMail(mailOptions);
     res.status(201).json({ message: "Nouveau utilisateur créé" });
   } catch (error) {
     console.error(error);
