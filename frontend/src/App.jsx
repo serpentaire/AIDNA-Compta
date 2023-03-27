@@ -13,6 +13,7 @@ import UpdatePassword from "./pages/homes/login/UpdatePassword";
 import PrivateAdmin from "./pages/Layout/PrivateAdmin";
 import PrivateTresorier from "./pages/Layout/PrivateTresorier";
 import PrivateAdherent from "./pages/Layout/PrivateAdherent";
+import RapComptes from "./pages/Rapports/RappComptes";
 import "./App.css";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<PrivateTresorier />}>
               <Route path="/homeTresorier" element={<HomeTresorier />} />
               <Route path="/compteJournalier" element={<CompteJournalier />} />
+              <Route path="/rapportComptes" element={<RapComptes />} />
             </Route>
             {/* route admin */}
             <Route path="/" element={<PrivateAdmin />}>
