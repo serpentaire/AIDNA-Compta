@@ -68,6 +68,7 @@ function SideBarMembreBureau() {
           </div>
         </div>
       </div>
+      <div id="cible" />
     </div>
   );
 }

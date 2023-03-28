@@ -26,6 +26,7 @@ function SideBarAdherent() {
           </div>
         </div>
       </div>
+      <div id="cible" />
     </div>
   );
 }
