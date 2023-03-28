@@ -93,6 +93,18 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         toast.error(`Votre écriture n'a pas été supprimée.`, toastiConfig);
         console.warn(err);
       });
+    if (enregistrement.facture !== "assets/null") {
+      const fic = enregistrement.facture.split("/").pop();
+      apiConnexion
+        .delete(`/supfichier/${fic}`)
+        .then(() => {
+          toast.success(`Votre fichier a bien été supprimée.`, toastiConfig);
+        })
+        .catch((err) => {
+          toast.error(`Votre fichier n'a pas été supprimée.`, toastiConfig);
+          console.warn(err);
+        });
+    }
   };
   const sendForm = (e) => {
     e.preventDefault();

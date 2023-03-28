@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const prisma = require("../models/prisma");
 const validate = require("../service/validateEnregistrement");
 
@@ -164,6 +166,23 @@ const editValidation = async (req, res) => {
   }
 };
 
+const destroyfichier = (req, res) => {
+  const nomFichier = req.params.nom;
+  const chemindir = __dirname.split("\\").slice(0, 6).join("\\");
+  const cheminFichier = path.join(chemindir, "public", "assets", nomFichier);
+
+  fs.unlink(cheminFichier, (err) => {
+    if (err) {
+      console.error(err);
+      res
+        .status(500)
+        .send({ message: "Erreur lors de la suppression du fichier" });
+    } else {
+      res.send({ message: "Le fichier a été supprimé avec succès" });
+    }
+  });
+};
+
 module.exports = {
   browse,
   read,
@@ -172,4 +191,5 @@ module.exports = {
   destroy,
   cJournalier,
   editValidation,
+  destroyfichier,
 };
