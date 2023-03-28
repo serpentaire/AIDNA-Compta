@@ -9,7 +9,7 @@ import {
 import { Line } from "react-chartjs-2";
 import apiConnexion from "../services/apiConnexion";
 
-function GrapComptes() {
+function GraphComptes() {
   const [dataGraph, setDataGraph] = useState();
   // graphique
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
@@ -75,7 +75,7 @@ function GrapComptes() {
   }, []);
 
   return (
-    <div className="grapComptes">
+    <div className="graphComptes">
       <div className=" pt-4 text-center">
         <select
           className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-1/2"
@@ -104,4 +104,4 @@ function GrapComptes() {
   );
 }
 
-export default GrapComptes;
+export default GraphComptes;
