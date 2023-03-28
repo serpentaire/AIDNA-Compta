@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ScrollDown from "../ScrollDown";
 
 function SideBarAdmin() {
   const navigate = useNavigate();
   const setManageRedirect = (url, enregistrementType) => {
     navigate(url, { state: { parametre: enregistrementType } });
+    ScrollDown();
   };
 
   return (
@@ -86,6 +88,7 @@ function SideBarAdmin() {
           </div>
         </div>
       </div>
+      <div id="cible" />
     </div>
   );
 }

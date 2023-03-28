@@ -34,6 +34,7 @@ function SideBarMembreEquipe() {
           </div>
         </div>
       </div>
+      <div id="cible" />
     </div>
   );
 }

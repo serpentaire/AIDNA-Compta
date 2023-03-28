@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ScrollDown from "../ScrollDown";
 
 function SideBarTresorier() {
   const navigate = useNavigate();
   const setManageRedirect = (url, enregistrementType) => {
     navigate(url, { state: { parametre: enregistrementType } });
+    ScrollDown();
   };
 
   return (
@@ -125,6 +127,7 @@ function SideBarTresorier() {
           </div>
         </div>
       </div>
+      <div id="cible" />
     </div>
   );
 }
