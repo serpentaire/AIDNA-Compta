@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import apiConnexion from "../services/apiConnexion";
 import Enregistrement from "./Enregistrement";
+import icone from "../assets/ticket.png";
 
 function TableauJournalier() {
   const mois = [
@@ -108,6 +109,19 @@ function TableauJournalier() {
               </td>
               <td className="border px-4 py-2">
                 {enregistrementJour.description}
+                {enregistrementJour.facture !== "assets/null" && (
+                  <button type="button" className="">
+                    <a
+                      href={`${import.meta.env.VITE_BACKEND_URL}/${
+                        enregistrementJour.facture
+                      }`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <img src={icone} alt="icone" className="w-5 h-5" />
+                    </a>
+                  </button>
+                )}
               </td>
               <td className="border px-4 py-2">
                 {enregistrementJour.mode_pay.nom}

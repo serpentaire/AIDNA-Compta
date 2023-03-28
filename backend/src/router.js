@@ -67,6 +67,7 @@ router.put(
   compteControllers.editValidation
 );
 router.delete("/enregistrement/:id", checkAuth, compteControllers.destroy);
+router.delete("/supfichier/:nom", checkAuth, compteControllers.destroyfichier);
 router.post("/nComptes", checkAuth, nComptesControllers.add);
 router.delete("/nComptes/:id", checkAuth, nComptesControllers.destroy);
 router.post("/login", checkAuth, loginControllers.validateLogin);
