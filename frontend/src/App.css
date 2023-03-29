@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* customisation des boutons */
+  .btnCustom {
+    @apply rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4;
+  }
+  /* customisation des cards des sidebars */
+  .card {
+    @apply md:w-60 border pt-2 pb-2 border-black hover:scale-105 duration-300 rounded-3xl shadow-lg lg:max-w-lg mt-3 mx-8;
+  }
+  /* customisation du text du titre de la sidebar */
+  .h1sidebar {
+    @apply rounded-3xl text-center text-green font-semibold p-3 md:pl-2;
+  }
+  /* customisation du text du titre des cards */
+  .h2sidebar {
+    @apply rounded-3xl text-center text-green font-semibold p-3;
+  }
+  /* customisation du text du titre des composants */
+  .h1compo {
+    @apply grow text-center font-semibold text-green md:text-2xl;
+  }
+  /* customisation du text des titres des formulaires */
+  .h2compo {
+    @apply text-center md:text-start font-semibold text-green;
+  }
+  /* customisation des champs de saisie */
+  .inputCustom {
+    @apply border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-1/2;
+  }
+  /* customisation de la div du couple titre et champs de saisie des formulaires utilisateur */
+  .divUtCustom {
+    @apply md:flex md:pt-4 text-center md:text-start pl-2 md:pl-20;
+  }
+  /* customisation de la div du couple titre et champs de saisie des formulaires enregistrement */
+  .divEnCustom {
+    @apply pt-4 text-center md:text-start md:pl-20;
+  }
+    /* customisation du bouton, devient blanc au clic */
+    .btnCustumFocus {
+      @apply focus:bg-white focus:text-orange border border-orange;
+    }
+}
+
