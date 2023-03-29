@@ -20,9 +20,7 @@ function NumCompte() {
   return (
     <div className="numCompte">
       <div>
-        <h1 className="grow text-center font-semibold text-green md:text-2xl">
-          Liste des comptes
-        </h1>
+        <h1 className="h1compo">Liste des comptes</h1>
         <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="1" />
         <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="2" />
         <TableauCompte nCompte={nCompte} updateChild={getNcompte} nb="3" />

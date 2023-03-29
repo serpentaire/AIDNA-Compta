@@ -72,7 +72,7 @@ function TableauJournalier() {
       <div className=" m-3 md:justify-start">
         {mois.map((moi) => (
           <button
-            className="focus:bg-white focus:text-orange m-2 border border-orange rounded-3xl p-2 bg-orange text-white font-bold md:w-26"
+            className="btnCustom focus:bg-white focus:text-orange m-2 border border-orange w-1/4 md:w-24 text-xs md:text-base"
             type="button"
             onClick={() => selectMois(moi.id)}
           >

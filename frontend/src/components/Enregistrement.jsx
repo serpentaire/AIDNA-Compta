@@ -163,21 +163,15 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         id="formulaire"
       >
         {idUpdate ? (
-          <h1 className="grow text-center font-semibold text-green md:text-2xl">
-            Modifier une {enregistrementType}
-          </h1>
+          <h1 className="h1compo">Modifier une {enregistrementType}</h1>
         ) : (
-          <h1 className="grow text-center font-semibold text-green md:text-2xl">
-            Enregistrer une {enregistrementType}
-          </h1>
+          <h1 className="h1compo">Enregistrer une {enregistrementType}</h1>
         )}
-        <div className=" pt-4 text-center md:text-start md:pl-20">
-          <h2 className="grow text-center md:text-start font-semibold text-green">
-            Date de l'opération*
-          </h2>
+        <div className=" divEnCustom">
+          <h2 className="h2compo grow">Date de l'opération*</h2>
           <input
             required
-            className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-40"
+            className="inputCustom md:w-40"
             type="date"
             name="date"
             value={enregistrement.date}
@@ -186,13 +180,11 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             }
           />
         </div>
-        <div className=" pt-4 text-center md:text-start md:pl-20">
-          <h2 className="grow text-center md:text-start font-semibold text-green">
-            Détail de l'opération*
-          </h2>
+        <div className=" divEnCustom">
+          <h2 className="h2compo grow">Détail de l'opération*</h2>
           <input
             required
-            className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-3/4"
+            className="inputCustom md:w-3/4"
             type="text"
             name="description"
             value={enregistrement.description}
@@ -202,12 +194,10 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           />
         </div>
         <div className="md:flex">
-          <div className=" pt-4 text-center md:text-start md:pl-20">
-            <h2 className="grow text-center md:text-start font-semibold text-green">
-              Mode de paiement*
-            </h2>
+          <div className=" divEnCustom">
+            <h2 className="h2compo grow">Mode de paiement*</h2>
             <select
-              className="border border-orange rounded-full p-2 pl-5 text-orange w-3/4 md:w-40"
+              className="inputCustom md:w-40"
               name="mode_pay_id"
               type="text"
               value={enregistrement.mode_pay_id}
@@ -228,12 +218,10 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             </select>
           </div>
           {enregistrement.mode_pay_id === "2" && (
-            <div className=" pt-4 text-center md:text-start md:pl-20">
-              <h2 className="grow text-center font-semibold text-green">
-                Numéro de chèque
-              </h2>
+            <div className=" divEnCustom">
+              <h2 className="h2compo grow text-center">Numéro de chèque</h2>
               <input
-                className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-full"
+                className="inputCustom md:w-full"
                 type="text"
                 name="N_cheque"
                 value={enregistrement.N_cheque}
@@ -244,12 +232,10 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             </div>
           )}
           {enregistrement.mode_pay_id === "2" && (
-            <div className=" pt-4 text-center md:text-start md:pl-20">
-              <h2 className="grow text-center font-semibold text-green md:text-2xl>Détail de l'opération">
-                Banque
-              </h2>
+            <div className=" divEnCustom">
+              <h2 className="h2compo grow text-center">Banque</h2>
               <select
-                className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-full"
+                className="inputCustom md:w-full"
                 name="banque_id"
                 type="text"
                 onChange={(e) =>
@@ -270,12 +256,10 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             </div>
           )}
         </div>
-        <div className=" pt-4 text-center md:text-start md:pl-20">
-          <h2 className="grow text-center md:text-start font-semibold text-green">
-            Numéro de compte
-          </h2>
+        <div className=" divEnCustom">
+          <h2 className="h2compo grow">Numéro de compte</h2>
           <select
-            className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-1/2"
+            className="inputCustom md:w-1/2"
             name="N_comptes_id"
             type="text"
             value={enregistrement.N_comptes_id}
@@ -309,13 +293,11 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
                 ))}
           </select>
         </div>
-        <div className=" pt-4 text-center md:text-start md:pl-20">
-          <h2 className="grow text-center md:text-start font-semibold text-green">
-            Nom, Prénom*
-          </h2>
+        <div className=" divEnCustom">
+          <h2 className="h2compo grow">Nom, Prénom*</h2>
           <input
             required
-            className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-72"
+            className="inputCustom md:w-72"
             type="text"
             name="nom"
             value={enregistrement.nom}
@@ -324,13 +306,11 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             }
           />
         </div>
-        <div className=" pt-4 text-center md:text-start md:pl-20">
-          <h2 className="grow text-center md:text-start font-semibold text-green md:text-2xl>Détail de l'opération">
-            Somme en €*
-          </h2>
+        <div className=" divEnCustom">
+          <h2 className="h2compo grow">Somme en €*</h2>
           <input
             required
-            className="border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-40"
+            className="inputCustom md:w-40"
             type="text"
             name="somme"
             value={enregistrement.somme}
@@ -340,9 +320,9 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           />
         </div>
         {enregistrementType === "dépense" && (
-          <div className=" pt-4 text-center md:text-start md:pl-20">
+          <div className=" divEnCustom">
             <button
-              className="focus:bg-white focus:text-orange border border-orange rounded-full p-2 pl-5 bg-orange text-white w-1/2 md:w-52"
+              className="btnCustom btnCustumFocus pl-5 md:w-52"
               type="button"
               onClick={handleClick1}
             >
@@ -361,7 +341,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         <div className="flex flex-row justify-around items-center my-3 md:justify-end md:pr-20">
           {!idUpdate ? (
             <button
-              className="focus:bg-white focus:text-orange m-2 border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
+              className="btnCustom btnCustumFocus m-2 md:w-40"
               type="submit"
             >
               Enregistrer
@@ -369,14 +349,14 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           ) : (
             <div>
               <button
-                className="focus:bg-white focus:text-orange m-2 border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
+                className="btnCustom btnCustumFocus m-2 md:w-40"
                 type="button"
                 onClick={() => deleteEnregistrement(idUpdate)}
               >
                 Supprimer
               </button>
               <button
-                className="focus:bg-white focus:text-orange border border-orange rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-40"
+                className="btnCustom btnCustumFocus md:w-40"
                 type="submit"
               >
                 Modifier

@@ -11,17 +11,15 @@ function SideBarTresorier() {
 
   return (
     <div className="sideBarTresorier overflow-y-scroll md:h-screen">
-      <h1 className="rounded-3xl text-1xl text-center text-green font-semibold p-3 md:pl-2">
+      <h1 className="h1sidebar text-1xl">
         Espace Présidente, Secrétaire et Trésorier
       </h1>
-      <div className=" md:w-60 md:w-56 border pt-2 pb-2 border-black hover:scale-105 duration-300 rounded-3xl shadow-lg lg:max-w-lg mt-3 mx-8">
-        <h2 className="rounded-3xl text-1xl text-center text-green font-semibold p-3">
-          Saisies
-        </h2>
+      <div className="card">
+        <h2 className="h2sidebar text-1xl">Saisies</h2>
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
+              className="btnCustom btnCustumFocus"
               type="button"
               onClick={() => setManageRedirect("/homeTresorier", "recette")}
             >
@@ -30,7 +28,7 @@ function SideBarTresorier() {
           </div>
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
+              className="btnCustom btnCustumFocus"
               type="button"
               onClick={() => setManageRedirect("/homeTresorier", "dépense")}
             >
@@ -39,14 +37,12 @@ function SideBarTresorier() {
           </div>
         </div>
       </div>
-      <div className="md:w-60 md:w-56 border pt-2 pb-2 border-black hover:scale-105 duration-300 rounded-3xl shadow-lg lg:max-w-lg mt-3 mx-8">
-        <h2 className="rounded-3xl text-1xl text-center text-green font-semibold p-3">
-          Comptes
-        </h2>
+      <div className="card">
+        <h2 className="h2sidebar text-1xl">Comptes</h2>
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
+              className="btnCustom btnCustumFocus"
               type="button"
               onClick={() => setManageRedirect("/compteJournalier")}
             >
@@ -54,47 +50,33 @@ function SideBarTresorier() {
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               Caisse
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               PayPal
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               Etat de rapprochement banquaire
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               Stocks
             </button>
           </div>
         </div>
       </div>
-      <div className="md:w-60 md:w-56 border pt-2 pb-2 border-black hover:scale-105 duration-300 rounded-3xl shadow-lg lg:max-w-lg mt-3 mx-8">
-        <h2 className="rounded-3xl text-1xl text-center text-green font-semibold p-3">
-          Rapports
-        </h2>
+      <div className="card">
+        <h2 className="h2sidebar text-1xl">Rapports</h2>
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
+              className="btnCustom btnCustumFocus"
               type="button"
               onClick={() => setManageRedirect("/rapportComptes")}
             >
@@ -102,26 +84,17 @@ function SideBarTresorier() {
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               Bilan
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               Projet
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
-            <button
-              className="rounded-3xl p-2 bg-orange text-white font-bold w-1/2 md:w-3/4"
-              type="button"
-            >
+            <button className="btnCustom btnCustumFocus" type="button">
               Analyse des comptes
             </button>
           </div>

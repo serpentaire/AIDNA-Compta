@@ -19,7 +19,7 @@ function TableauCompte({ nCompte, updateChild, nb }) {
 
   return (
     <div className="tableauCompte">
-      <h2 className="grow text-center m-1 mt-5 font-semibold text-green md:text-xl">
+      <h2 className="h2compo grow md:text-center m-1 mt-5 md:text-xl">
         Classe {nb}
       </h2>
       <div className="tableau flex justify-center">
