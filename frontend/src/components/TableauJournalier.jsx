@@ -102,7 +102,11 @@ function TableauJournalier() {
                 <button
                   className="underline"
                   type="button"
-                  onClick={() => updateEnrgmt(enregistrementJour.id)}
+                  onClick={() =>
+                    idUpdate !== enregistrementJour.id
+                      ? updateEnrgmt(enregistrementJour.id)
+                      : setIdUpdate()
+                  }
                 >
                   {enregistrementJour.date.split("T").shift().substr(-2)}
                 </button>
