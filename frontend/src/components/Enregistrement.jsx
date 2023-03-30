@@ -266,29 +266,19 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             }
           >
             <option value="">Sélectionnez</option>
-            {enregistrementType === "recette"
-              ? Ncompte.filter((compte) =>
-                  compte.numero.toString().startsWith("7")
-                ).map((compte) => (
-                  <option
-                    key={compte.id}
-                    value={compte.id}
-                    selected={compte.id === enregistrement.N_comptes_id}
-                  >
-                    {compte.numero} - {compte.designation}
-                  </option>
-                ))
-              : Ncompte.filter((compte) =>
-                  compte.numero.toString().startsWith("6")
-                ).map((compte) => (
-                  <option
-                    key={compte.id}
-                    value={compte.id}
-                    selected={compte.id === enregistrement.N_comptes_id}
-                  >
-                    {compte.numero} - {compte.designation}
-                  </option>
-                ))}
+            {Ncompte.filter((compte) =>
+              compte.numero
+                .toString()
+                .startsWith(enregistrementType === "recette" ? "7" : "6")
+            ).map((compte) => (
+              <option
+                key={compte.id}
+                value={compte.id}
+                selected={compte.id === enregistrement.N_comptes_id}
+              >
+                {compte.numero} - {compte.designation}
+              </option>
+            ))}
           </select>
         </div>
         <div className=" divEnCustom">
