@@ -7,6 +7,7 @@ import {
   LineElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import getNcompte from "../CRUD/getNcompte";
 import apiConnexion from "../services/apiConnexion";
 
 function GraphComptes() {
@@ -30,7 +31,7 @@ function GraphComptes() {
     "Novembre",
     "Décembre",
   ];
-
+  const [Ncompte, setNcompte] = useState([]);
   const data = {
     labels,
     datasets: [
@@ -61,17 +62,13 @@ function GraphComptes() {
       .catch((error) => console.error(error));
   };
 
-  const [Ncompte, setNcompte] = useState([]);
-  const getNcompte = () => {
-    apiConnexion
-      .get(`/allCompteActif`)
-      .then((allCompte) => {
-        setNcompte(allCompte.data);
-      })
-      .catch((error) => console.error(error));
+  const NcompteData = async () => {
+    const allCompte = await getNcompte();
+    setNcompte(allCompte);
   };
+
   useEffect(() => {
-    getNcompte();
+    NcompteData();
   }, []);
 
   return (

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../services/toastiConfig";
+import getNcompte from "../CRUD/getNcompte";
 import apiConnexion from "../services/apiConnexion";
 
 function Enregistrement({ idUpdate, setIdUpdate }) {
@@ -52,15 +53,12 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
     newEnregistrement[place] = value;
     setEnregistrement(newEnregistrement);
   };
-
-  const getNcompte = () => {
-    apiConnexion
-      .get(`/allCompteActif`)
-      .then((allCompte) => {
-        setNcompte(allCompte.data);
-      })
-      .catch((error) => console.error(error));
+  // Récupération de tous les numéro de comptes actifs
+  const NcompteData = async () => {
+    const allCompte = await getNcompte();
+    setNcompte(allCompte);
   };
+
   const getBanque = () => {
     apiConnexion
       .get(`/banque`)
@@ -142,7 +140,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
     }
   };
   useEffect(() => {
-    getNcompte();
+    NcompteData();
     getBanque();
     getModePay();
     getOneEnrgmt();
