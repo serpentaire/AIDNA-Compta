@@ -9,6 +9,7 @@ const modePayControllers = require("./controllers/modePayControllers");
 const compteControllers = require("./controllers/compteControllers");
 const roleControllers = require("./controllers/roleControllers");
 const usersControllers = require("./controllers/usersControllers");
+const soldeMensuelControllers = require("./controllers/soldeMensuelControllers");
 const checkAuth = require("./middleware/authentification");
 
 const storage = multer.diskStorage({
@@ -46,8 +47,9 @@ router.get("/roles", roleControllers.browse);
 router.post("/login", loginControllers.validateLogin);
 router.post("/users", usersControllers.add);
 router.put("/firstconnexion", loginControllers.firstconnexion);
+router.get("/soldeMensuel", soldeMensuelControllers.browse);
 
-// mur d'authenfication
+// mur d'authentification
 router.post(
   "/enregistrement",
   checkAuth,

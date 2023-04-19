@@ -19,6 +19,7 @@ function TableauJournalier() {
     { moi: "Décembre", id: "12" },
   ];
   const [enregistrementMois, setEnregistrementMois] = useState([]);
+  const [soldeMensuel, setSoldeMensuel] = useState([]);
   const date1 = "2023";
   const [date2, setDate2] = useState("01");
   const [idUpdate, setIdUpdate] = useState();
@@ -31,6 +32,15 @@ function TableauJournalier() {
       })
       .catch((error) => console.error(error));
   };
+  const getSoldeMensuel = () => {
+    apiConnexion
+      .get(`/soldeMensuel`)
+      .then((allData) => {
+        setSoldeMensuel(allData.data);
+      })
+      .catch((error) => console.error(error));
+  };
+  // console.log(soldeMensuel);
 
   const sousTotal = (enr) => {
     const ssTotalRecette = enregistrementMois
@@ -40,9 +50,7 @@ function TableauJournalier() {
       }, 0);
     return ssTotalRecette;
   };
-  const total = () => {
-    return sousTotal("recette") - sousTotal("dépense");
-  };
+
   const selectMois = (moiId) => {
     setDate2(moiId);
   };
@@ -65,7 +73,15 @@ function TableauJournalier() {
 
   useEffect(() => {
     getenregistrement();
+    getSoldeMensuel();
   }, [date2, idUpdate, validat]);
+
+  const soldeMois = () => {
+    const sol = soldeMensuel.filter(
+      (donne) => donne.periode === `${date1}-${date2}`
+    );
+    return sol[0] ? sol[0].solde : 0;
+  };
 
   return (
     <div className="tableauJournalier">
@@ -188,7 +204,7 @@ function TableauJournalier() {
               Solde
             </td>
             <td className="border text-center border-4 px-4 py-2" colSpan="2">
-              {total().toFixed(2)}€
+              {parseFloat(soldeMois(), 10).toFixed(2)}€
             </td>
           </tr>
         </tfoot>
