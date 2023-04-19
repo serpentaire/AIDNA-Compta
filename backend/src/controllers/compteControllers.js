@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const prisma = require("../models/prisma");
 const validate = require("../service/validateEnregistrement");
+const calculSoldeMensuel = require("../service/calculSoldeMensuel");
 
 const browse = async (req, res) => {
   try {
@@ -98,6 +99,7 @@ const edit = async (req, res) => {
         where: { id: +req.params.id },
         data: { ...enregistrement, facture: facturejpg },
       });
+      await calculSoldeMensuel(enregistrement);
       res.status(204).json({ message: "Enregistrement a bien été modifié" });
     } catch (err) {
       console.error(err);
@@ -131,6 +133,7 @@ const add = async (req, res) => {
       await prisma.compte.create({
         data: { ...enregistrement, facture: facturejpg },
       });
+      await calculSoldeMensuel(enregistrement);
       res
         .status(201)
         .json({ message: "Nouvelle recette ou depense enregistrée" });
@@ -143,9 +146,19 @@ const add = async (req, res) => {
 
 const destroy = async (req, res) => {
   try {
-    await prisma.compte.delete({
-      where: { id: parseInt(req.params.id, 10) },
-    });
+    const result = await prisma.$transaction([
+      prisma.compte.findUnique({
+        where: { id: parseInt(req.params.id, 10) },
+        select: {
+          date: true,
+        },
+      }),
+      prisma.compte.delete({
+        where: { id: parseInt(req.params.id, 10) },
+      }),
+    ]);
+    const compte = result[0];
+    await calculSoldeMensuel(compte);
     res.status(200).json({ message: "Compte supprimé" });
   } catch (error) {
     console.error(error);

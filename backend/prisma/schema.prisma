@@ -75,7 +75,13 @@ model mode_pay {
 }
 
 model recu_don {
-  id        Int    @id
+  id        Int    @id @default(autoincrement())
   compte_id Int
   compte    compte @relation(fields: [compte_id], references: [id])
+}
+
+model solde_mensuel {
+  id      Int    @id @default(autoincrement())
+  periode String @db.VarChar @unique
+  solde   Decimal    @db.Decimal
 }
