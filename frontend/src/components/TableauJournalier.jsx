@@ -19,11 +19,13 @@ function TableauJournalier() {
     { moi: "Décembre", id: "12" },
   ];
   const [enregistrementMois, setEnregistrementMois] = useState([]);
+  const [selectedMonthId, setSelectedMonthId] = useState("01");
   const [soldeMensuel, setSoldeMensuel] = useState([]);
   const date1 = "2023";
   const [date2, setDate2] = useState("01");
   const [idUpdate, setIdUpdate] = useState();
   const [validat, setValidat] = useState("oui");
+
   const getenregistrement = () => {
     apiConnexion
       .get(`/compteJournalier?date1=${date1}&date2=${date2}`)
@@ -40,7 +42,6 @@ function TableauJournalier() {
       })
       .catch((error) => console.error(error));
   };
-  // console.log(soldeMensuel);
 
   const sousTotal = (enr) => {
     const ssTotalRecette = enregistrementMois
@@ -53,6 +54,7 @@ function TableauJournalier() {
 
   const selectMois = (moiId) => {
     setDate2(moiId);
+    setSelectedMonthId(moiId);
   };
 
   const updateEnrgmt = (id) => {
@@ -74,7 +76,7 @@ function TableauJournalier() {
   useEffect(() => {
     getenregistrement();
     getSoldeMensuel();
-  }, [date2, idUpdate, validat]);
+  }, [date2, idUpdate, validat, selectedMonthId]);
 
   const soldeMois = () => {
     const sol = soldeMensuel.filter(
@@ -88,8 +90,11 @@ function TableauJournalier() {
       <div className=" m-3 md:justify-start">
         {mois.map((moi) => (
           <button
-            className="btnCustom focus:bg-white focus:text-orange m-2 border border-orange w-1/4 md:w-24 text-xs md:text-base"
+            className={`btnCustom m-2 w-1/4 md:w-24 text-xs md:text-base ${
+              moi.id === selectedMonthId ? "btnCustumFocus" : ""
+            }`}
             type="button"
+            tabIndex={moi.id}
             onClick={() => selectMois(moi.id)}
           >
             {moi.moi}

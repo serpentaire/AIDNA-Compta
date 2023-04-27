@@ -170,7 +170,7 @@ function Utilisateur() {
         </div>
         <div className="flex flex-row justify-around md:mt-10 items-center my-3 md:justify-end md:pr-20">
           <button
-            className="btnCustom btnCustumFocus m-2 md:w-40"
+            className="btnCustom focus:btnCustumFocus m-2 md:w-40"
             type="submit"
           >
             Enregistrer
