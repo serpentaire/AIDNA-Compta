@@ -31,8 +31,12 @@ const read = async (req, res) => {
 };
 
 const cJournalier = async (req, res) => {
-  const date3 = (parseInt(req.query.date2, 10) + 1).toString();
-  const date1 = `${req.query.date1}-0${date3}`;
+  const date3 =
+    parseInt(req.query.date2, 10) < 12
+      ? (parseInt(req.query.date2, 10) + 1).toString()
+      : "1";
+  const date1 =
+    date3 < 10 ? `${req.query.date1}-0${date3}` : `${req.query.date1}-${date3}`;
   const date2 = `${req.query.date1}-${req.query.date2}`;
 
   try {
