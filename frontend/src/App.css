@@ -41,7 +41,7 @@
   }
     /* customisation du bouton, devient blanc au clic */
     .btnCustumFocus {
-      @apply focus:bg-white focus:text-orange border border-orange;
+      @apply bg-white text-orange border border-orange;
     }
 }
 

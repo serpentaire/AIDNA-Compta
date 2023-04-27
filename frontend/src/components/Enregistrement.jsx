@@ -310,7 +310,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         {enregistrementType === "dépense" && (
           <div className=" divEnCustom">
             <button
-              className="btnCustom btnCustumFocus pl-5 md:w-52"
+              className="btnCustom focus:btnCustumFocus pl-5 md:w-52"
               type="button"
               onClick={handleClick1}
             >
@@ -329,7 +329,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         <div className="flex flex-row justify-around items-center my-3 md:justify-end md:pr-20">
           {!idUpdate ? (
             <button
-              className="btnCustom btnCustumFocus m-2 md:w-40"
+              className="btnCustom focus:btnCustumFocus m-2 md:w-40"
               type="submit"
             >
               Enregistrer
@@ -337,14 +337,14 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           ) : (
             <div>
               <button
-                className="btnCustom btnCustumFocus m-2 md:w-40"
+                className="btnCustom focus:btnCustumFocus m-2 md:w-40"
                 type="button"
                 onClick={() => deleteEnregistrement(idUpdate)}
               >
                 Supprimer
               </button>
               <button
-                className="btnCustom btnCustumFocus md:w-40"
+                className="btnCustom focus:btnCustumFocus md:w-40"
                 type="submit"
               >
                 Modifier
