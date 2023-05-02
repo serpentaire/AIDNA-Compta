@@ -31,14 +31,16 @@ const read = async (req, res) => {
 };
 
 const cJournalier = async (req, res) => {
-  const date3 =
-    parseInt(req.query.date2, 10) < 12
-      ? (parseInt(req.query.date2, 10) + 1).toString()
-      : "1";
-  const date1 =
-    date3 < 10 ? `${req.query.date1}-0${date3}` : `${req.query.date1}-${date3}`;
+  let date3 = "";
+  let date4 = req.query.date1;
+  if (parseInt(req.query.date2, 10) < 12) {
+    date3 = (parseInt(req.query.date2, 10) + 1).toString();
+  } else {
+    date3 = "1";
+    date4 = (parseInt(req.query.date1, 10) + 1).toString();
+  }
+  const date1 = date3 < 10 ? `${date4}-0${date3}` : `${date4}-${date3}`;
   const date2 = `${req.query.date1}-${req.query.date2}`;
-
   try {
     const compte = await prisma.compte.findMany({
       where: {
@@ -200,6 +202,24 @@ const destroyfichier = (req, res) => {
   });
 };
 
+const distinctYear = async (req, res) => {
+  try {
+    const distinctYears = await prisma.compte.findMany({
+      select: {
+        date: true,
+      },
+    });
+    const years = distinctYears.map((obj) => {
+      return obj.date.getFullYear();
+    });
+    const uniqueYears = [...new Set(years)];
+    res.status(200).json(uniqueYears);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   browse,
   read,
@@ -209,4 +229,5 @@ module.exports = {
   cJournalier,
   editValidation,
   destroyfichier,
+  distinctYear,
 };
