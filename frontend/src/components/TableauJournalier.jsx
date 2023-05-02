@@ -19,21 +19,40 @@ function TableauJournalier() {
     { moi: "Décembre", id: "12" },
   ];
   const [enregistrementMois, setEnregistrementMois] = useState([]);
+  const [annees, setAnnees] = useState([]);
   const [selectedMonthId, setSelectedMonthId] = useState("01");
   const [soldeMensuel, setSoldeMensuel] = useState([]);
-  const date1 = "2023";
+  const [selectedYear, setSelectedYear] = useState(
+    new Date().getFullYear().toString()
+  );
   const [date2, setDate2] = useState("01");
   const [idUpdate, setIdUpdate] = useState();
   const [validat, setValidat] = useState("oui");
 
+  const getAnnees = () => {
+    apiConnexion
+      .get(`/distinctYear`)
+      .then((allData) => {
+        setAnnees(allData.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleAnnees = (place, value) => {
+    const newAnnee = { ...annees };
+    newAnnee[place] = value;
+    setSelectedYear(newAnnee.annees);
+  };
+
   const getenregistrement = () => {
     apiConnexion
-      .get(`/compteJournalier?date1=${date1}&date2=${date2}`)
+      .get(`/compteJournalier?date1=${selectedYear}&date2=${date2}`)
       .then((allData) => {
         setEnregistrementMois(allData.data);
       })
       .catch((error) => console.error(error));
   };
+
   const getSoldeMensuel = () => {
     apiConnexion
       .get(`/soldeMensuel`)
@@ -76,11 +95,12 @@ function TableauJournalier() {
   useEffect(() => {
     getenregistrement();
     getSoldeMensuel();
-  }, [date2, idUpdate, validat, selectedMonthId]);
+    getAnnees();
+  }, [date2, idUpdate, validat, selectedMonthId, selectedYear]);
 
   const soldeMois = () => {
     const sol = soldeMensuel.filter(
-      (donne) => donne.periode === `${date1}-${date2}`
+      (donne) => donne.periode === `${selectedYear}-${date2}`
     );
     return sol[0] ? sol[0].solde : 0;
   };
@@ -100,6 +120,18 @@ function TableauJournalier() {
             {moi.moi}
           </button>
         ))}
+        <select
+          className="inputCustom m-2 w-1/4 md:w-24 text-xs md:text-base"
+          name="annees"
+          type="text"
+          onChange={(e) => handleAnnees(e.target.name, e.target.value)}
+        >
+          {annees.map((annee) => (
+            <option key={annee} value={annee} selected={annee === annees}>
+              {annee}
+            </option>
+          ))}
+        </select>
       </div>
       <table className=" m-5 border-collapse border-2 text-xs">
         <thead>

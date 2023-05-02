@@ -48,6 +48,7 @@ router.post("/login", loginControllers.validateLogin);
 router.post("/users", usersControllers.add);
 router.put("/firstconnexion", loginControllers.firstconnexion);
 router.get("/soldeMensuel", soldeMensuelControllers.browse);
+router.get("/distinctYear", compteControllers.distinctYear);
 
 // mur d'authentification
 router.post(
