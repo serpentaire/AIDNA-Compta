@@ -4,7 +4,7 @@ import GraphComptes from "../../components/GraphComptes";
 
 function RapComptes() {
   return (
-    <div className="homeTresorier md:flex ">
+    <div className="homeTresorier md:flex md:h-[calc(100vh-148px)]">
       <div>
         <SideBarTresorier />
       </div>

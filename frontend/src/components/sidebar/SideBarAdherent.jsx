@@ -6,7 +6,7 @@ function SideBarAdherent() {
     setSelectedMenu(id);
   };
   return (
-    <div>
+    <div className="md:h-[calc(100vh-148px)]">
       <h1 className="h1sidebar text-1xl md:text-start md:pl-24">
         Espace adhèrent
       </h1>
