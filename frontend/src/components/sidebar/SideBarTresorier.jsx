@@ -13,7 +13,7 @@ function SideBarTresorier() {
     setSelectedMenu(id);
   };
   return (
-    <div className="sideBarTresorier overflow-y-scroll md:h-screen">
+    <div className="sideBarTresorier overflow-y-scroll md:h-[calc(100vh-148px)]">
       <h1 className="h1sidebar text-1xl">
         Espace Présidente, Secrétaire et Trésorier
       </h1>

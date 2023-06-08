@@ -6,7 +6,7 @@ function SideBarMembreBureau() {
     setSelectedMenu(id);
   };
   return (
-    <div className="sideBarMembreBureau">
+    <div className="sideBarMembreBureau md:h-[calc(100vh-148px)]">
       <h1 className="h1sidebar text-1xl md:text-start md:pl-12">
         Espace membre du bureau
       </h1>

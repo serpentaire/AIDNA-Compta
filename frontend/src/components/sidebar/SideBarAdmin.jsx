@@ -14,7 +14,7 @@ function SideBarAdmin() {
   };
 
   return (
-    <div className="sideBarAdmin">
+    <div className="sideBarAdmin md:h-[calc(100vh-148px)]">
       <h1 className="h1sidebar text-1xl md:text-start md:pl-16">
         Espace Administrateur
       </h1>

@@ -17,11 +17,12 @@ function GraphComptes() {
   const [selectedYear, setSelectedYear] = useState(
     new Date().getFullYear().toString()
   );
-  const [allDataCompte, setAllDataCompte] = useState();
+  const [allDataCompte, setAllDataCompte] = useState([]);
   // graphique
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
   const options = {
     responsive: true,
+    // maintainAspectRatio: false,
   };
   const labels = [
     "Janvier",
@@ -99,7 +100,7 @@ function GraphComptes() {
     handleCompte(selectedCompte);
   }, [selectedYear, selectedCompte]);
   return (
-    <div className="graphComptes">
+    <div className="graphComptes ">
       <div className=" pt-4 text-center">
         <select
           className="inputCustom text-start m-2 w-1/4 md:w-24 text-xs md:text-base"
@@ -131,71 +132,91 @@ function GraphComptes() {
           ))}
         </select>
       </div>
-      <div className="flex mt-10">
-        <div className="flex-auto ml-5 md:ml-32">
-          {allDataCompte && (
-            <div>
-              <h2 className="mb-4 ml-10">Recettes</h2>
-              {allDataCompte
-                .filter((compte) => {
-                  const date = new Date(compte.date);
-                  return date.getFullYear() === parseInt(selectedYear, 10);
-                })
-                .sort((a, b) => {
-                  const dateA = new Date(a.date);
-                  const dateB = new Date(b.date);
-                  if (dateA.getMonth() !== dateB.getMonth()) {
-                    return dateA.getMonth() - dateB.getMonth();
-                  }
-                  return dateA.getDate() - dateB.getDate();
-                })
-                .map((compte) =>
-                  compte.enregmt === "recette" ? (
-                    <p>
-                      {compte.date.split("T").shift().substr(8)}-
-                      {compte.date.split("T").shift().substr(5, 2)} /{" "}
-                      {compte.description} : {compte.somme} €
-                    </p>
-                  ) : null
-                )}
-            </div>
-          )}
-        </div>
-        <div className="flex-auto md:ml-32">
-          {allDataCompte && (
-            <div>
-              <h2 className="mb-4 ml-10">Dépenses</h2>
-              {allDataCompte
-                .filter((compte) => {
-                  const date = new Date(compte.date);
-                  return date.getFullYear() === parseInt(selectedYear, 10);
-                })
-                .sort((a, b) => {
-                  const dateA = new Date(a.date);
-                  const dateB = new Date(b.date);
-                  if (dateA.getMonth() !== dateB.getMonth()) {
-                    return dateA.getMonth() - dateB.getMonth();
-                  }
-                  return dateA.getDate() - dateB.getDate();
-                })
-                .map((compte) =>
-                  compte.enregmt === "dépense" ? (
-                    <p>
-                      {compte.date.split("T").shift().substr(8)}-
-                      {compte.date.split("T").shift().substr(5, 2)} /{" "}
-                      {compte.description} : {compte.somme} €
-                    </p>
-                  ) : null
-                )}
-            </div>
-          )}
-        </div>
+      <div className="md:flex md:flex-row">
+        {allDataCompte.length > 0 && (
+          <div className="text-center md:grow md:w-60">
+            {Ncompte.map((compte) =>
+              compte.id === parseInt(selectedCompte, 10) ? compte.numero : null
+            )
+              .filter((numero) => numero !== null)
+              .toString()
+              .startsWith("7") && (
+              <div className="">
+                <div className="inline-flex">
+                  <h2 className="mb-4 btnCustom w-36 mt-4 md:w-48">Recettes</h2>
+                </div>
+                <div>
+                  {allDataCompte
+                    .filter((compte) => {
+                      const date = new Date(compte.date);
+                      return date.getFullYear() === parseInt(selectedYear, 10);
+                    })
+                    .sort((a, b) => {
+                      const dateA = new Date(a.date);
+                      const dateB = new Date(b.date);
+                      if (dateA.getMonth() !== dateB.getMonth()) {
+                        return dateA.getMonth() - dateB.getMonth();
+                      }
+                      return dateA.getDate() - dateB.getDate();
+                    })
+                    .map((compte) =>
+                      compte.enregmt === "recette" ? (
+                        <p className=" ml-4 text-xs md:text-sm">
+                          {compte.date.split("T").shift().substr(8)}-
+                          {compte.date.split("T").shift().substr(5, 2)} /{" "}
+                          {compte.description} : {compte.somme} €
+                        </p>
+                      ) : null
+                    )}
+                </div>
+              </div>
+            )}
+            {Ncompte.map((compte) =>
+              compte.id === parseInt(selectedCompte, 10) ? compte.numero : null
+            )
+              .filter((numero) => numero !== null)
+              .toString()
+              .startsWith("6") && (
+              <div className="text-center">
+                <div>
+                  <div className="inline-flex">
+                    <h2 className="mb-4 btnCustom w-36 mt-4 md:w-48">
+                      Dépenses
+                    </h2>
+                  </div>
+                  {allDataCompte
+                    .filter((compte) => {
+                      const date = new Date(compte.date);
+                      return date.getFullYear() === parseInt(selectedYear, 10);
+                    })
+                    .sort((a, b) => {
+                      const dateA = new Date(a.date);
+                      const dateB = new Date(b.date);
+                      if (dateA.getMonth() !== dateB.getMonth()) {
+                        return dateA.getMonth() - dateB.getMonth();
+                      }
+                      return dateA.getDate() - dateB.getDate();
+                    })
+                    .map((compte) =>
+                      compte.enregmt === "dépense" ? (
+                        <p className="ml-4 text-xs md:text-sm">
+                          {compte.date.split("T").shift().substr(8)}-
+                          {compte.date.split("T").shift().substr(5, 2)} /{" "}
+                          {compte.description} : {compte.somme} €
+                        </p>
+                      ) : null
+                    )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        {allDataCompte.length > 0 && (
+          <div className="graphique pt-5 text-center md:grow">
+            <Line options={options} data={data} />;
+          </div>
+        )}
       </div>
-      {dataGraph && (
-        <div className="graphique pt-5">
-          <Line options={options} data={data} />;
-        </div>
-      )}
     </div>
   );
 }

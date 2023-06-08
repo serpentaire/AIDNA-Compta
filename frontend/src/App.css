@@ -29,7 +29,7 @@
   }
   /* customisation des champs de saisie */
   .inputCustom {
-    @apply border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-1/2;
+    @apply focus:outline-none border border-orange rounded-full p-2 pl-5 bg-white text-orange w-3/4 md:w-1/2;
   }
   /* customisation de la div du couple titre et champs de saisie des formulaires utilisateur */
   .divUtCustom {

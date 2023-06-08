@@ -18,7 +18,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App md:h-auto">
+    <div className="App md:h-screen">
       <Router>
         <div>
           <Header />
