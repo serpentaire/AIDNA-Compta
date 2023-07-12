@@ -22,39 +22,52 @@ function Login() {
 
   const sendForm = (e) => {
     e.preventDefault();
-    apiConnexion
-      .post("/login", connexion)
-      .then((data) => {
-        userContext.handleUser(data.data);
-        if (data.data[0].Users_log.nb_connexion === 1) {
-          setTimeout(() => navigate(`/updatePassword`), 3000);
-          toast.success(
-            `Bonjour ${data.data[0].prenom}, veuillez changer votre mot de passe.`,
+    const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/;
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,25}$/;
+    if (
+      emailPattern.test(connexion.utilisateur) &&
+      passwordPattern.test(connexion.password)
+    ) {
+      apiConnexion
+        .post("/login", connexion)
+        .then((data) => {
+          userContext.handleUser(data.data);
+          if (data.data[0].Users_log.nb_connexion === 1) {
+            setTimeout(() => navigate(`/updatePassword`), 3000);
+            toast.success(
+              `Bonjour ${data.data[0].prenom}, veuillez changer votre mot de passe.`,
+              toastiConfig
+            );
+          } else {
+            if (data.data[0].Role.nom === "Trésorier") {
+              setTimeout(
+                () =>
+                  navigate(`/homeTresorier`, {
+                    state: { parametre: "recette" },
+                  }),
+                2000
+              );
+            } else if (data.data[0].Role.nom === "Administrateur") {
+              setTimeout(() => navigate(`/homeAdmin`), 2000);
+            } else if (data.data[0].Role.nom === "Adhèrent") {
+              setTimeout(() => navigate(`/homeAdherent`), 2000);
+            }
+            toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
+          }
+        })
+        .catch(() => {
+          toast.error(
+            `Votre email ou votre mot de passe n'est pas valide.`,
             toastiConfig
           );
-        } else {
-          if (data.data[0].Role.nom === "Trésorier") {
-            setTimeout(
-              () =>
-                navigate(`/homeTresorier`, {
-                  state: { parametre: "recette" },
-                }),
-              2000
-            );
-          } else if (data.data[0].Role.nom === "Administrateur") {
-            setTimeout(() => navigate(`/homeAdmin`), 2000);
-          } else if (data.data[0].Role.nom === "Adhèrent") {
-            setTimeout(() => navigate(`/homeAdherent`), 2000);
-          }
-          toast.success(`Bonjour ${data.data[0].prenom}.`, toastiConfig);
-        }
-      })
-      .catch(() => {
-        toast.error(
-          `Votre email ou votre mot de passe n'est pas valide.`,
-          toastiConfig
-        );
-      });
+        });
+    } else {
+      toast.error(
+        `Votre email ou votre mot de passe n'est pas valide.`,
+        toastiConfig
+      );
+    }
   };
 
   const handleConnexion = (place, value) => {

@@ -1,6 +1,7 @@
 const prisma = require("../models/prisma");
 const { hashNewPassword } = require("../service/auth");
 const sendMail = require("./emailControllers");
+const validateLogMp = require("../service/validateLogMp");
 
 const browse = async (req, res) => {
   try {
@@ -70,21 +71,26 @@ const add = async (req, res) => {
       },
     ],
     text: `${email.message} \n\n Name: ${email.name} \n\n Email: ${email.email} \n\n mp: ${email.mp}`,
-    html: `<p>Bonjour ${email.name},</p> <p>${email.message}</p> <p>L'association AIDNA est heureuse de vous compter parmi nous.</p><p>Pour vous connecter à AIDNA_COMPTA</p><p>Login : ${email.email}</p><p>Mot de passe : ${email.mp}</p><p>Vous serez inviter à changer votre mot de passe lors de votre première connexion.</p><p>Cordialement</p> <img src="cid:logo" height="100" />`,
+    html: `<p>Bonjour ${email.name},</p> <p>${email.message}</p> <p>L'association AIDNA est heureuse de vous compter parmi nous.</p><p>Pour vous connecter à AIDNA_COMPTA</p><p>Login : ${email.email}</p><p>Mot de passe : ${email.mp}</p><p>Vous serez inviter à changer votre mot de passe lors de votre première connexion.</p><p>Votre mot de passe devra contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial parmi #$+=!*()@%&. De plus sa longueur devra être comprise entre 8 et 25 caractères.</p><p>Cordialement</p> <img src="cid:logo" height="100" />`,
   };
-  try {
-    const usersLog = await prisma.Users_log.create({
-      data: { login: newLogin, hashedpassword: motPasshashed },
-    });
+  const errorValidate = validateLogMp(users);
+  if (errorValidate) {
+    try {
+      const usersLog = await prisma.Users_log.create({
+        data: { login: newLogin, hashedpassword: motPasshashed },
+      });
 
-    await prisma.Users.create({
-      data: { ...users, users_log_id: usersLog.id },
-    });
-    sendMail(mailOptions);
-    res.status(201).json({ message: "Nouveau utilisateur créé" });
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+      await prisma.Users.create({
+        data: { ...users, users_log_id: usersLog.id },
+      });
+      sendMail(mailOptions);
+      res.status(201).json({ message: "Nouveau utilisateur créé" });
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+  } else {
+    res.status(400).json({ msg: "" });
   }
 };
 

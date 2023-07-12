@@ -27,33 +27,48 @@ function UpdatePassword() {
 
   const sendForm = (e) => {
     e.preventDefault();
-    if (confirm.password === confirm.confirmpassword) {
-      apiConnexion
-        .put("/firstconnexion", { ...confirm, id: user[0].users_log_id })
-        .then(() => {
-          toast.success(`Bonjour ${user[0].prenom}.`, toastiConfig);
-          if (user[0].Role.nom === "Trésorier") {
-            setTimeout(
-              () =>
-                navigate(`/homeTresorier`, {
-                  state: { parametre: "recette" },
-                }),
-              2000
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,20}$/;
+    if (
+      passwordPattern.test(confirm.password) &&
+      passwordPattern.test(confirm.confirmpassword)
+    ) {
+      if (confirm.password === confirm.confirmpassword) {
+        apiConnexion
+          .put("/firstconnexion", { ...confirm, id: user[0].users_log_id })
+          .then(() => {
+            toast.success(`Bonjour ${user[0].prenom}.`, toastiConfig);
+            if (user[0].Role.nom === "Trésorier") {
+              setTimeout(
+                () =>
+                  navigate(`/homeTresorier`, {
+                    state: { parametre: "recette" },
+                  }),
+                2000
+              );
+            } else if (user[0].Role.nom === "Administrateur") {
+              setTimeout(() => navigate(`/homeAdmin`), 2000);
+            } else if (user[0].Role.nom === "Adhèrent") {
+              setTimeout(() => navigate(`/homeAdherent`), 2000);
+            }
+          })
+          .catch(() => {
+            toast.error(
+              `Votre ancien mot de passe n'est pas valide`,
+              toastiConfig
             );
-          } else if (user[0].Role.nom === "Administrateur") {
-            setTimeout(() => navigate(`/homeAdmin`), 2000);
-          } else if (user[0].Role.nom === "Adhèrent") {
-            setTimeout(() => navigate(`/homeAdherent`), 2000);
-          }
-        })
-        .catch(() => {
-          toast.error(
-            `Votre ancien mot de passe n'est pas valide`,
-            toastiConfig
-          );
-        });
+          });
+      } else {
+        toast.error(
+          `Vos nouveaux mots de passe ne sont pas identiques`,
+          toastiConfig
+        );
+      }
     } else {
-      toast.error(`Vos mots de passe ne sont pas identiques`, toastiConfig);
+      toast.error(
+        `Vos nouveaux mots de passe ne répondent aux critères`,
+        toastiConfig
+      );
     }
   };
 
