@@ -22,7 +22,7 @@ const add = async (req, res) => {
     ],
 
     text: `${email.message} \n\n Name: ${email.name} \n\n Email: ${email.email} \n\n Prenom: ${email.prenom}`,
-    html: `<p>Bonjour,</p> <p>Mme/Mr ${email.prenom} ${email.name} a laissé le message:</p><p>${email.message}</p><p>Email: ${email.email}</p><p>Cordialement</p> <img src="cid:logo" height="100" />`,
+    html: `<p>Bonjour,</p> <p>Mme/Mr ${email.prenom} ${email.name} a laissé le message suivant:</p><p>${email.message}</p><p>Email: ${email.email}</p><p>Cordialement</p> <img src="cid:logo" height="100" />`,
   };
   sendMail(mailOptions);
   res.status(200).json({ message: "Email envoyé" });
