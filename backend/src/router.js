@@ -10,6 +10,7 @@ const compteControllers = require("./controllers/compteControllers");
 const roleControllers = require("./controllers/roleControllers");
 const usersControllers = require("./controllers/usersControllers");
 const soldeMensuelControllers = require("./controllers/soldeMensuelControllers");
+const contactcontrolers = require("./controllers/contactcontrolers");
 const checkAuth = require("./middleware/authentification");
 
 const storage = multer.diskStorage({
@@ -76,5 +77,6 @@ router.delete("/nComptes/:id", checkAuth, nComptesControllers.destroy);
 router.post("/login", checkAuth, loginControllers.validateLogin);
 router.post("/users", checkAuth, usersControllers.add);
 router.put("/firstconnexion", checkAuth, loginControllers.firstconnexion);
+router.post("/contact", checkAuth, contactcontrolers.add);
 
 module.exports = router;
