@@ -6,9 +6,11 @@ import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../services/toastiConfig";
 
 function ForgotPw({ visible, onclose }) {
-  const [login, setLogin] = useState();
-  const handleLogin = (value) => {
-    setLogin(value);
+  const [login, setLogin] = useState({ login: "" });
+  const handleLogin = (place, value) => {
+    const newLogin = { ...login };
+    newLogin[place] = value;
+    setLogin(newLogin);
   };
 
   const sendForm = (e) => {
@@ -43,9 +45,10 @@ function ForgotPw({ visible, onclose }) {
                 className="focus:bg-orange placeholder:italic placeholder:text-white rounded-full p-2 pl-5 bg-orange text-white w-3/4 md:w-3/4"
                 type="text"
                 id="utilisateur"
+                name="login"
                 placeholder="Email..."
-                value={login}
-                onChange={(e) => handleLogin(e.target.value)}
+                value={login.login}
+                onChange={(e) => handleLogin(e.target.name, e.target.value)}
               />
             </div>
             <div className="flex flex-row justify-around items-center my-3">

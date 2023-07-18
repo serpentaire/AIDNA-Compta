@@ -12,6 +12,7 @@ const usersControllers = require("./controllers/usersControllers");
 const soldeMensuelControllers = require("./controllers/soldeMensuelControllers");
 const contactcontrolers = require("./controllers/contactcontrolers");
 const checkAuth = require("./middleware/authentification");
+const forgotPwControlers = require("./controllers/forgotPwControlers");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -50,6 +51,7 @@ router.post("/users", usersControllers.add);
 router.put("/firstconnexion", loginControllers.firstconnexion);
 router.get("/soldeMensuel", soldeMensuelControllers.browse);
 router.get("/distinctYear", compteControllers.distinctYear);
+router.post("/forgotPw", forgotPwControlers.getNewMp);
 
 // mur d'authentification
 router.post(
