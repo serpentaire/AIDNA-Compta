@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ForgotPwModal from "../../../components/forgotPwModal";
 import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
 import User from "../../../context/user";
@@ -11,6 +12,8 @@ function Login() {
   const navigate = useNavigate("");
   const [hidePassword, setHidePassword] = useState(true);
   const userContext = useContext(User.UserContext);
+  const [forgotPwModalIsVisible, setForgotPwModalIsVisible] = useState(false);
+
   function showPassword() {
     setHidePassword(!hidePassword);
   }
@@ -20,6 +23,17 @@ function Login() {
     password: "",
   });
 
+  const handleConnexion = (place, value) => {
+    const newConnexion = { ...connexion };
+    newConnexion[place] = value;
+    setConnexion(newConnexion);
+  };
+  const handleOnCloseforgotPwModal = () => {
+    setForgotPwModalIsVisible(false);
+  };
+  const handleOpenforgotPwModal = () => {
+    setForgotPwModalIsVisible(true);
+  };
   const sendForm = (e) => {
     e.preventDefault();
     const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/;
@@ -68,12 +82,6 @@ function Login() {
         toastiConfig
       );
     }
-  };
-
-  const handleConnexion = (place, value) => {
-    const newConnexion = { ...connexion };
-    newConnexion[place] = value;
-    setConnexion(newConnexion);
   };
 
   return (
@@ -137,6 +145,19 @@ function Login() {
               </button>
             </div>
           </div>
+          <div className="flex flex-row justify-around items-center">
+            <button
+              className="rounded-3xl text-1xl text-green font-semibold"
+              type="button"
+              onClick={() => handleOpenforgotPwModal()}
+            >
+              Mot de passe oublié
+            </button>
+          </div>
+          <ForgotPwModal
+            visible={forgotPwModalIsVisible}
+            onclose={handleOnCloseforgotPwModal}
+          />
         </div>
       </form>
       <ToastContainer
