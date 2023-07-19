@@ -1,10 +1,21 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import SideBarAdmin from "../../components/sidebar/SideBarAdmin";
 import Utilisateur from "../../components/Utilisateur";
+import logo from "../../assets/logo.png";
 
 function AdminUtilisateur() {
   return (
     <div className="homeTresorier md:flex ">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>AIDNA_COMPTA - Administration utilisateur</title>
+        <meta
+          name="description"
+          content="Page d'administration des utilisateurs"
+        />
+        <link rel="icon" type="image/png" href={logo} />
+      </Helmet>
       <div>
         <SideBarAdmin />
       </div>
