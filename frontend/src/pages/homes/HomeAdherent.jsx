@@ -1,9 +1,17 @@
+import { Helmet } from "react-helmet";
 import SideBarAdherent from "../../components/sidebar/SideBarAdherent";
 import Contact from "../../components/contact";
+import logo from "../../assets/logo.png";
 
 export default function HomeAdherent() {
   return (
     <div className="homeAdherent md:flex ">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>AIDNA_COMPTA - Acceuil adhérent</title>
+        <meta name="description" content="Page d'accueil adhérent" />
+        <link rel="icon" type="image/png" href={logo} />
+      </Helmet>
       <div>
         <SideBarAdherent />
       </div>

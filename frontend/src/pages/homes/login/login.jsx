@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -86,6 +87,12 @@ function Login() {
 
   return (
     <div className="login flex justify-center pt-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>AIDNA_COMPTA - Login</title>
+        <meta name="description" content="Page d'accueil de AIDNA_COMPTA" />
+        <link rel="icon" type="image/png" href={logo} />
+      </Helmet>
       <form onSubmit={(e) => sendForm(e)}>
         <div className=" w-80 md:w-96 border pt-2 pb-2 border-black rounded-3xl shadow-lg lg:max-w-lg mt-3">
           <div className="flex flex-col mx-3">

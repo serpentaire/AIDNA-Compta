@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -74,6 +75,12 @@ function UpdatePassword() {
 
   return (
     <div className="updatePassword flex justify-center pt-5">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>AIDNA_Compta - Modifier le mot de passe</title>
+        <meta name="description" content="Page pour modifier le mot de passe" />
+        <link rel="icon" type="image/png" href={logo} />
+      </Helmet>
       <form onSubmit={(e) => sendForm(e)}>
         <div className=" w-80 md:w-96 border pt-2 pb-2 border-black rounded-3xl shadow-lg lg:max-w-lg mt-3">
           <div className="flex flex-col mx-3">

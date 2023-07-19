@@ -19,7 +19,7 @@ function Header() {
         <img src={logo} alt="logo" className="w-40 h-16" />
       </Link>
       <h1 className="grow text-center pt-5 md:text-2xl mr-10 md:mr-0">
-        AIDNA Compta
+        AIDNA_Compta
       </h1>
       <div className="hidden md:block">
         <div className="mr-3 mt-5">
