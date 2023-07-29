@@ -10,7 +10,7 @@ const add = async (req, res) => {
   };
 
   const mailOptions = {
-    from: "glemoine@hotmail.fr", // this is adresse of transmitter
+    from: contact.email, // this is adresse of transmitter
     to: "glemoine@hotmail.fr", // this is the address to which the email will be sent : association.aidna@wanadoo.fr
     subject: `Contact de ${email.prenom} ${email.name}`,
     attachments: [

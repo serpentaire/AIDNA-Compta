@@ -12,14 +12,15 @@ const sendMail = async (mailOptions) => {
     },
   });
 
-  return transporter
-    .sendMail(mailOptions)
-    .then((info) => {
-      console.warn(info);
-    })
-    .catch((err) => {
-      console.warn(err);
-    });
+  return (
+    transporter
+      .sendMail(mailOptions)
+      // .then((info) => {console.warn(info);})
+      .then()
+      .catch((err) => {
+        console.warn(err);
+      })
+  );
 };
 
 module.exports = sendMail;
