@@ -8,7 +8,7 @@ const firstconnexion = async (req, res) => {
   const motPasshashed = await hashNewPassword(motPass);
   try {
     const user = await prisma.Users_log.findMany({
-      where: { id: req.body.id },
+      where: { id: +req.body.id },
     });
     if (user) {
       if (await verifyHash(user[0].hashedpassword, req.body.oldpassword)) {

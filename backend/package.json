@@ -8,7 +8,10 @@
     "migrate": "node migrate.js",
     "start": "node index.js",
     "lint": "echo '----- Checking Backend...' && npx prettier --debug-check . && eslint --ext .js . && echo '----- Done!'",
-    "fix": "prettier --write . && eslint --fix --ext .js ."
+    "fix": "prettier --write . && eslint --fix --ext .js .",
+    "test": "set DATABASE_URL=postgresql://glemoine:colombia@localhost:5432/aidna_test?schema=public && jest",
+    "test-bail" : "set DATABASE_URL=postgresql://glemoine:colombia@localhost:5432/aidna_test?schema=public && jest --bail",
+    "test:watch": "set DATABASE_URL=postgresql://glemoine:colombia@localhost:5432/aidna_test?schema=public && jest --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -44,8 +47,10 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^29.6.1",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
-    "prisma": "^4.9.0"
+    "prisma": "^4.9.0",
+    "supertest": "^6.3.3"
   }
 }

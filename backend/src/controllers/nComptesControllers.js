@@ -1,4 +1,5 @@
 const prisma = require("../models/prisma");
+const validate = require("../service/validateNCompte");
 
 const browse = async (req, res) => {
   try {
@@ -46,27 +47,39 @@ const read = async (req, res) => {
 };
 
 const edit = async (req, res) => {
-  try {
-    await prisma.N_comptes.update({
-      where: { id: +req.params.id },
-      data: req.body,
-    });
-    res.status(204).json({ message: "Le compte a bien été modifié" });
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+  const error = validate(req.body);
+
+  if (error) {
+    res.status(422).send(error);
+  } else {
+    try {
+      await prisma.N_comptes.update({
+        where: { id: +req.params.id },
+        data: req.body,
+      });
+      res.status(204).json({ message: "Le compte a bien été modifié" });
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   }
 };
 
 const add = async (req, res) => {
-  try {
-    await prisma.N_comptes.create({
-      data: req.body,
-    });
-    res.status(201).json({ message: "Nouveau compte créé" });
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+  const error = validate(req.body);
+
+  if (error) {
+    res.status(422).send(error);
+  } else {
+    try {
+      await prisma.N_comptes.create({
+        data: req.body,
+      });
+      res.status(201).json({ message: "Nouveau compte créé" });
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
   }
 };
 

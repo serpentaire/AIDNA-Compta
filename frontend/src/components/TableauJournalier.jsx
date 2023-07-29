@@ -127,7 +127,11 @@ function TableauJournalier() {
           onChange={(e) => handleAnnees(e.target.name, e.target.value)}
         >
           {annees.map((annee) => (
-            <option key={annee} value={annee} selected={annee === annees}>
+            <option
+              key={annee}
+              value={annee}
+              selected={annee === parseInt(selectedYear, 10)}
+            >
               {annee}
             </option>
           ))}
