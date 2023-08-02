@@ -7,6 +7,7 @@ import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
 import User from "../../../context/user";
 import logo from "../../../assets/logo.png";
+import { passwordPattern } from "../../../services/regexPattern";
 
 function UpdatePassword() {
   const navigate = useNavigate("");
@@ -28,9 +29,8 @@ function UpdatePassword() {
 
   const sendForm = (e) => {
     e.preventDefault();
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,20}$/;
     if (
+      // Vérification  du format du mot de passe
       passwordPattern.test(confirm.password) &&
       passwordPattern.test(confirm.confirmpassword)
     ) {

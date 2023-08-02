@@ -18,21 +18,27 @@ function Header() {
       <Link to="/">
         <img src={logo} alt="logo" className="w-40 h-16" />
       </Link>
-      <h1 className="grow text-center pt-5 md:text-2xl mr-10 md:mr-0">
+      <h1
+        className={`grow text-center pt-5 md:text-2xl ${
+          user ? "md:ml-24" : "md:mr-32"
+        }`}
+      >
         AIDNA_Compta
       </h1>
       <div className="hidden md:block">
         <div className="mr-3 mt-5">
           {user && (
-            <Link to="/updatePassword">
-              <button className="mr-3" type="button">
-                Mot de passe
+            <div>
+              <Link to="/updatePassword">
+                <button className="mr-3" type="button">
+                  Mot de passe
+                </button>
+              </Link>
+              <button type="button" onClick={() => getLogout()}>
+                Déconnexion
               </button>
-            </Link>
+            </div>
           )}
-          <button type="button" onClick={() => getLogout()}>
-            Déconnexion
-          </button>
         </div>
       </div>
       <div className="md:hidden mt-5 mr-3">

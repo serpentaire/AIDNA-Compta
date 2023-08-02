@@ -1,3 +1,4 @@
+// Modification d'un utilisateur dans la base
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -5,11 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "../services/toastiConfig";
 import apiConnexion from "../services/apiConnexion";
 
-function Utilisateur() {
+function ModifUtilisateur() {
   const formulaire = document.getElementById("formulaire");
   const location = useLocation();
   const actionUtilisateur = location.state?.parametre;
   const [roles, setRoles] = useState([]);
+  const [utilisats, setUtilisats] = useState([]);
   const usersInitial = {
     nom: "",
     prenom: "",
@@ -22,6 +24,11 @@ function Utilisateur() {
     role_id: null,
   };
   const [users, setUsers] = useState(usersInitial);
+  const handleLogin = (value) => {
+    const log = utilisats.find((e) => e.Users_log.login === value);
+    const newLog = { ...log };
+    setUsers(newLog);
+  };
   const handleUsers = (place, value) => {
     const newUsers = { ...users };
     newUsers[place] = value;
@@ -35,29 +42,55 @@ function Utilisateur() {
       })
       .catch((error) => console.error(error));
   };
+  const getUtilisats = () => {
+    apiConnexion
+      .get(`/users`)
+      .then((allUtilisats) => {
+        setUtilisats(allUtilisats.data);
+      })
+      .catch((error) => console.error(error));
+  };
   const sendForm = (e) => {
     e.preventDefault();
     apiConnexion
-      .post("/users", users)
+      .put(`/users/${users.id}`, users)
       .then(() => {
-        toast.success(`L'utilisateur a bien été ajoutée.`, toastiConfig);
+        toast.success(`L'utilisateur a bien été modifié.`, toastiConfig);
         setUsers(usersInitial);
         formulaire.reset();
       })
       .catch((error) => {
-        toast.error(`L'utilisateur n'a pas été ajoutée.`, toastiConfig);
+        toast.error(`L'utilisateur n'a pas été modifié.`, toastiConfig);
         console.error(error);
       });
   };
   useEffect(() => {
     getRole();
-  }, []);
+    getUtilisats();
+  }, [users]);
 
   return (
     <div className="utilisateur">
       <form onSubmit={(e) => sendForm(e)} id="formulaire">
         <h1 className="h1compo">{actionUtilisateur} un utilisateur</h1>
-        <div className="md:flex md:mt-10 pl-2 md:pt-4 text-center md:text-start md:pl-20">
+        <div className="divUtCustom md:flex md:mt-10 pl-2 md:pt-4 text-center md:text-start md:pl-20">
+          <h2 className="h2compo md:pr-24 mt-2">login :</h2>
+          <select
+            className="border border-orange rounded-full p-2 pl-5 text-orange w-3/4 w-3/4 md:w-1/2"
+            name="login"
+            type="text"
+            value={users.login}
+            onChange={(e) => handleLogin(e.target.value)}
+          >
+            <option value="">Sélectionnez</option>
+            {utilisats.map((utilisat) => (
+              <option key={utilisat.id} value={utilisat.Users_log.login}>
+                {utilisat.Users_log.login}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="md:flex pl-2 md:pt-4 text-center md:text-start md:pl-20">
           <h2 className="h2compo md:pr-24 mt-2">Nom :</h2>
           <input
             required
@@ -76,28 +109,6 @@ function Utilisateur() {
             type="text"
             name="prenom"
             value={users.prenom}
-            onChange={(e) => handleUsers(e.target.name, e.target.value)}
-          />
-        </div>
-        <div className="divUtCustom">
-          <h2 className="h2compo md:pr-24 mt-2">login :</h2>
-          <input
-            required
-            className="inputCustom"
-            type="text"
-            name="login"
-            value={users.login}
-            onChange={(e) => handleUsers(e.target.name, e.target.value)}
-          />
-        </div>
-        <div className="divUtCustom">
-          <h2 className="h2compo md:pr-10 mt-2">Mot de passe :</h2>
-          <input
-            required
-            className="inputCustom"
-            type="text"
-            name="mot_pass"
-            value={users.mot_pass}
             onChange={(e) => handleUsers(e.target.name, e.target.value)}
           />
         </div>
@@ -173,7 +184,7 @@ function Utilisateur() {
             className="btnCustom focus:btnCustumFocus m-2 md:w-40"
             type="submit"
           >
-            Enregistrer
+            {actionUtilisateur}
           </button>
         </div>
       </form>
@@ -193,4 +204,4 @@ function Utilisateur() {
   );
 }
 
-export default Utilisateur;
+export default ModifUtilisateur;
