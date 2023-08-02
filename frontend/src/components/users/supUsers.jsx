@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import apiConnexion from "../services/apiConnexion";
+import apiConnexion from "../../services/apiConnexion";
 import "react-toastify/dist/ReactToastify.css";
-import toastiConfig from "../services/toastiConfig";
+import toastiConfig from "../../services/toastiConfig";
+import getUsers from "../../CRUD/getUsers";
 
-function SupUtilisateur() {
+function SupUsers() {
   const [utilisats, setUtilisats] = useState([]);
   // Pour faire la mise à jour de l'écran
   const deleteUser = (id) => {
@@ -12,14 +13,12 @@ function SupUtilisateur() {
     newUtilisats.splice(utilisats.indexOf(id), 1);
     setUtilisats(newUtilisats);
   };
-  const getUtilisats = () => {
-    apiConnexion
-      .get(`/users`)
-      .then((allUtilisats) => {
-        setUtilisats(allUtilisats.data);
-      })
-      .catch((error) => console.error(error));
+  // Récupération de tous les users
+  const getUsersData = async () => {
+    const allUsers = await getUsers();
+    setUtilisats(allUsers);
   };
+  // suppression de l'utilisateur
   const supUsers = (id) => {
     apiConnexion
       .delete(`/users/${id}`)
@@ -33,7 +32,7 @@ function SupUtilisateur() {
       });
   };
   useEffect(() => {
-    getUtilisats();
+    getUsersData();
   }, []);
 
   return (
@@ -100,4 +99,4 @@ function SupUtilisateur() {
   );
 }
 
-export default SupUtilisateur;
+export default SupUsers;

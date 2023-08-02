@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ForgotPwModal from "../../../components/oublieMpModal";
+import ForgotPwModal from "../../../components/forgotPwModal";
 import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
 import User from "../../../context/user";
