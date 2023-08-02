@@ -1,10 +1,14 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import SideBarAdmin from "../../components/sidebar/SideBarAdmin";
-import Utilisateur from "../../components/Utilisateur";
+import AjoutUtilisateur from "../../components/ajoutUtilisateur";
+import ModifUtilisateur from "../../components/modifUtilisateur";
 import logo from "../../assets/logo.png";
 
 function AdminUtilisateur() {
+  const location = useLocation();
+  const userType = location.state?.parametre;
   return (
     <div className="homeTresorier md:flex ">
       <Helmet>
@@ -19,9 +23,16 @@ function AdminUtilisateur() {
       <div>
         <SideBarAdmin />
       </div>
-      <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
-        <Utilisateur />
-      </div>
+      {userType === "Ajouter" && (
+        <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+          <AjoutUtilisateur />
+        </div>
+      )}
+      {userType === "Modifier" && (
+        <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+          <ModifUtilisateur />
+        </div>
+      )}
     </div>
   );
 }

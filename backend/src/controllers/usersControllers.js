@@ -5,7 +5,27 @@ const validateLogMp = require("../service/validateLogMp");
 
 const browse = async (req, res) => {
   try {
-    const users = await prisma.Users.findMany();
+    const users = await prisma.Users.findMany({
+      include: {
+        Users_log: {
+          select: {
+            login: true,
+            hashedpassword: true,
+            nb_connexion: true,
+          },
+        },
+        Role: {
+          select: {
+            nom: true,
+          },
+        },
+      },
+      where: {
+        Users_log: {
+          login: req.body.utilisateur,
+        },
+      },
+    });
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
@@ -30,10 +50,16 @@ const read = async (req, res) => {
 };
 
 const edit = async (req, res) => {
+  const users = req.body;
+  delete users.Users_log;
+  delete users.Role;
+  delete users.id;
+  users.telephone = parseInt(users.telephone, 10);
+  users.role_id = parseInt(users.role_id, 10);
   try {
     await prisma.Users.update({
       where: { id: +req.params.id },
-      data: req.body,
+      data: users,
     });
     res.status(204).json({ message: "L'utilisateur' a bien été modifié" });
   } catch (error) {

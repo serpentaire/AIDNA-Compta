@@ -73,7 +73,9 @@ function SideBarAdmin() {
                 selectedMenu === 4 ? "btnCustumFocus" : ""
               }`}
               type="button"
-              onClick={() => selectBtn(4)}
+              onClick={() => {
+                selectBtn(4);
+              }}
             >
               Supprimer un utilisateur
             </button>
@@ -84,7 +86,10 @@ function SideBarAdmin() {
                 selectedMenu === 5 ? "btnCustumFocus" : ""
               }`}
               type="button"
-              onClick={() => selectBtn(5)}
+              onClick={() => {
+                setManageRedirect("/adminUtilisateur", "Modifier");
+                selectBtn(5);
+              }}
             >
               Modifier un utilisateur
             </button>

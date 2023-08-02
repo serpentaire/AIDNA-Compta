@@ -3,11 +3,12 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ForgotPwModal from "../../../components/forgotPwModal";
+import ForgotPwModal from "../../../components/oublieMpModal";
 import toastiConfig from "../../../services/toastiConfig";
 import apiConnexion from "../../../services/apiConnexion";
 import User from "../../../context/user";
 import logo from "../../../assets/logo.png";
+import { emailPattern, passwordPattern } from "../../../services/regexPattern";
 
 function Login() {
   const navigate = useNavigate("");
@@ -37,10 +38,8 @@ function Login() {
   };
   const sendForm = (e) => {
     e.preventDefault();
-    const emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/;
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,25}$/;
     if (
+      // Vérification du format du login et du mot de passe
       emailPattern.test(connexion.utilisateur) &&
       passwordPattern.test(connexion.password)
     ) {

@@ -50,6 +50,7 @@ router.post("/login", loginControllers.validateLogin);
 router.get("/soldeMensuel", soldeMensuelControllers.browse);
 router.get("/distinctYear", compteControllers.distinctYear);
 router.post("/forgotPw", forgotPwControlers.getNewMp);
+router.get("/users", checkAuth, usersControllers.browse);
 
 // mur d'authentification
 router.post(
@@ -77,5 +78,6 @@ router.delete("/nComptes/:id", checkAuth, nComptesControllers.destroy);
 router.post("/users", checkAuth, usersControllers.add);
 router.put("/firstconnexion", checkAuth, loginControllers.firstconnexion);
 router.post("/contact", checkAuth, contactcontrolers.add);
+router.put("/users/:id", checkAuth, usersControllers.edit);
 
 module.exports = router;

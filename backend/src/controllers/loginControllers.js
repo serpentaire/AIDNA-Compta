@@ -36,7 +36,9 @@ const firstconnexion = async (req, res) => {
 const validateLogin = async (req, res) => {
   try {
     const user = await prisma.Users.findMany({
-      include: {
+      select: {
+        nom: true,
+        prenom: true,
         Users_log: {
           select: {
             login: true,
