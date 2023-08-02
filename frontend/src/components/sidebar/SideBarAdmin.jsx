@@ -74,6 +74,7 @@ function SideBarAdmin() {
               }`}
               type="button"
               onClick={() => {
+                setManageRedirect("/adminUtilisateur", "Supprimer");
                 selectBtn(4);
               }}
             >
