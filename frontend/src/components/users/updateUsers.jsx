@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import toastiConfig from "../services/toastiConfig";
-import apiConnexion from "../services/apiConnexion";
+import toastiConfig from "../../services/toastiConfig";
+import apiConnexion from "../../services/apiConnexion";
+import getRole from "../../CRUD/getRole";
+import getUsers from "../../CRUD/getUsers";
 
-function ModifUtilisateur() {
+function UpdateUsers() {
   const formulaire = document.getElementById("formulaire");
   const location = useLocation();
   const actionUtilisateur = location.state?.parametre;
@@ -34,22 +36,17 @@ function ModifUtilisateur() {
     newUsers[place] = value;
     setUsers(newUsers);
   };
-  const getRole = () => {
-    apiConnexion
-      .get(`/roles`)
-      .then((allroles) => {
-        setRoles(allroles.data);
-      })
-      .catch((error) => console.error(error));
+  // Récupération de tous les roles
+  const getRoleData = async () => {
+    const allRole = await getRole();
+    setRoles(allRole);
   };
-  const getUtilisats = () => {
-    apiConnexion
-      .get(`/users`)
-      .then((allUtilisats) => {
-        setUtilisats(allUtilisats.data);
-      })
-      .catch((error) => console.error(error));
+  // Récupération de tous les users
+  const getUsersData = async () => {
+    const allUsers = await getUsers();
+    setUtilisats(allUsers);
   };
+  // Modification de l'utilisateur
   const sendForm = (e) => {
     e.preventDefault();
     apiConnexion
@@ -65,8 +62,8 @@ function ModifUtilisateur() {
       });
   };
   useEffect(() => {
-    getRole();
-    getUtilisats();
+    getRoleData();
+    getUsersData();
   }, [users]);
 
   return (
@@ -204,4 +201,4 @@ function ModifUtilisateur() {
   );
 }
 
-export default ModifUtilisateur;
+export default UpdateUsers;

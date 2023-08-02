@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import toastiConfig from "../services/toastiConfig";
-import apiConnexion from "../services/apiConnexion";
-import { emailPattern, passwordPattern } from "../services/regexPattern";
+import toastiConfig from "../../services/toastiConfig";
+import apiConnexion from "../../services/apiConnexion";
+import { emailPattern, passwordPattern } from "../../services/regexPattern";
+import getRole from "../../CRUD/getRole";
 
-function Utilisateur() {
+function addUsers() {
   const formulaire = document.getElementById("formulaire");
   const location = useLocation();
   const actionUtilisateur = location.state?.parametre;
@@ -29,14 +30,12 @@ function Utilisateur() {
     newUsers[place] = value;
     setUsers(newUsers);
   };
-  const getRole = () => {
-    apiConnexion
-      .get(`/roles`)
-      .then((allroles) => {
-        setRoles(allroles.data);
-      })
-      .catch((error) => console.error(error));
+  // Récupération de tous les roles
+  const getRoleData = async () => {
+    const allRole = await getRole();
+    setRoles(allRole);
   };
+  // enregistrement du nouveau utilisateurs
   const sendForm = (e) => {
     e.preventDefault();
     if (
@@ -60,9 +59,8 @@ function Utilisateur() {
     }
   };
   useEffect(() => {
-    getRole();
+    getRoleData();
   }, []);
-
   return (
     <div className="utilisateur">
       <form onSubmit={(e) => sendForm(e)} id="formulaire">
@@ -203,4 +201,4 @@ function Utilisateur() {
   );
 }
 
-export default Utilisateur;
+export default addUsers;
