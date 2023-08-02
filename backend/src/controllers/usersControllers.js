@@ -123,8 +123,17 @@ const add = async (req, res) => {
 
 const destroy = async (req, res) => {
   try {
+    const logId = await prisma.Users.findUnique({
+      where: { id: parseInt(req.params.id, 10) },
+      select: {
+        users_log_id: true,
+      },
+    });
     await prisma.Users.delete({
       where: { id: parseInt(req.params.id, 10) },
+    });
+    await prisma.Users_log.delete({
+      where: { id: parseInt(logId.users_log_id, 10) },
     });
     res.status(200).json({ message: "Utilisateur supprimé" });
   } catch (error) {

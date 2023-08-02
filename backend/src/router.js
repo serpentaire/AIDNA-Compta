@@ -79,5 +79,6 @@ router.post("/users", checkAuth, usersControllers.add);
 router.put("/firstconnexion", checkAuth, loginControllers.firstconnexion);
 router.post("/contact", checkAuth, contactcontrolers.add);
 router.put("/users/:id", checkAuth, usersControllers.edit);
+router.delete("/users/:id", checkAuth, usersControllers.destroy);
 
 module.exports = router;
