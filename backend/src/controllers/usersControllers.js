@@ -61,7 +61,7 @@ const edit = async (req, res) => {
       where: { id: +req.params.id },
       data: users,
     });
-    res.status(204).json({ message: "L'utilisateur' a bien été modifié" });
+    res.status(204).json({ message: "L'utilisateur a bien été modifié" });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);

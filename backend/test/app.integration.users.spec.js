@@ -10,7 +10,7 @@ jest.mock("../src/middleware/authentification", () =>
   jest.fn((req, res, next) => next())
 );
 
-describe("Test routes création users", () => {
+describe("Test routes users", () => {
   const prisma = new PrismaClient();
   beforeAll(async () => {
     await prisma.Users.deleteMany({});
@@ -100,7 +100,7 @@ describe("Test routes création users", () => {
       .catch(done);
   });
   // début fichier login
-  // route création d'un users
+  // route création d'un utilisateur
   it("POST /users - OK (fields provided) ", (done) => {
     request(app)
       .post("/users")
@@ -125,7 +125,57 @@ describe("Test routes création users", () => {
       })
       .catch(done);
   });
-  // route modif d'un enregistrement
+  // route lecture des utilisateurs
+  it("GET /users - OK ", (done) => {
+    request(app)
+      .get("/users")
+      .then((response) => {
+        expect(response.statusCode).toEqual(200);
+        done();
+      })
+      .catch(done);
+  });
+  // route modif d'un utilisateur
+  it("PUT /users/:id - OK (fields provided) ", (done) => {
+    request(app)
+      .put("/users/3")
+      .send({
+        id: 3,
+        nom: "LEMOINE",
+        prenom: "Gaetan",
+        adresse: "14 route ici",
+        code_postal: 72540,
+        ville: "Vallon sur gee",
+        telephone: "761074681",
+        role_id: "1",
+        users_log_id: 4,
+        Users_log: {
+          login: "test2@hotmail.fr",
+          hashedpassword:
+            "$argon2id$v=19$m=65536,t=5,p=1$x9WH9MNrsCAz1Wr8eNaGCw$acYX27A/NHonPBzijSB/RIXSUZWJdFa0NVAFCkSAsVs",
+          nb_connexion: 1,
+        },
+        Role: { nom: "Adhèrent" },
+      })
+      .then((response) => {
+        expect(response.statusCode).toEqual(204);
+        done();
+      })
+      .catch(done);
+  });
+  it("DELETE /users/:id - OK ", (done) => {
+    request(app)
+      .delete("/users/1")
+      .expect(200)
+      .expect("Content-Type", /json/)
+      .then((response) => {
+        const expected = { message: "Utilisateur supprimé" };
+        expect(response.body).toEqual(expected);
+        done();
+      })
+      .catch(done);
+  });
+  // route modif pour la première connexion
   it("PUT /firstconnexion - OK (fields provided) ", (done) => {
     request(app)
       .put("/firstconnexion")
