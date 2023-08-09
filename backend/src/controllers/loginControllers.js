@@ -39,6 +39,7 @@ const validateLogin = async (req, res) => {
       select: {
         nom: true,
         prenom: true,
+        users_log_id: true,
         Users_log: {
           select: {
             login: true,
