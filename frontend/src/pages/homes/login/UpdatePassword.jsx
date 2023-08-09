@@ -35,7 +35,6 @@ function UpdatePassword() {
       passwordPattern.test(confirm.confirmpassword)
     ) {
       if (confirm.password === confirm.confirmpassword) {
-        console.log(user[0].users_log_id);
         apiConnexion
           .put("/firstconnexion", { ...confirm, id: user[0].users_log_id })
           .then(() => {
