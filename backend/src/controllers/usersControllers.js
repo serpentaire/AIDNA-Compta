@@ -11,7 +11,6 @@ const browse = async (req, res) => {
           select: {
             login: true,
             hashedpassword: true,
-            nb_connexion: true,
           },
         },
         Role: {
@@ -20,10 +19,8 @@ const browse = async (req, res) => {
           },
         },
       },
-      where: {
-        Users_log: {
-          login: req.body.utilisateur,
-        },
+      orderBy: {
+        id: "asc",
       },
     });
     res.status(200).json(users);

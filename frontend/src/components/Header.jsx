@@ -43,15 +43,17 @@ function Header() {
       </div>
       <div className="md:hidden mt-5 mr-3">
         {user && (
-          <Link to="/updatePassword">
-            <button type="button">
-              <img src={updateMp} alt="logo" className="w-7 h-7 mr-3" />
+          <div>
+            <Link to="/updatePassword">
+              <button type="button">
+                <img src={updateMp} alt="logo" className="w-7 h-7 mr-3" />
+              </button>
+            </Link>
+            <button type="button" onClick={() => getLogout()}>
+              <img src={deconnexion} alt="logo" className="w-7 h-7" />
             </button>
-          </Link>
+          </div>
         )}
-        <button type="button" onClick={() => getLogout()}>
-          <img src={deconnexion} alt="logo" className="w-7 h-7" />
-        </button>
       </div>
     </div>
   );
