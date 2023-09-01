@@ -26,6 +26,7 @@ function SideBarTresorier() {
                 selectedMenu === 1 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-enrgRecette"
               onClick={() => {
                 setManageRedirect("/homeTresorier", "recette");
                 selectBtn(1);
@@ -40,6 +41,7 @@ function SideBarTresorier() {
                 selectedMenu === 2 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-enrgDepense"
               onClick={() => {
                 setManageRedirect("/homeTresorier", "dépense");
                 selectBtn(2);
@@ -51,7 +53,7 @@ function SideBarTresorier() {
         </div>
       </div>
       <div className="card">
-        <h2 className="h2sidebar text-1xl">Comptes</h2>
+        <h2 className="h2sidebar text-1xl">Compte</h2>
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
@@ -59,6 +61,7 @@ function SideBarTresorier() {
                 selectedMenu === 3 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-compteJournalier"
               onClick={() => {
                 setManageRedirect("/compteJournalier");
                 selectBtn(3);
@@ -73,6 +76,7 @@ function SideBarTresorier() {
                 selectedMenu === 4 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-caisse"
               onClick={() => selectBtn(4)}
             >
               Caisse
@@ -84,6 +88,7 @@ function SideBarTresorier() {
                 selectedMenu === 5 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-payPal"
               onClick={() => selectBtn(5)}
             >
               PayPal
@@ -95,6 +100,7 @@ function SideBarTresorier() {
                 selectedMenu === 6 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-etatBanquaire"
               onClick={() => selectBtn(6)}
             >
               Etat de rapprochement banquaire
@@ -106,6 +112,7 @@ function SideBarTresorier() {
                 selectedMenu === 7 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-stocks"
               onClick={() => selectBtn(7)}
             >
               Stocks
@@ -122,6 +129,7 @@ function SideBarTresorier() {
                 selectedMenu === 8 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-comptes"
               onClick={() => {
                 setManageRedirect("/rapportComptes");
                 selectBtn(8);
@@ -136,6 +144,7 @@ function SideBarTresorier() {
                 selectedMenu === 9 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilan"
               onClick={() => selectBtn(9)}
             >
               Bilan
@@ -147,6 +156,7 @@ function SideBarTresorier() {
                 selectedMenu === 10 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-projet"
               onClick={() => selectBtn(10)}
             >
               Projet
@@ -158,11 +168,15 @@ function SideBarTresorier() {
                 selectedMenu === 11 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-analyseComptes"
               onClick={() => selectBtn(11)}
             >
               Analyse des comptes
             </button>
           </div>
+        </div>
+        <div data-testid="selected-menu" className="hidden">
+          {selectedMenu}
         </div>
       </div>
       <div id="cible" />

@@ -28,6 +28,7 @@ function SideBarAdmin() {
                 selectedMenu === 1 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-archiverCompte"
               onClick={() => {
                 setManageRedirect("/homeAdmin");
                 selectBtn(1);
@@ -42,6 +43,7 @@ function SideBarAdmin() {
                 selectedMenu === 2 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-ajoutCompte"
               onClick={() => selectBtn(2)}
             >
               Ajouter un compte
@@ -59,6 +61,7 @@ function SideBarAdmin() {
                 selectedMenu === 3 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-ajoutUtilisateur"
               onClick={() => {
                 setManageRedirect("/adminUtilisateur", "Ajouter");
                 selectBtn(3);
@@ -73,6 +76,7 @@ function SideBarAdmin() {
                 selectedMenu === 4 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-supUtilisateur"
               onClick={() => {
                 setManageRedirect("/adminUtilisateur", "Supprimer");
                 selectBtn(4);
@@ -87,6 +91,7 @@ function SideBarAdmin() {
                 selectedMenu === 5 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-modifUtilisateur"
               onClick={() => {
                 setManageRedirect("/adminUtilisateur", "Modifier");
                 selectBtn(5);
@@ -107,11 +112,15 @@ function SideBarAdmin() {
                 selectedMenu === 6 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bdd"
               onClick={() => selectBtn(6)}
             >
-              Bose de données
+              Base de données
             </button>
           </div>
+        </div>
+        <div data-testid="selected-menu" className="hidden">
+          {selectedMenu}
         </div>
       </div>
       <div id="cible" />

@@ -11,7 +11,7 @@ function SideBarMembreBureau() {
         Espace membre du bureau
       </h1>
       <div className="card">
-        <h2 className="h2sidebar text-1xl md:text-start md:pl-20">Comptes</h2>
+        <h2 className="h2sidebar text-1xl md:text-start md:pl-20">Compte</h2>
         <div className="flex flex-col mx-3">
           <div className="flex flex-row justify-around items-center my-3">
             <button
@@ -19,6 +19,7 @@ function SideBarMembreBureau() {
                 selectedMenu === 1 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-comptejournalier"
               onClick={() => selectBtn(1)}
             >
               Compte journalier
@@ -30,6 +31,7 @@ function SideBarMembreBureau() {
                 selectedMenu === 2 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-caisse"
               onClick={() => selectBtn(2)}
             >
               caisse
@@ -46,6 +48,7 @@ function SideBarMembreBureau() {
                 selectedMenu === 3 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-comptes"
               onClick={() => selectBtn(3)}
             >
               Comptes
@@ -57,6 +60,7 @@ function SideBarMembreBureau() {
                 selectedMenu === 4 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilan"
               onClick={() => selectBtn(4)}
             >
               Bilan
@@ -68,6 +72,7 @@ function SideBarMembreBureau() {
                 selectedMenu === 5 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-projet"
               onClick={() => selectBtn(5)}
             >
               Projet
@@ -79,11 +84,15 @@ function SideBarMembreBureau() {
                 selectedMenu === 6 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-analyseComptes"
               onClick={() => selectBtn(6)}
             >
               Analyse des comptes
             </button>
           </div>
+        </div>
+        <div data-testid="selected-menu" className="hidden">
+          {selectedMenu}
         </div>
       </div>
       <div id="cible" />
