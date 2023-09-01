@@ -18,6 +18,7 @@ function SideBarMembreEquipe() {
                 selectedMenu === 1 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-comptes"
               onClick={() => selectBtn(1)}
             >
               Comptes
@@ -29,6 +30,7 @@ function SideBarMembreEquipe() {
                 selectedMenu === 2 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilanAnnuel"
               onClick={() => selectBtn(2)}
             >
               Bilan Annuel
@@ -40,11 +42,15 @@ function SideBarMembreEquipe() {
                 selectedMenu === 3 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilanProjet"
               onClick={() => selectBtn(3)}
             >
               Bilan Projet
             </button>
           </div>
+        </div>
+        <div data-testid="selected-menu" className="hidden">
+          {selectedMenu}
         </div>
       </div>
       <div id="cible" />

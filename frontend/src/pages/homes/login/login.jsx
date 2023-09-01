@@ -107,6 +107,7 @@ function Login() {
                 id="utilisateur"
                 name="utilisateur"
                 placeholder="Email..."
+                data-testid="inputEmail"
                 value={connexion.utilisateur}
                 onChange={(e) => handleConnexion(e.target.name, e.target.value)}
               />
@@ -119,6 +120,7 @@ function Login() {
                 name="password"
                 id="password"
                 placeholder="Mot de passe..."
+                data-testid="inputMP"
                 value={connexion.password}
                 onChange={(e) => handleConnexion(e.target.name, e.target.value)}
               />
@@ -126,6 +128,7 @@ function Login() {
                 <button
                   className="absolute w-[20px] h-[20px] top-0 right-0 py-2 mr-12"
                   onClick={showPassword}
+                  data-testid="togglePasswordButton"
                   type="button"
                 >
                   {hidePassword ? (
@@ -145,6 +148,7 @@ function Login() {
             <div className="flex flex-row justify-around items-center my-3">
               <button
                 type="submit"
+                data-testid="btn-Valider"
                 className="rounded-full p-2 bg-orange text-white font-bold w-1/2"
               >
                 Valider
@@ -155,6 +159,7 @@ function Login() {
             <button
               className="rounded-3xl text-1xl text-green font-semibold"
               type="button"
+              data-testid="forgot-password-button"
               onClick={() => handleOpenforgotPwModal()}
             >
               Mot de passe oublié
@@ -167,6 +172,7 @@ function Login() {
         </div>
       </form>
       <ToastContainer
+        data-testid="message"
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}

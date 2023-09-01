@@ -18,6 +18,7 @@ function SideBarAdherent() {
                 selectedMenu === 1 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilanAnnuel"
               onClick={() => selectBtn(1)}
             >
               Bilan Annuel
@@ -29,11 +30,15 @@ function SideBarAdherent() {
                 selectedMenu === 2 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilanProjet"
               onClick={() => selectBtn(2)}
             >
               Bilan Projet
             </button>
           </div>
+        </div>
+        <div data-testid="selected-menu" className="hidden">
+          {selectedMenu}
         </div>
       </div>
       <div id="cible" />
