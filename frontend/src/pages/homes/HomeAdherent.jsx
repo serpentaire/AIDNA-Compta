@@ -1,3 +1,4 @@
+import React from "react";
 import { Helmet } from "react-helmet";
 import SideBarAdherent from "../../components/sidebar/SideBarAdherent";
 import Contact from "../../components/contact";
@@ -12,7 +13,7 @@ export default function HomeAdherent() {
         <meta name="description" content="Page d'accueil adhérent" />
         <link rel="icon" type="image/png" href={logo} />
       </Helmet>
-      <div>
+      <div data-testid="sidebar-adherent">
         <SideBarAdherent />
       </div>
       <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
@@ -26,7 +27,7 @@ export default function HomeAdherent() {
           afin de vous montrer l'état des comptes.
         </p>
         <h1 className="h1compo md:mt-40">Laissez-nous un message</h1>
-        <div>
+        <div data-testid="contact">
           <Contact />
         </div>
       </div>
