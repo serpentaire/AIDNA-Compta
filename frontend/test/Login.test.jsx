@@ -396,9 +396,8 @@ it("displays an error message for incorrect password", async () => {
 
   const submitButton = screen.getByTestId("btn-Valider");
 
-  // Utilisez le gestionnaire d'erreur approprié pour simuler une erreur de connexion
   await act(async () => {
-    await server.use(loginHandlers[1]); // Utilisez le gestionnaire de test approprié pour une erreur de mot de passe incorrect
+    await server.use(loginHandlers[1]);
   });
 
   // Simuler le clic sur le bouton de validation
