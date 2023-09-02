@@ -13,7 +13,7 @@ function HomeAdmin() {
         <meta name="description" content="Page d'accueil de l'administrateur" />
         <link rel="icon" type="image/png" href={logo} />
       </Helmet>
-      <div data-testid="sidebar-adherent">
+      <div data-testid="sidebar-admin">
         <SideBarAdmin />
       </div>
       <div

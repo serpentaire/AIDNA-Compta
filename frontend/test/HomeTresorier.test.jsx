@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { screen, waitFor } from "@testing-library/dom";
 import { BrowserRouter } from "react-router-dom";
-import HomeAdmin from "../src/pages/homes/HomeAdmin";
+import HomeTresorier from "../src/pages/homes/HomeTresorier";
 
 // Test de l'affichage des textes
 
@@ -18,37 +18,37 @@ jest.mock("react-helmet", () => {
   };
 });
 // eslint-disable-next-line no-undef
-it("Espace admin", () => {
+it("Espace tresorier", () => {
   render(
     <BrowserRouter>
-      <HomeAdmin />
+      <HomeTresorier />
     </BrowserRouter>
   );
   // cible l'élément Sidebar par son data-testid
-  const sidebarElement = screen.getByTestId("sidebar-admin");
+  const sidebarElement = screen.getByTestId("sidebar-tresorier");
 
   // Vérifie si l'élément Sidebar est présent dans le DOM
   // eslint-disable-next-line no-undef
   expect(sidebarElement).toBeInTheDocument();
 });
 // eslint-disable-next-line no-undef
-jest.mock("../src/components/NumCompte", () => ({
+jest.mock("../src/components/Enregistrement", () => ({
   __esModule: true,
-  default: () => null, // Remplace NumCompte par un composant qui ne fait rien
+  default: () => null,
 }));
 // eslint-disable-next-line no-undef
-it("Espace admin", async () => {
+it("Espace tresorier", async () => {
   render(
     <BrowserRouter>
-      <HomeAdmin />
+      <HomeTresorier />
     </BrowserRouter>
   );
 
-  // Vérifie si l'élément NumCompte est présent dans le DOM
+  // Vérifie si l'élément Enregistrement est présent dans le DOM
   await waitFor(() => {
-    // cible l'élément NumCompte par son data-testid
-    const NumCompteElement = screen.getByTestId("NumCompte");
+    // cible l'élément Enregistrement par son data-testid
+    const EnregistrementElement = screen.getByTestId("Enregistrement");
     // eslint-disable-next-line no-undef
-    expect(NumCompteElement).toBeInTheDocument();
+    expect(EnregistrementElement).toBeInTheDocument();
   });
 });
