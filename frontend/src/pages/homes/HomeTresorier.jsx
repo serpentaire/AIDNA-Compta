@@ -13,10 +13,13 @@ function HomeTresorier() {
         <meta name="description" content="Page d'accueil du trésorier" />
         <link rel="icon" type="image/png" href={logo} />
       </Helmet>
-      <div>
+      <div data-testid="sidebar-tresorier">
         <SideBarTresorier />
       </div>
-      <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+      <div
+        data-testid="Enregistrement"
+        className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen"
+      >
         <Enregistrement />
       </div>
     </div>
