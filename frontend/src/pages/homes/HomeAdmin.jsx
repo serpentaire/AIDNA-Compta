@@ -13,10 +13,13 @@ function HomeAdmin() {
         <meta name="description" content="Page d'accueil de l'administrateur" />
         <link rel="icon" type="image/png" href={logo} />
       </Helmet>
-      <div>
+      <div data-testid="sidebar-adherent">
         <SideBarAdmin />
       </div>
-      <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+      <div
+        data-testid="NumCompte"
+        className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen"
+      >
         <NumCompte />
       </div>
     </div>

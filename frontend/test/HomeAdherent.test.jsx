@@ -122,10 +122,10 @@ it("Espace adhèrent", () => {
       </BrowserRouter>
     </MockUserProvider>
   );
-  // Utilisez getByTestId pour cibler l'élément Sidebar par son data-testid
+  // cible l'élément Sidebar par son data-testid
   const sidebarElement = screen.getByTestId("sidebar-adherent");
 
-  // Vérifiez si l'élément Sidebar est présent dans le DOM
+  // Vérifie si l'élément Sidebar est présent dans le DOM
   // eslint-disable-next-line no-undef
   expect(sidebarElement).toBeInTheDocument();
 });
@@ -152,10 +152,10 @@ it("Espace adhèrent", () => {
       </BrowserRouter>
     </MockUserProvider>
   );
-  // Utilisez getByTestId pour cibler l'élément Sidebar par son data-testid
-  const sidebarElement = screen.getByTestId("contact");
+  // cible l'élément contact par son data-testid
+  const contactElement = screen.getByTestId("contact");
 
-  // Vérifiez si l'élément Sidebar est présent dans le DOM
+  // Vérifie si l'élément contact est présent dans le DOM
   // eslint-disable-next-line no-undef
-  expect(sidebarElement).toBeInTheDocument();
+  expect(contactElement).toBeInTheDocument();
 });
