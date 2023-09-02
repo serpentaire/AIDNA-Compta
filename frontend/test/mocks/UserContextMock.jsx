@@ -1,26 +1,21 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const MockUserContext = createContext();
 
-function MockUserProvider({ children }) {
-  const [user, setUser] = useState(
-    sessionStorage.user !== "undefined"
-      ? JSON.parse(sessionStorage.getItem("user"))
-      : null
-  );
-
+function MockUserProvider({ children, value }) {
+  const [user, setUser] = useState(value || null);
   const handleUser = (data) => {
     setUser(data);
   };
 
   const logout = () => {
-    // setUser();
-    // sessionStorage.removeItem("user");
+    setUser();
+    sessionStorage.removeItem("user");
   };
 
-  // useEffect(() => {
-  //   sessionStorage.setItem("user", JSON.stringify(user));
-  // }, [user]);
+  useEffect(() => {
+    sessionStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <MockUserContext.Provider

@@ -95,6 +95,7 @@ function UpdatePassword() {
                 type={hidePassword ? "password" : "text"}
                 name="oldpassword"
                 id="oldpassword"
+                data-testid="inputOldPassword"
                 placeholder="Ancien mot de passe..."
                 value={confirm.oldpassword}
                 onChange={(e) => handleConfirm(e.target.name, e.target.value)}
@@ -126,6 +127,7 @@ function UpdatePassword() {
                 type={hidePassword ? "password" : "text"}
                 name="password"
                 id="password"
+                data-testid="inputPassword"
                 placeholder="Nouveau mot de passe..."
                 value={confirm.password}
                 onChange={(e) => handleConfirm(e.target.name, e.target.value)}
@@ -157,6 +159,7 @@ function UpdatePassword() {
                 type={hidePassword ? "password" : "text"}
                 name="confirmpassword"
                 id="confirmpassword"
+                data-testid="inputConfirmPassword"
                 placeholder="Confirmer le mot de passe..."
                 value={confirm.confirmpassword}
                 onChange={(e) => handleConfirm(e.target.name, e.target.value)}
@@ -184,6 +187,7 @@ function UpdatePassword() {
             <div className="flex flex-row justify-around items-center my-3">
               <button
                 type="submit"
+                data-testid="btn-Valider"
                 className="rounded-full p-2 bg-orange text-white font-bold w-1/2"
               >
                 Valider
