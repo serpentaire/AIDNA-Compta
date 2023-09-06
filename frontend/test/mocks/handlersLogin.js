@@ -187,12 +187,32 @@ export const loginHandlers = [
     );
   }),
   // N°10
-  // Scénario pour la création d'un nouvel utilisateur réussie
+  // Scénario pour la création d'un nouvel utilisateur non réussie
   rest.post("/users", (req, res, ctx) => {
     return res(
       ctx.status(500),
       ctx.json({
         message: "L'utilisateur n'a pas été ajoutée..",
+      })
+    );
+  }),
+  // N°11
+  // Scénario pour la suppression d'un utilisateur réussie
+  rest.delete("/users/1", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: "Utilisateur supprimé",
+      })
+    );
+  }),
+  // N°12
+  // Scénario pour la suppression d'un utilisateur non réussie
+  rest.delete("/users/1", (req, res, ctx) => {
+    return res(
+      ctx.status(500),
+      ctx.json({
+        message: "Utilisateur supprimé",
       })
     );
   }),

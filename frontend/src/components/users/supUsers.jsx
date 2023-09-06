@@ -18,6 +18,7 @@ function SupUsers() {
     const allUsers = await getUsers();
     setUtilisats(allUsers);
   };
+  // console.log(utilisats);
   // suppression de l'utilisateur
   const supUsers = (id) => {
     apiConnexion
@@ -26,9 +27,9 @@ function SupUsers() {
         deleteUser(id);
         toast.success(`L'utilisateur a bien été supprimée.`, toastiConfig);
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error(`Une erreur s'est produite`, toastiConfig);
-        console.warn(err);
+        // console.warn(err);
       });
   };
   useEffect(() => {
@@ -41,7 +42,11 @@ function SupUsers() {
         Supprimer un utilisateur
       </h2>
       <div className="tableau flex justify-center">
-        <table className=" m-2 border-collapse border-2 text-xs text-center">
+        <table
+          data-testid="utilisats-table"
+          data-utilisats={JSON.stringify(utilisats)}
+          className=" m-2 border-collapse border-2 text-xs text-center"
+        >
           <thead>
             <tr>
               <th className="p-2 border border-2 w-20">Login</th>
@@ -51,36 +56,39 @@ function SupUsers() {
               <th className="p-2 border border-2">Supprimer</th>
             </tr>
           </thead>
-          {utilisats.map((utilisat) => (
-            <tr key={utilisat.id}>
-              <td className="border px-4 py-2">{utilisat.Users_log.login}</td>
-              <td className="border px-4 py-2">{utilisat.nom}</td>
-              <td className="border px-4 py-2">{utilisat.prenom}</td>
-              <td className="border px-4 py-2">{utilisat.Role.nom}</td>
-              <td className="border px-4 py-2">
-                <button
-                  className="underline"
-                  type="button"
-                  onClick={() => supUsers(utilisat.id)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6 md:w-8 md:h-8"
+          <tbody>
+            {utilisats.map((utilisat) => (
+              <tr key={utilisat.id}>
+                <td className="border px-4 py-2">{utilisat.Users_log.login}</td>
+                <td className="border px-4 py-2">{utilisat.nom}</td>
+                <td className="border px-4 py-2">{utilisat.prenom}</td>
+                <td className="border px-4 py-2">{utilisat.Role.nom}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    className="underline"
+                    type="button"
+                    data-testid={`btn-supUser-${utilisat.id}`}
+                    onClick={() => supUsers(utilisat.id)}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
-                    />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-          ))}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 md:w-8 md:h-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <ToastContainer
