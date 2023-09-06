@@ -1,5 +1,5 @@
 // Ajout d'un utilisateur dans la base
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,8 +8,8 @@ import apiConnexion from "../../services/apiConnexion";
 import { emailPattern, passwordPattern } from "../../services/regexPattern";
 import getRole from "../../CRUD/getRole";
 
-function addUsers() {
-  const formulaire = document.getElementById("formulaire");
+function AddUsers() {
+  const formRef = useRef();
   const location = useLocation();
   const actionUtilisateur = location.state?.parametre;
   const [roles, setRoles] = useState([]);
@@ -46,13 +46,13 @@ function addUsers() {
       apiConnexion
         .post("/users", users)
         .then(() => {
-          toast.success(`L'utilisateur a bien été ajoutée.`, toastiConfig);
+          toast.success("L'utilisateur a bien été ajoutée.", toastiConfig);
           setUsers(usersInitial);
-          formulaire.reset();
+          formRef.current.reset();
         })
-        .catch((error) => {
+        .catch(() => {
           toast.error(`L'utilisateur n'a pas été ajoutée.`, toastiConfig);
-          console.error(error);
+          // console.error(error);
         });
     } else {
       toast.error(`L'email ou le mot de passe n'est pas valide.`, toastiConfig);
@@ -63,7 +63,7 @@ function addUsers() {
   }, []);
   return (
     <div className="utilisateur">
-      <form onSubmit={(e) => sendForm(e)} id="formulaire">
+      <form ref={formRef} onSubmit={(e) => sendForm(e)} id="formulaire">
         <h1 className="h1compo">{actionUtilisateur} un utilisateur</h1>
         <div className="md:flex md:mt-10 pl-2 md:pt-4 text-center md:text-start md:pl-20">
           <h2 className="h2compo md:pr-24 mt-2">Nom :</h2>
@@ -94,6 +94,7 @@ function addUsers() {
             className="inputCustom"
             type="text"
             name="login"
+            data-testid="inputLogin"
             value={users.login}
             onChange={(e) => handleUsers(e.target.name, e.target.value)}
           />
@@ -105,6 +106,7 @@ function addUsers() {
             className="inputCustom"
             type="text"
             name="mot_pass"
+            data-testid="inputMP"
             value={users.mot_pass}
             onChange={(e) => handleUsers(e.target.name, e.target.value)}
           />
@@ -180,6 +182,7 @@ function addUsers() {
           <button
             className="btnCustom focus:btnCustumFocus m-2 md:w-40"
             type="submit"
+            data-testid="btn-Enregistrer"
           >
             Enregistrer
           </button>
@@ -201,4 +204,4 @@ function addUsers() {
   );
 }
 
-export default addUsers;
+export default AddUsers;

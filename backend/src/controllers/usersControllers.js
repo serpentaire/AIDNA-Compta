@@ -108,10 +108,10 @@ const add = async (req, res) => {
         data: { ...users, users_log_id: usersLog.id },
       });
       sendMail(mailOptions);
-      res.status(201).json({ message: "Nouveau utilisateur créé" });
+      res.status(201).json({ message: "L'utilisateur a bien été ajoutée." });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Nouveau utilisateur non créé" });
+      res.status(500).json({ message: "L'utilisateur n'a pas été ajoutée." });
     }
   } else {
     res.status(400).json({ message: "Nouveau utilisateur non créé" });

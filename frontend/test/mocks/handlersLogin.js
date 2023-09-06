@@ -176,4 +176,24 @@ export const loginHandlers = [
       })
     );
   }),
+  // N°9
+  // Scénario pour la création d'un nouvel utilisateur réussie
+  rest.post("/users", (req, res, ctx) => {
+    return res(
+      ctx.status(201),
+      ctx.json({
+        message: "L'utilisateur a bien été ajoutée.",
+      })
+    );
+  }),
+  // N°10
+  // Scénario pour la création d'un nouvel utilisateur réussie
+  rest.post("/users", (req, res, ctx) => {
+    return res(
+      ctx.status(500),
+      ctx.json({
+        message: "L'utilisateur n'a pas été ajoutée..",
+      })
+    );
+  }),
 ];
