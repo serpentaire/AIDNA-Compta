@@ -139,13 +139,12 @@ it("checks if 'utilisats' is an array", async () => {
     render(<SupUsers />);
   });
 
-  // Vous pouvez accéder à l'attribut 'data-utilisats' et le convertir en tableau JavaScript
   const utilisats = JSON.parse(
     screen.getByTestId("utilisats-table").getAttribute("data-utilisats")
   );
 
   await act(async () => {
-    // Vérifiez si 'utilisats' est un tableau
+    // Vérifie si 'utilisats' est un tableau
     // eslint-disable-next-line no-undef
     expect(Array.isArray(utilisats)).toBe(true);
   });

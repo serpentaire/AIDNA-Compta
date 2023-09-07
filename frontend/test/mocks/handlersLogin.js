@@ -216,4 +216,24 @@ export const loginHandlers = [
       })
     );
   }),
+  // N°13
+  // Scénario pour la modification d'un utilisateur réussie
+  rest.put("/users/2", (req, res, ctx) => {
+    return res(
+      ctx.status(204),
+      ctx.json({
+        message: "L'utilisateur a bien été modifié.",
+      })
+    );
+  }),
+  // N°14
+  // Scénario pour la suppression d'un utilisateur non réussie
+  rest.put("/users/2", (req, res, ctx) => {
+    return res(
+      ctx.status(500),
+      ctx.json({
+        message: "Utilisateur supprimé",
+      })
+    );
+  }),
 ];

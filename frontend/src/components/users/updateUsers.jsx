@@ -56,9 +56,8 @@ function UpdateUsers() {
         setUsers(usersInitial);
         formulaire.reset();
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error(`L'utilisateur n'a pas été modifié.`, toastiConfig);
-        console.error(error);
       });
   };
   useEffect(() => {
@@ -76,6 +75,7 @@ function UpdateUsers() {
             className="border border-orange rounded-full p-2 pl-5 text-orange w-3/4 w-3/4 md:w-1/2"
             name="login"
             type="text"
+            data-testid="selectUser"
             value={users.login}
             onChange={(e) => handleLogin(e.target.value)}
           >
@@ -161,6 +161,7 @@ function UpdateUsers() {
             className="border border-orange rounded-full p-2 pl-5 text-orange w-3/4 w-3/4 md:w-1/2"
             name="role_id"
             type="text"
+            data-testid="selectRole"
             value={users.role_id}
             onChange={(e) => handleUsers(e.target.name, e.target.value)}
           >
@@ -180,6 +181,7 @@ function UpdateUsers() {
           <button
             className="btnCustom focus:btnCustumFocus m-2 md:w-40"
             type="submit"
+            data-testid="btn-modifier"
           >
             {actionUtilisateur}
           </button>
