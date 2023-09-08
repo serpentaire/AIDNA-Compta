@@ -21,21 +21,30 @@ function AdminUtilisateur() {
         />
         <link rel="icon" type="image/png" href={logo} />
       </Helmet>
-      <div>
+      <div data-testid="sidebar-admin">
         <SideBarAdmin />
       </div>
       {userType === "Ajouter" && (
-        <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+        <div
+          data-testid="AddUser"
+          className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen"
+        >
           <AddUsers />
         </div>
       )}
       {userType === "Modifier" && (
-        <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+        <div
+          data-testid="UpdateUsers"
+          className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen"
+        >
           <UpdateUsers />
         </div>
       )}
       {userType === "Supprimer" && (
-        <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen">
+        <div
+          data-testid="SupUsers"
+          className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8 md:w-screen"
+        >
           <SupUsers />
         </div>
       )}
