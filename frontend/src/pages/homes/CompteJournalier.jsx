@@ -13,10 +13,13 @@ function CompteJournalier() {
         <meta name="description" content="Page des comptes journaliers" />
         <link rel="icon" type="image/png" href={logo} />
       </Helmet>
-      <div>
+      <div data-testid="sideBar-Tresorier">
         <SideBarTresorier />
       </div>
-      <div className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8">
+      <div
+        data-testid="TableauJournalier"
+        className=" border pt-2 pb-2 border-black rounded-3xl shadow-lg mt-3 mx-8"
+      >
         <TableauJournalier />
       </div>
     </div>
