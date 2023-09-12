@@ -7,7 +7,7 @@ import getNcompte from "../CRUD/getNcompte";
 import apiConnexion from "../services/apiConnexion";
 
 function Enregistrement({ idUpdate, setIdUpdate }) {
-  const formulaire = document.getElementById("formulaire");
+  const formRef = useRef();
   const inputRef1 = useRef(null);
   const location = useLocation();
   let enregistrementType = location.state?.parametre;
@@ -41,7 +41,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           };
           setEnregistrement(enregistrementInitial);
         })
-        .catch((error) => console.error(error));
+        .catch();
     }
   };
 
@@ -87,9 +87,8 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         setTimeout(() => setEnregistrement(enregistrementInitial), 1000);
         setTimeout(() => setIdUpdate(), 5000);
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error(`Votre écriture n'a pas été supprimée.`, toastiConfig);
-        console.warn(err);
       });
     if (enregistrement.facture !== "assets/null") {
       const fic = enregistrement.facture.split("/").pop();
@@ -121,9 +120,8 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
           setTimeout(() => setEnregistrement(enregistrementInitial), 1000);
           setTimeout(() => setIdUpdate(), 5000);
         })
-        .catch((error) => {
+        .catch(() => {
           toast.error(`Votre écriture n'a pas été modifiée.`, toastiConfig);
-          console.error(error);
         });
     } else {
       apiConnexion
@@ -131,11 +129,10 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
         .then(() => {
           toast.success(`Votre écriture a bien été ajoutée.`, toastiConfig);
           setEnregistrement(enregistrementInitial);
-          formulaire.reset();
+          formRef.current.reset();
         })
-        .catch((error) => {
+        .catch(() => {
           toast.error(`Votre écriture n'a pas été ajoutée.`, toastiConfig);
-          console.error(error);
         });
     }
   };
@@ -156,9 +153,9 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
   return (
     <div className="enregistrement">
       <form
+        ref={formRef}
         encType="multipart/form-data"
         onSubmit={(e) => sendForm(e)}
-        id="formulaire"
       >
         {idUpdate ? (
           <h1 className="h1compo">Modifier une {enregistrementType}</h1>
@@ -331,6 +328,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
             <button
               className="btnCustom focus:btnCustumFocus m-2 md:w-40"
               type="submit"
+              data-testid="btn-ajouter"
             >
               Enregistrer
             </button>
@@ -339,6 +337,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
               <button
                 className="btnCustom focus:btnCustumFocus m-2 md:w-40"
                 type="button"
+                data-testid="btn-supprimer"
                 onClick={() => deleteEnregistrement(idUpdate)}
               >
                 Supprimer
@@ -346,6 +345,7 @@ function Enregistrement({ idUpdate, setIdUpdate }) {
               <button
                 className="btnCustom focus:btnCustumFocus md:w-40"
                 type="submit"
+                data-testid="btn-modifier"
               >
                 Modifier
               </button>
