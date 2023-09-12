@@ -54,6 +54,7 @@ function ForgotPw({ visible, onclose }) {
             <div className="flex flex-row justify-around items-center my-3">
               <button
                 type="submit"
+                data-testid="btn-envoie-demande"
                 onClick={(e) => sendForm(e)}
                 className="rounded-full p-2 bg-orange text-white font-bold w-1/2"
               >

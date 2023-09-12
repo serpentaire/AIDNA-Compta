@@ -366,4 +366,24 @@ export const loginHandlers = [
       })
     );
   }),
+  // N°24
+  // send ask correct
+  rest.post("/forgotPw", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: "Demande envoyée",
+      })
+    );
+  }),
+  // N°25
+  // send ask not correct
+  rest.post("/forgotPw", (req, res, ctx) => {
+    return res(
+      ctx.status(404),
+      ctx.json({
+        message: "Vous n'avez pas de compte à cette adresse",
+      })
+    );
+  }),
 ];
