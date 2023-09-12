@@ -386,24 +386,4 @@ export const loginHandlers = [
       })
     );
   }),
-  // N°26
-  // switch activ compte ok
-  rest.put("/compteActive/1", (req, res, ctx) => {
-    return res(
-      ctx.status(204),
-      ctx.json({
-        message: "L'activation a bien été modifié",
-      })
-    );
-  }),
-  // N°27
-  // switch activ compte Nok
-  rest.put("/compteActive/1", (req, res, ctx) => {
-    return res(
-      ctx.status(500),
-      ctx.json({
-        message: "L'activation n'est pas modifié",
-      })
-    );
-  }),
 ];
