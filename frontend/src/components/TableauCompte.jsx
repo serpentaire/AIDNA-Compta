@@ -31,23 +31,26 @@ function TableauCompte({ nCompte, updateChild, nb }) {
               <th className="p-2 border border-2">Actif</th>
             </tr>
           </thead>
-          {nCompte
-            .filter((compte) => compte.numero.toString().startsWith(nb))
-            .map((compte) => (
-              <tr key={compte.id}>
-                <td className="border px-4 py-2">{compte.numero}</td>
-                <td className="border px-4 py-2">{compte.designation}</td>
-                <td className="border px-4 py-2">
-                  <button
-                    className="underline"
-                    type="button"
-                    onClick={() => updateActive(compte.id, compte.actif)}
-                  >
-                    {compte.actif}
-                  </button>
-                </td>
-              </tr>
-            ))}
+          <tbody>
+            {nCompte
+              .filter((compte) => compte.numero.toString().startsWith(nb))
+              .map((compte) => (
+                <tr key={compte.id}>
+                  <td className="border px-4 py-2">{compte.numero}</td>
+                  <td className="border px-4 py-2">{compte.designation}</td>
+                  <td className="border px-4 py-2">
+                    <button
+                      className="underline"
+                      type="button"
+                      data-testid="btn-actif"
+                      onClick={() => updateActive(compte.id, compte.actif)}
+                    >
+                      {compte.actif}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
         </table>
       </div>
     </div>
