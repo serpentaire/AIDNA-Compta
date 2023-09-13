@@ -16,7 +16,7 @@ function Header() {
   return (
     <div className="header flex text-green">
       <Link to="/">
-        <img src={logo} alt="logo" className="w-40 h-16" />
+        <img data-testid="logo" src={logo} alt="logo" className="w-40 h-16" />
       </Link>
       <h1
         className={`grow text-center pt-5 md:text-2xl ${
@@ -30,11 +30,19 @@ function Header() {
           {user && (
             <div>
               <Link to="/updatePassword">
-                <button className="mr-3" type="button">
+                <button
+                  data-testid="btn-motPasse"
+                  className="mr-3"
+                  type="button"
+                >
                   Mot de passe
                 </button>
               </Link>
-              <button type="button" onClick={() => getLogout()}>
+              <button
+                data-testid="btn-logout"
+                type="button"
+                onClick={() => getLogout()}
+              >
                 Déconnexion
               </button>
             </div>
