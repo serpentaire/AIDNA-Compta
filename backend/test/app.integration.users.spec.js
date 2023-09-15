@@ -69,7 +69,7 @@ describe("Test routes users", () => {
       .expect(201)
       .expect("Content-Type", /json/)
       .then((response) => {
-        const expected = { message: "Nouveau utilisateur créé" };
+        const expected = { message: "L'utilisateur a bien été ajoutée." };
         expect(response.body).toEqual(expected);
         done();
       })
@@ -119,7 +119,7 @@ describe("Test routes users", () => {
       .expect(201)
       .expect("Content-Type", /json/)
       .then((response) => {
-        const expected = { message: "Nouveau utilisateur créé" };
+        const expected = { message: "L'utilisateur a bien été ajoutée." };
         expect(response.body).toEqual(expected);
         done();
       })
