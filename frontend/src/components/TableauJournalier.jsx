@@ -52,7 +52,6 @@ function TableauJournalier() {
       })
       .catch((error) => console.error(error));
   };
-
   const getSoldeMensuel = () => {
     apiConnexion
       .get(`/soldeMensuel`)
@@ -61,7 +60,6 @@ function TableauJournalier() {
       })
       .catch((error) => console.error(error));
   };
-
   const sousTotal = (enr) => {
     const ssTotalRecette = enregistrementMois
       .filter((rec) => rec.enregmt === enr)
@@ -110,6 +108,7 @@ function TableauJournalier() {
       <div className=" m-3 md:justify-start">
         {mois.map((moi) => (
           <button
+            key={moi.id}
             className={`btnCustom m-2 w-1/4 md:w-24 text-xs md:text-base ${
               moi.id === selectedMonthId ? "btnCustumFocus" : ""
             }`}
@@ -130,7 +129,7 @@ function TableauJournalier() {
             <option
               key={annee}
               value={annee}
-              selected={annee === parseInt(selectedYear, 10)}
+              // selected={annee === parseInt(selectedYear, 10)}
             >
               {annee}
             </option>
@@ -233,10 +232,16 @@ function TableauJournalier() {
             <td className="border text-right px-4 py-2" colSpan="7">
               Total
             </td>
-            <td className="border text-right border-t-2 px-4 py-2">
+            <td
+              data-testid="Totalrecette"
+              className="border text-right border-t-2 px-4 py-2"
+            >
               {sousTotal("recette").toFixed(2)}€
             </td>
-            <td className="border border-t-2 px-4 py-2">
+            <td
+              data-testid="Totaldépense"
+              className="border border-t-2 px-4 py-2"
+            >
               {sousTotal("dépense").toFixed(2)}€
             </td>
           </tr>
@@ -244,7 +249,11 @@ function TableauJournalier() {
             <td className="border text-right px-4 py-2" colSpan="8">
               Solde
             </td>
-            <td className="border text-center border-4 px-4 py-2" colSpan="2">
+            <td
+              data-testid="solde"
+              className="border text-center border-4 px-4 py-2"
+              colSpan="2"
+            >
               {parseFloat(soldeMois(), 10).toFixed(2)}€
             </td>
           </tr>
