@@ -109,7 +109,7 @@ function GraphComptes() {
           onChange={(e) => handleAnnees(e.target.name, e.target.value)}
         >
           {annees.map((annee) => (
-            <option key={annee} value={annee} selected={annee === annees}>
+            <option key={annee} value={annee}>
               {annee}
             </option>
           ))}
@@ -117,6 +117,7 @@ function GraphComptes() {
         <select
           className="inputCustom"
           name="N_comptes_id"
+          data-testid="selectCompte"
           type="text"
           onChange={(e) => handleCompte(e.target.value)}
         >
@@ -161,7 +162,7 @@ function GraphComptes() {
                     })
                     .map((compte) =>
                       compte.enregmt === "recette" ? (
-                        <p className=" ml-4 text-xs md:text-sm">
+                        <p key={compte.id} className=" ml-4 text-xs md:text-sm">
                           {compte.date.split("T").shift().substr(8)}-
                           {compte.date.split("T").shift().substr(5, 2)} /{" "}
                           {compte.description} : {compte.somme} €
@@ -212,7 +213,10 @@ function GraphComptes() {
           </div>
         )}
         {allDataCompte.length > 0 && (
-          <div className="graphique pt-5 text-center md:grow">
+          <div
+            data-testid="graphique"
+            className="graphique pt-5 text-center md:grow"
+          >
             <Line options={options} data={data} />;
           </div>
         )}
