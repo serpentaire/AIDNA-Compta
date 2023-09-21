@@ -357,7 +357,7 @@ jest.mock("../../src/pages/Layout/PrivateTresorier", () => ({
   },
 }));
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to //homeTresorier", () => {
+it("clicking on button redirects to /tresorier/accueil", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarTresorier />
@@ -366,10 +366,10 @@ it("clicking on button redirects to //homeTresorier", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-enrgRecette");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/homeTresorier");
+  expect(window.location.pathname).toBe("/tresorier/accueil");
 });
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /homeTresorier", () => {
+it("clicking on button redirects to /tresorier/accueil", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarTresorier />
@@ -378,10 +378,10 @@ it("clicking on button redirects to /homeTresorier", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-enrgDepense");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/homeTresorier");
+  expect(window.location.pathname).toBe("/tresorier/accueil");
 });
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /compteJournalier", () => {
+it("clicking on button redirects to /compte", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarTresorier />
@@ -390,10 +390,10 @@ it("clicking on button redirects to /compteJournalier", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-compteJournalier");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/compteJournalier");
+  expect(window.location.pathname).toBe("/tresorier/compte");
 });
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /rapportComptes", () => {
+it("clicking on button redirects to /rapport", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarTresorier />
@@ -402,5 +402,5 @@ it("clicking on button redirects to /rapportComptes", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-comptes");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/rapportComptes");
+  expect(window.location.pathname).toBe("/tresorier/rapport");
 });

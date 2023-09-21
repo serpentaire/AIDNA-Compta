@@ -42,15 +42,15 @@ function UpdatePassword() {
             if (user[0].Role.nom === "Trésorier") {
               setTimeout(
                 () =>
-                  navigate(`/homeTresorier`, {
+                  navigate(`/tresorier/accueil`, {
                     state: { parametre: "recette" },
                   }),
                 2000
               );
             } else if (user[0].Role.nom === "Administrateur") {
-              setTimeout(() => navigate(`/homeAdmin`), 2000);
+              setTimeout(() => navigate(`/admin/accueil`), 2000);
             } else if (user[0].Role.nom === "Adhèrent") {
-              setTimeout(() => navigate(`/homeAdherent`), 2000);
+              setTimeout(() => navigate(`/adherent/accueil`), 2000);
             }
           })
           .catch(() => {
