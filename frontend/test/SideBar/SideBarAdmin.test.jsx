@@ -218,7 +218,7 @@ jest.mock("../../src/pages/Layout/PrivateAdmin", () => ({
   },
 }));
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /homeAdmin", () => {
+it("clicking on button redirects to /admin/accueil", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarAdmin />
@@ -227,10 +227,10 @@ it("clicking on button redirects to /homeAdmin", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-archiverCompte");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/homeAdmin");
+  expect(window.location.pathname).toBe("/admin/accueil");
 });
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /adminUtilisateur", () => {
+it("clicking on button redirects to /utilisateurs", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarAdmin />
@@ -239,10 +239,10 @@ it("clicking on button redirects to /adminUtilisateur", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-ajoutUtilisateur");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/adminUtilisateur");
+  expect(window.location.pathname).toBe("/admin/utilisateurs");
 });
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /adminUtilisateur", () => {
+it("clicking on button redirects to /utilisateurs", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarAdmin />
@@ -251,10 +251,10 @@ it("clicking on button redirects to /adminUtilisateur", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-supUtilisateur");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/adminUtilisateur");
+  expect(window.location.pathname).toBe("/admin/utilisateurs");
 });
 // eslint-disable-next-line no-undef
-it("clicking on button redirects to /adminUtilisateur", () => {
+it("clicking on button redirects to utilisateurs", () => {
   render(
     <BrowserRouter initialEntries={["/"]} initialIndex={0}>
       <SideBarAdmin />
@@ -263,5 +263,5 @@ it("clicking on button redirects to /adminUtilisateur", () => {
   const boutonAjoutUtilisateur = screen.getByTestId("btn-modifUtilisateur");
   fireEvent.click(boutonAjoutUtilisateur);
   // eslint-disable-next-line no-undef
-  expect(window.location.pathname).toBe("/adminUtilisateur");
+  expect(window.location.pathname).toBe("/admin/utilisateurs");
 });

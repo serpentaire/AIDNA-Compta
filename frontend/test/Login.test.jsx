@@ -156,7 +156,7 @@ it("redirection to /homeAdmin after successful login", async () => {
 
   await waitFor(() => {
     // eslint-disable-next-line no-undef
-    expect(window.location.pathname).toBe("/homeAdmin");
+    expect(window.location.pathname).toBe("/admin/accueil");
   });
 });
 
@@ -211,7 +211,7 @@ it("redirection to /homeTresorier after successful login", async () => {
 
   await waitFor(() => {
     // eslint-disable-next-line no-undef
-    expect(window.location.pathname).toBe("/homeTresorier");
+    expect(window.location.pathname).toBe("/tresorier/accueil");
   });
 });
 
@@ -253,7 +253,7 @@ it("redirection to /homeAdherent after successful login", async () => {
 
   await waitFor(() => {
     // eslint-disable-next-line no-undef
-    expect(window.location.pathname).toBe("/homeAdherent");
+    expect(window.location.pathname).toBe("/adherent/accueil");
   });
 });
 // eslint-disable-next-line no-undef

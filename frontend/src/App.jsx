@@ -1,4 +1,3 @@
-// import Home from "./pages/Homes/Home";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
@@ -26,19 +25,19 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/updatePassword" element={<UpdatePassword />} />
             {/* route adhérent */}
-            <Route path="/" element={<PrivateAdherent />}>
-              <Route path="/homeAdherent" element={<HomeAdherent />} />
+            <Route path="/adherent/" element={<PrivateAdherent />}>
+              <Route path="accueil" element={<HomeAdherent />} />
             </Route>
             {/* route trésorier */}
-            <Route path="/" element={<PrivateTresorier />}>
-              <Route path="/homeTresorier" element={<HomeTresorier />} />
-              <Route path="/compteJournalier" element={<CompteJournalier />} />
-              <Route path="/rapportComptes" element={<RapComptes />} />
+            <Route path="/tresorier/" element={<PrivateTresorier />}>
+              <Route path="accueil" element={<HomeTresorier />} />
+              <Route path="compte" element={<CompteJournalier />} />
+              <Route path="rapport" element={<RapComptes />} />
             </Route>
             {/* route admin */}
-            <Route path="/" element={<PrivateAdmin />}>
-              <Route path="homeAdmin" element={<HomeAdmin />} />
-              <Route path="adminUtilisateur" element={<AdminUser />} />
+            <Route path="/admin/" element={<PrivateAdmin />}>
+              <Route path="accueil" element={<HomeAdmin />} />
+              <Route path="utilisateurs" element={<AdminUser />} />
             </Route>
           </Routes>
           <Footer />

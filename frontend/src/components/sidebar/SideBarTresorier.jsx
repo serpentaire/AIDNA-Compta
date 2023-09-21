@@ -28,7 +28,7 @@ function SideBarTresorier() {
               type="button"
               data-testid="btn-enrgRecette"
               onClick={() => {
-                setManageRedirect("/homeTresorier", "recette");
+                setManageRedirect("/tresorier/accueil", "recette");
                 selectBtn(1);
               }}
             >
@@ -43,7 +43,7 @@ function SideBarTresorier() {
               type="button"
               data-testid="btn-enrgDepense"
               onClick={() => {
-                setManageRedirect("/homeTresorier", "dépense");
+                setManageRedirect("/tresorier/accueil", "dépense");
                 selectBtn(2);
               }}
             >
@@ -63,7 +63,7 @@ function SideBarTresorier() {
               type="button"
               data-testid="btn-compteJournalier"
               onClick={() => {
-                setManageRedirect("/compteJournalier");
+                setManageRedirect("/tresorier/compte");
                 selectBtn(3);
               }}
             >
@@ -131,7 +131,7 @@ function SideBarTresorier() {
               type="button"
               data-testid="btn-comptes"
               onClick={() => {
-                setManageRedirect("/rapportComptes");
+                setManageRedirect("/tresorier/rapport");
                 selectBtn(8);
               }}
             >

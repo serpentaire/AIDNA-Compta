@@ -30,7 +30,7 @@ function SideBarAdmin() {
               type="button"
               data-testid="btn-archiverCompte"
               onClick={() => {
-                setManageRedirect("/homeAdmin");
+                setManageRedirect("/admin/accueil");
                 selectBtn(1);
               }}
             >
@@ -63,7 +63,7 @@ function SideBarAdmin() {
               type="button"
               data-testid="btn-ajoutUtilisateur"
               onClick={() => {
-                setManageRedirect("/adminUtilisateur", "Ajouter");
+                setManageRedirect("/admin/utilisateurs", "Ajouter");
                 selectBtn(3);
               }}
             >
@@ -78,7 +78,7 @@ function SideBarAdmin() {
               type="button"
               data-testid="btn-supUtilisateur"
               onClick={() => {
-                setManageRedirect("/adminUtilisateur", "Supprimer");
+                setManageRedirect("/admin/utilisateurs", "Supprimer");
                 selectBtn(4);
               }}
             >
@@ -93,7 +93,7 @@ function SideBarAdmin() {
               type="button"
               data-testid="btn-modifUtilisateur"
               onClick={() => {
-                setManageRedirect("/adminUtilisateur", "Modifier");
+                setManageRedirect("/admin/utilisateurs", "Modifier");
                 selectBtn(5);
               }}
             >
