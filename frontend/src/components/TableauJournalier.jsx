@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import apiConnexion from "../services/apiConnexion";
 import Enregistrement from "./Enregistrement";
 import icone from "../assets/ticket.png";
@@ -60,14 +60,17 @@ function TableauJournalier() {
       })
       .catch((error) => console.error(error));
   };
-  const sousTotal = (enr) => {
-    const ssTotalRecette = enregistrementMois
-      .filter((rec) => rec.enregmt === enr)
-      .reduce((acc, currentValue) => {
-        return acc + parseFloat(currentValue.somme, 10);
-      }, 0);
-    return ssTotalRecette;
-  };
+
+  const sousTotal = useMemo(() => {
+    return (enr) => {
+      const sstotal = enregistrementMois
+        .filter((rec) => rec.enregmt === enr)
+        .reduce((acc, currentValue) => {
+          return acc + parseFloat(currentValue.somme, 10);
+        }, 0);
+      return sstotal;
+    };
+  }, [enregistrementMois]);
 
   const selectMois = (moiId) => {
     setDate2(moiId);
