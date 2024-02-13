@@ -26,7 +26,6 @@ function TableauJournalier() {
   const [enregistrementMois, setEnregistrementMois] = useState([]);
   const [annees, setAnnees] = useState([]);
   const [selectedMonthId, setSelectedMonthId] = useState(currentMonth());
-  // console.log(selectedMonthId);
   const [soldeMensuel, setSoldeMensuel] = useState([]);
   const [selectedYear, setSelectedYear] = useState(
     new Date().getFullYear().toString()
