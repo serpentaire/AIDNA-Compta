@@ -18,14 +18,20 @@ function TableauJournalier() {
     { moi: "Novembre", id: "11" },
     { moi: "Décembre", id: "12" },
   ];
+
+  const currentMonth = () => {
+    const newDate = new Date().getMonth() + 1;
+    return newDate > 10 ? newDate.toString() : "0".concat(newDate.toString());
+  };
   const [enregistrementMois, setEnregistrementMois] = useState([]);
   const [annees, setAnnees] = useState([]);
-  const [selectedMonthId, setSelectedMonthId] = useState("01");
+  const [selectedMonthId, setSelectedMonthId] = useState(currentMonth());
+  // console.log(selectedMonthId);
   const [soldeMensuel, setSoldeMensuel] = useState([]);
   const [selectedYear, setSelectedYear] = useState(
     new Date().getFullYear().toString()
   );
-  const [date2, setDate2] = useState("01");
+  const [date2, setDate2] = useState(currentMonth());
   const [idUpdate, setIdUpdate] = useState();
   const [validat, setValidat] = useState("oui");
 
@@ -126,14 +132,11 @@ function TableauJournalier() {
           className="inputCustom m-2 w-1/4 md:w-24 text-xs md:text-base"
           name="annees"
           type="text"
+          value={selectedYear}
           onChange={(e) => handleAnnees(e.target.name, e.target.value)}
         >
           {annees.map((annee) => (
-            <option
-              key={annee}
-              value={annee}
-              // selected={annee === parseInt(selectedYear, 10)}
-            >
+            <option key={annee} value={annee}>
               {annee}
             </option>
           ))}
