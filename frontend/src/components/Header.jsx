@@ -15,9 +15,9 @@ function Header() {
   };
   return (
     <div className="header flex text-green">
-      <Link to="/">
+      <button type="button" onClick={() => getLogout()}>
         <img data-testid="logo" src={logo} alt="logo" className="w-40 h-16" />
-      </Link>
+      </button>
       <h1
         className={`grow text-center pt-5 md:text-2xl ${
           user ? "md:ml-24" : "md:mr-32"
