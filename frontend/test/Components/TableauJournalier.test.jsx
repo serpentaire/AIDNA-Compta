@@ -1,4 +1,5 @@
 // Pour executer les tests : npm run testFront
+// Lors du changement d'année, remplacer l'année dans toutes les dates
 import "../../jest.config";
 import React from "react";
 import "@testing-library/jest-dom";
@@ -17,7 +18,7 @@ const enregistrementMois = [
     },
     N_comptes_id: 70,
     banque: null,
-    date: "2023-01-04T00:00:00.000Z",
+    date: "2024-01-04T00:00:00.000Z",
     description: "Dons, mécénat",
     enregmt: "recette",
     facture: "assets/null",
@@ -37,7 +38,7 @@ const enregistrementMois = [
     },
     N_comptes_id: 70,
     banque: null,
-    date: "2023-02-04T00:00:00.000Z",
+    date: "2024-02-04T00:00:00.000Z",
     description: "Dons, mécénat",
     enregmt: "recette",
     facture: "assets/null",
@@ -57,7 +58,7 @@ const enregistrementMois = [
     },
     N_comptes_id: 70,
     banque: null,
-    date: "2023-03-04T00:00:00.000Z",
+    date: "2024-03-04T00:00:00.000Z",
     description: "Dons, mécénat",
     enregmt: "dépense",
     facture: "assets/null",
@@ -77,7 +78,7 @@ const enregistrementMois = [
     },
     N_comptes_id: 70,
     banque: null,
-    date: "2023-04-04T00:00:00.000Z",
+    date: "2024-04-04T00:00:00.000Z",
     description: "Dons, mécénat",
     enregmt: "dépense",
     facture: "assets/null",
@@ -93,33 +94,34 @@ const enregistrementMois = [
 const soldeMensuel = [
   {
     id: 37,
-    periode: "2023-01",
+    periode: "2024-01",
     solde: "100",
   },
   {
     id: 30,
-    periode: "2023-02",
-    solde: "200",
+    periode: "2024-02",
+    solde: "100",
   },
   {
     id: 14,
-    periode: "2023-03",
+    periode: "2024-03",
     solde: "300",
   },
   {
     id: 112,
-    periode: "2023-04",
+    periode: "2024-04",
     solde: "460",
   },
 ];
+// Mock de l'apiconnection
 // eslint-disable-next-line no-undef
 jest.mock("../../src/services/apiConnexion", () => ({
   // eslint-disable-next-line no-undef, consistent-return
   get: jest.fn((url) => {
     if (url === "/distinctYear") {
-      return Promise.resolve({ data: [2022, 2023] });
+      return Promise.resolve({ data: [2023, 2024] });
     }
-    if (url === "/compteJournalier?date1=2023&date2=01") {
+    if (url === "/compteJournalier?date1=2024&date2=02") {
       return Promise.resolve({ data: enregistrementMois });
     }
     if (url === "/soldeMensuel") {
@@ -209,7 +211,7 @@ it("récupère les données de enregistrement du mois lors du montage", async ()
   await waitFor(async () => {
     // eslint-disable-next-line no-undef
     await expect(apiConnexion.get).toHaveBeenCalledWith(
-      "/compteJournalier?date1=2023&date2=01"
+      "/compteJournalier?date1=2024&date2=02"
     );
   });
 });
@@ -233,9 +235,9 @@ it("affiche les totaux pour les recettes et les dépenses", async () => {
     render(<TableauJournalier enregistrementMois={enregistrementMois} />);
   });
 
-  const totalRecettesElement = screen.getByTestId("Totalrecette");
-  const totalDepensesElement = screen.getByTestId("Totaldépense");
-  const soldeElement = screen.getByTestId("solde");
+  const totalRecettesElement = screen.getByTestId("Totalrecette").textContent;
+  const totalDepensesElement = screen.getByTestId("Totaldépense").textContent;
+  const soldeElement = screen.getByTestId("solde").textContent;
 
   // Calcule des totaux attendus en fonction des données de test
   const totalRecettesAttendu = enregistrementMois
@@ -254,15 +256,15 @@ it("affiche les totaux pour les recettes et les dépenses", async () => {
 
   await act(() => {
     // eslint-disable-next-line no-undef
-    expect(totalRecettesElement).toHaveTextContent(
+    expect(totalRecettesElement).toContain(
       `${totalRecettesAttendu.toFixed(2)}€`
     );
     // eslint-disable-next-line no-undef
-    expect(totalDepensesElement).toHaveTextContent(
+    expect(totalDepensesElement).toContain(
       `${totalDepensesAttendu.toFixed(2)}€`
     );
     // eslint-disable-next-line no-undef
-    expect(soldeElement).toHaveTextContent(`${soldeAttendu.toFixed(2)}€`);
+    expect(soldeElement).toContain(`${soldeAttendu.toFixed(2)}€`);
   });
 });
 
@@ -432,5 +434,40 @@ it("affichage du bouton du mois de Décembre", async () => {
   await act(() => {
     // eslint-disable-next-line no-undef
     expect(boutonDécembre).toBeInTheDocument();
+  });
+});
+// eslint-disable-next-line no-undef
+it("pré-sélection du moi en cours", async () => {
+  await waitFor(() => {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    render(<TableauJournalier />);
+  });
+
+  // Trouvez le bouton avec l'index 1 (0-indexed)
+  const buttonAtIndex1 = screen.getAllByRole("button")[new Date().getMonth()];
+  // Vérifiez si le bouton a la classe attendue
+  await waitFor(() => {
+    // eslint-disable-next-line no-undef
+    expect(buttonAtIndex1).toHaveClass(
+      "btnCustom m-2 w-1/4 md:w-24 text-xs md:text-base btnCustumFocus"
+    );
+  });
+});
+// eslint-disable-next-line no-undef
+it("pré-sélection du moi en cours + 1, ne doit pas comporter btnCustumFocus", async () => {
+  await waitFor(() => {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    render(<TableauJournalier />);
+  });
+
+  // Trouvez le bouton avec l'index 1 (0-indexed)
+  const buttonAtIndex1 =
+    screen.getAllByRole("button")[new Date().getMonth() + 1];
+  // Vérifiez si le bouton a la classe attendue
+  await waitFor(() => {
+    // eslint-disable-next-line no-undef
+    expect(buttonAtIndex1).toHaveClass(
+      "btnCustom m-2 w-1/4 md:w-24 text-xs md:text-base"
+    );
   });
 });
