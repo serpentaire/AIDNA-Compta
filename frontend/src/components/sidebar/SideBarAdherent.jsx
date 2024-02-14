@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ScrollDown from "../ScrollDown";
 
 function SideBarAdherent() {
   const [selectedMenu, setSelectedMenu] = useState(1);
+  const navigate = useNavigate();
+  const setManageRedirect = (url) => {
+    navigate(url);
+    ScrollDown();
+  };
   const selectBtn = (id) => {
     setSelectedMenu(id);
   };
@@ -18,10 +25,13 @@ function SideBarAdherent() {
                 selectedMenu === 1 ? "btnCustumFocus" : ""
               }`}
               type="button"
-              data-testid="btn-bilanAnnuel"
-              onClick={() => selectBtn(1)}
+              data-testid="btn-acceuil"
+              onClick={() => {
+                selectBtn(1);
+                setManageRedirect("/adherent/accueil");
+              }}
             >
-              Bilan Annuel
+              Accueil
             </button>
           </div>
           <div className="flex flex-row justify-around items-center my-3">
@@ -30,8 +40,23 @@ function SideBarAdherent() {
                 selectedMenu === 2 ? "btnCustumFocus" : ""
               }`}
               type="button"
+              data-testid="btn-bilanAnnuel"
+              onClick={() => {
+                selectBtn(2);
+                setManageRedirect("/adherent/bilanAnnuel");
+              }}
+            >
+              Bilan Annuel
+            </button>
+          </div>
+          <div className="flex flex-row justify-around items-center my-3">
+            <button
+              className={`btnCustom ${
+                selectedMenu === 3 ? "btnCustumFocus" : ""
+              }`}
+              type="button"
               data-testid="btn-bilanProjet"
-              onClick={() => selectBtn(2)}
+              onClick={() => selectBtn(3)}
             >
               Bilan Projet
             </button>
