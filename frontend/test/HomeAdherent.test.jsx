@@ -74,27 +74,29 @@ it("Espace adhèrent", () => {
     <MockUserProvider value={user}>
       <BrowserRouter>
         <HomeAdherent
-          title="Bonjour l'association AIDNA est heureuse de vous compter parmi ses
+          title="Bonjour, l'association AIDNA est heureuse de vous compter parmi ses
           adhérents. En tant qu'adhèrent vous pouvez avoir accès au résultat des
           comptes de l'association. Vous pouvez voir le bilan annuel et le bilan
-          par projet. Ceci en cliquant sur les boutons. Pour voir les comptes en
-          détails il faut en faire la demande par écrit à la présidente à l'aide
-          du formulaire de contact. Une visio ou une rencontre sera organisée
-          afin de vous montrer l'état des comptes."
+          par projet. Ceci en cliquant sur les boutons situés sur le coté gauche
+          de l'écran. Pour voir les comptes en détails il faut en faire la
+          demande par écrit à la présidente à l'aide du formulaire de contact.
+          Une visio ou une rencontre sera organisée afin de vous montrer l'état
+          des comptes."
         >
-          Bonjour l'association AIDNA est heureuse de vous compter parmi ses
+          Bonjour, l'association AIDNA est heureuse de vous compter parmi ses
           adhérents. En tant qu'adhèrent vous pouvez avoir accès au résultat des
           comptes de l'association. Vous pouvez voir le bilan annuel et le bilan
-          par projet. Ceci en cliquant sur les boutons. Pour voir les comptes en
-          détails il faut en faire la demande par écrit à la présidente à l'aide
-          du formulaire de contact. Une visio ou une rencontre sera organisée
-          afin de vous montrer l'état des comptes.
+          par projet. Ceci en cliquant sur les boutons situés sur le coté gauche
+          de l'écran. Pour voir les comptes en détails il faut en faire la
+          demande par écrit à la présidente à l'aide du formulaire de contact.
+          Une visio ou une rencontre sera organisée afin de vous montrer l'état
+          des comptes.
         </HomeAdherent>
       </BrowserRouter>
     </MockUserProvider>
   );
   const title = screen.getByText(
-    "Bonjour l'association AIDNA est heureuse de vous compter parmi ses adhérents. En tant qu'adhèrent vous pouvez avoir accès au résultat des comptes de l'association. Vous pouvez voir le bilan annuel et le bilan par projet. Ceci en cliquant sur les boutons. Pour voir les comptes en détails il faut en faire la demande par écrit à la présidente à l'aide du formulaire de contact. Une visio ou une rencontre sera organisée afin de vous montrer l'état des comptes."
+    "Bonjour, l'association AIDNA est heureuse de vous compter parmi ses adhérents. En tant qu'adhèrent vous pouvez avoir accès au résultat des comptes de l'association. Vous pouvez voir le bilan annuel et le bilan par projet. Ceci en cliquant sur les boutons situés sur le coté gauche de l'écran. Pour voir les comptes en détails il faut en faire la demande par écrit à la présidente à l'aide du formulaire de contact. Une visio ou une rencontre sera organisée afin de vous montrer l'état des comptes."
   );
   // eslint-disable-next-line no-undef
   expect(title).toBeTruthy();

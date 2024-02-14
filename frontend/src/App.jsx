@@ -13,6 +13,7 @@ import PrivateAdmin from "./pages/Layout/PrivateAdmin";
 import PrivateTresorier from "./pages/Layout/PrivateTresorier";
 import PrivateAdherent from "./pages/Layout/PrivateAdherent";
 import RapComptes from "./pages/Rapports/RappComptes";
+import BilanAnnuel from "./pages/Rapports/BilanAnnuel";
 import "./App.css";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             {/* route adhérent */}
             <Route path="/adherent/" element={<PrivateAdherent />}>
               <Route path="accueil" element={<HomeAdherent />} />
+              <Route path="bilanAnnuel" element={<BilanAnnuel />} />
             </Route>
             {/* route trésorier */}
             <Route path="/tresorier/" element={<PrivateTresorier />}>
