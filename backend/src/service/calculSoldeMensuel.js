@@ -8,15 +8,17 @@ async function calculSoldeMensuel(req) {
   const moisCourant = dateCourante.getMonth() + 1;
   const anneeCourante = dateCourante.getFullYear().toString();
 
-  for (let annee = anneeModif; annee <= anneeCourante; annee += 1) {
-    const moisDebut = annee === anneeModif ? moisModif : 1;
-    const moisFin = annee === anneeCourante ? moisCourant : 12;
-
+  for (
+    let annee = parseInt(anneeModif, 10);
+    annee <= parseInt(anneeCourante, 10);
+    annee += 1
+  ) {
+    const moisDebut = annee === parseInt(anneeModif, 10) ? moisModif : 1;
+    const moisFin = annee === parseInt(anneeCourante, 10) ? moisCourant : 12;
     for (let mois = moisDebut; mois <= moisFin; mois += 1) {
       const moisFormatte = mois < 10 ? `0${mois}` : `${mois}`;
       const dateDebut = `${annee}-${moisFormatte}`;
-      const dateFin = mois === 12 ? `${annee + 1}-01` : `${annee}-${mois + 1}`;
-
+      const dateFin = mois === 12 ? `${annee + 1}-01` : `${annee}-0${mois + 1}`;
       // eslint-disable-next-line no-await-in-loop
       const comptes = await prisma.compte.findMany({
         where: {
