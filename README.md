@@ -1,7 +1,7 @@
 ## Concept
 
-This template is meant to serve as a foundation for every P2/P3 following the React-Express-MySQL stack, as learned in Wild Code School.
-It's pre-configured with a set of tools which'll help students produce industry-quality and easier-to-maintain code, while staying as simple as possible to use.
+AIDNA_COMPTA is an accounting application specifically created for the AIDNA association.
+It will facilitate the accounting management of the association and its visibility with the various volunteers by applying different access rights.
 
 ## Setup & Use
 
@@ -20,7 +20,7 @@ It's pre-configured with a set of tools which'll help students produce industry-
 - `dev-front` : Starts the React frontend server
 - `dev-back` : Starts the Express backend server
 - `lint` : Runs validation tools, and refuses unclean code (will be executed on every _commit_)
-- `fix` : Fixes linter errors (run it if `lint` growls on your code !)
+- `fix` : Fixes linter errors
 
 ## FAQ
 
@@ -33,3 +33,24 @@ It's pre-configured with a set of tools which'll help students produce industry-
 - _Prettier_ : "Quality of code" tool as well, focuses on the styleguide
 - _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
 - _Nodemon_ : Allows to restart the server everytime a .js file is udated
+
+### Technics specificity
+
+- _React_ : JavaScript library
+- _Axios_ : full set of features for making HTTP requests
+- _Tailwind_ : framework for CSS
+- _Toastify_ : for React notification
+- _chartJs_ : for data visualization.
+- _Express_ : an application infrastructure (framework), written in JavaScript for nade.Js
+- _PostgreSQL_ : data base
+- _Prisma_ : ORM FOR NODE.JS
+- _JOI_ : 
+- _Cookie_Parser_ :
+- _Argon2_ :
+- _JsonWebToken (JWT)_ :
+- _Multer_ :
+- _NodeMailer_ :
+- _Brevo_ :
+- _Jest_ :
+- _SuperTest_ :
+- _Babel_ :
